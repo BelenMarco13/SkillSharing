@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create new student</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>New student</h2>
+<form action="#" th:action="@{/student/add}"
+      th:object="${student}" method="post">
+  <table>
+    <tr>
+      <td><label>DNI</label></td>
+      <td><input type="text" th:field="*{dni}" /></td>
+    </tr>
+    <tr>
+      <td><label>Name</label></td>
+      <td><input type="text" th:field="*{name}" /></td>
+    </tr>
+    <tr>
+      <td><label>Email</label></td>
+      <td><input type="text" th:field="*{email}" /></td>
+    </tr>
+    <tr>
+      <td><label>UserName</label></td>
+      <td><input type="text" th:field="*{user_name}" /></td>
+    </tr>
+    <tr>
+      <td><label>Degree</label></td>
+      <td><input type="text" th:field="*{degree}" /></td>
+    </tr>
+    <tr>
+      <td><label>Course</label></td>
+      <td><input type="number" th:field="*{course}" /></td>
+    </tr>
+    <tr>
+      <td><label>BalanceHours</label></td>
+      <td><input type="number" th:field="*{balance_hours}" /></td>
+    </tr>
+    <tr>
+      <td><label>Skp</label></td>
+      <td><input type="text" th:field="*{skp}" /></td>
+    </tr>
+    <tr>
+      <td><label>Address</label></td>
+      <td><input type="text" th:field="*{address}" /></td>
+    </tr>
+    <tr>
+      <td><label>Age</label></td>
+      <td><input type="number" th:field="*{age}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="Add student" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

@@ -7,7 +7,7 @@ public class Student {
     private String userName;
     private String pwd;
     private String degree;
-    private String course;
+    private int course;
     private Float balanceHours;
     private String skp;
     private String address;
@@ -64,11 +64,11 @@ public class Student {
         this.degree = degree;
     }
 
-    public String getCourse() {
+    public int getCourse() {
         return course;
     }
 
-    public void setCourse(String course) {
+    public void setCourse(int course) {
         this.course = course;
     }
 

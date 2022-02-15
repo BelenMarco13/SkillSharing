@@ -31,11 +31,11 @@
         <td th:text="${student.email}"></td>
         <td th:text="${student.user_name}"></td>
         <td th:text="${student.degree}"></td>
-        <td th:text="${student.course}"></td>
-        <td th:text="${student.balance_hours}"></td>
+        <td th:number="${student.course}"></td>
+        <td th:number="${student.balance_hours}"></td>
         <td th:text="${student.skp}"></td>
         <td th:text="${student.adress}"></td>
-        <td th:text="${student.age}"></td>
+        <td th:number="${student.age}"></td>
         <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}">Update</a>
         </td>
         <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}">Delete</a>
