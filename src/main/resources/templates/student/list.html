@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Students management</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>List of student</h1>
+<table>
+    <thead>
+    <tr>
+        <th>DNI</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>User name</th>
+        <th>Degree</th>
+        <th>Course</th>
+        <th>Balance hours</th>
+        <th>skp</th>
+        <th>Address</th>
+        <th>Age</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${students}">
+        <td th:text="${student.dni}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.user_name}"></td>
+        <td th:text="${student.degree}"></td>
+        <td th:text="${student.course}"></td>
+        <td th:text="${student.balance_hours}"></td>
+        <td th:text="${student.skp}"></td>
+        <td th:text="${student.adress}"></td>
+        <td th:text="${student.age}"></td>
+        <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}">Update</a>
+        </td>
+        <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add">Add student</a>
+</body>
+</html>
