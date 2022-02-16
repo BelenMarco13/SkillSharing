@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>List of skill's type</h1>
-<table>
+<table class="table table-striped">
     <thead>
     <tr>
         <th>Name</th>
@@ -22,11 +22,11 @@
         <td th:text="${skillType.name}"></td>
         <td th:text="${skillType.level}"></td>
         <td th:text="${skillType.description}"></td>
-        <td><a th:href="@{/skillType/update/{name}/{level}(name=${skillType.name},level=${skillType.level}})}">Update</a></td>
-        <td><a th:href="@{/skillType/delete/{name}/{level}(name=${skillType.name},level=${skillType.level}})}">Delete</a></td>
+        <td><a th:href="@{/skillType/update/{name}/{level}(name=${skillType.name},level=${skillType.level})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+        <td><a th:href="@{/skillType/delete/{name}/{level}(name=${skillType.name},level=${skillType.level})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
     </tr>
     </tbody>
 </table>
-<a href="add">Add skillType</a>
+<a href="add"><button type="button" class="btn btn-success">Add skillType</button></a>
 </body>
 </html>

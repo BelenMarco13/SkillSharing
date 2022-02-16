@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>List of student</h1>
-<table>
+<table class="table table-striped">
     <thead>
     <tr>
         <th>DNI</th>
@@ -36,11 +36,11 @@
         <td th:text="${student.skp}"></td>
         <td th:text="${student.address}"></td>
         <td th:text="${student.age}"></td>
-        <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}">Update</a></td>
-        <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}">Delete</a></td>
+        <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+        <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
     </tr>
     </tbody>
 </table>
-<a href="add">Add student</a>
+<a href="add"><button type="button" class="btn btn-success">Add student</button></a>
 </body>
 </html>
