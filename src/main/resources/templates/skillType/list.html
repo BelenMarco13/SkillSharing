@@ -22,10 +22,8 @@
         <td th:text="${skillType.name}"></td>
         <td th:text="${skillType.level}"></td>
         <td th:text="${skillType.description}"></td>
-        <td><a th:href="@{/skillType/update/{name}/{level}(name=${skillType.name},level=${skillType.level}})}">Update</a>
-        </td>
-        <td><a th:href="@{/skillType/delete/{name}/{level}(name=${skillType.name},level=${skillType.level}})}">Delete</a>
-        </td>
+        <td><a th:href="@{/skillType/update/{name}/{level}(name=${skillType.name},level=${skillType.level}})}">Update</a></td>
+        <td><a th:href="@{/skillType/delete/{name}/{level}(name=${skillType.name},level=${skillType.level}})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

@@ -36,10 +36,8 @@
         <td th:text="${student.skp}"></td>
         <td th:text="${student.address}"></td>
         <td th:text="${student.age}"></td>
-        <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}">Update</a>
-        </td>
-        <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}">Delete</a>
-        </td>
+        <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}">Update</a></td>
+        <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

@@ -21,7 +21,7 @@ public class SkillTypeDao {
 
     //Add the skill to BBDD
     public void addSkillType(SkillType skillType) {
-        jdbcTemplate.update("INSERT INTO Skill_type VALUES(?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO skill_type VALUES(?, ?, ?)",
                 skillType.getName(), skillType.getLevel(), skillType.getDescription());
     }
 
@@ -38,14 +38,14 @@ public class SkillTypeDao {
 
     //Updates the skills
     public void updateSkillType(SkillType skillType) {
-        jdbcTemplate.update("UPDATE skill_type SET description=? WHERE name=?, level=?",
+        jdbcTemplate.update("UPDATE skill_type SET description=? WHERE name=? and level=?",
                 skillType.getDescription(), skillType.getName(), skillType.getLevel());
     }
 
     //Returns the skill with the given key
     public SkillType getSkillType(String name, int level) {
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM skill_type WHERE name=?, level=?",
+            return jdbcTemplate.queryForObject("SELECT * FROM skill_type WHERE name=? and level=?",
                     new SkillTypeRowMapper(), name, level);
         }catch (EmptyResultDataAccessException e) {
             return null;
