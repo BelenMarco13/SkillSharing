@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Create new student</title>
+  <title>Update student</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>New student</h2>
-<form action="#" th:action="@{/student/add}"
+<h2>Update student</h2>
+<form action="#" th:action="@{/student/update}"
       th:object="${student}" method="post">
   <table>
     <tr>
@@ -52,7 +52,7 @@
       <td><input type="number" th:field="*{age}" /></td>
     </tr>
     <tr>
-      <td colspan="2"><input type="submit" value="Add student" /></td>
+      <td colspan="2"><input type="submit" value="Update student" /></td>
     </tr>
   </table>
 </form>

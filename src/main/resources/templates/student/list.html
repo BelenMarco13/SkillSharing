@@ -29,13 +29,13 @@
         <td th:text="${student.dni}"></td>
         <td th:text="${student.name}"></td>
         <td th:text="${student.email}"></td>
-        <td th:text="${student.user_name}"></td>
+        <td th:text="${student.userName}"></td>
         <td th:text="${student.degree}"></td>
-        <td th:number="${student.course}"></td>
-        <td th:number="${student.balance_hours}"></td>
+        <td th:text="${student.course}"></td>
+        <td th:text="${student.balanceHours}"></td>
         <td th:text="${student.skp}"></td>
-        <td th:text="${student.adress}"></td>
-        <td th:number="${student.age}"></td>
+        <td th:text="${student.address}"></td>
+        <td th:text="${student.age}"></td>
         <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}">Update</a>
         </td>
         <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}">Delete</a>

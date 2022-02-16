@@ -22,7 +22,7 @@ public class StudentDao {
 
     //Add the student to BBDD
     public void addStudent(Student student) {
-        jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 student.getDni(), student.getName(), student.getEmail(), student.getUserName(),
                 student.getPwd(), student.getDegree(), student.getCourse(),
                 student.getBalanceHours(), student.getSkp(), student.getAddress(), student.getAge());
@@ -30,12 +30,17 @@ public class StudentDao {
 
     //Deletes the student from BBDD
     public void deleteStudent(Student student) {
-        jdbcTemplate.update("DELETE FROM Student WHERE dni=?", student.getDni());
+        jdbcTemplate.update("DELETE FROM student WHERE dni=?", student.getDni());
+    }
+
+    //Deletes the student from BBDD with dni
+    public void deleteStudentDni(String dni) {
+        jdbcTemplate.update("DELETE FROM student WHERE dni=?", dni);
     }
 
     //Updates the student
     public void updateStudent(Student student) {
-        jdbcTemplate.update("UPDATE Student SET name=?, email=?, user_name=?, pwd=?," +
+        jdbcTemplate.update("UPDATE student SET name=?, email=?, user_name=?, pwd=?," +
                         "degree=?, course=?, balance_hours=?, skp=?, address=?, age=? WHERE dni=?",
                 student.getName(), student.getEmail(), student.getUserName(), student.getPwd(),
                 student.getDegree(), student.getCourse(), student.getBalanceHours(),
@@ -45,7 +50,7 @@ public class StudentDao {
     //Returns the student with the given dni
     public Student getStudent(String dni) {
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM Student WHERE dni=?",
+            return jdbcTemplate.queryForObject("SELECT * FROM student WHERE dni=?",
                     new StudentRowMapper(), dni);
         }catch (EmptyResultDataAccessException e) {
             return null;
@@ -55,7 +60,7 @@ public class StudentDao {
     //Returns all the students from the BBDD
     public List<Student> getStudents() {
         try {
-            return jdbcTemplate.query("SELECT * FROM Student", new StudentRowMapper());
+            return jdbcTemplate.query("SELECT * FROM student", new StudentRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Student>();

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,14 +27,14 @@ public class StudentController {
         return "student/list";
     }
 
-    //Envía el formulario
+    //Send the form
     @RequestMapping(value="/add")
     public String addStudent(Model model) {
         model.addAttribute("student", new Student());
         return "student/add";
     }
 
-    //Recoge el formulario
+    //Collect the form
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("student") Student student,
                                    BindingResult bindingResult) {
@@ -41,5 +42,30 @@ public class StudentController {
             return "student/add";
         studentDao.addStudent(student);
         return "redirect:list";
+    }
+
+    //Send the form
+    @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
+    public String editStudent(Model model, @PathVariable String dni) {
+        model.addAttribute("student", studentDao.getStudent(dni));
+        return "student/update";
+    }
+
+    //Collect the form
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    public String processUpdateSubmit(
+            @ModelAttribute("student") Student student,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "student/update";
+        studentDao.updateStudent(student);
+        return "redirect:list";
+    }
+
+    //Delete student
+    @RequestMapping(value="/delete/{dni}")
+    public String processDelete(@PathVariable String dni) {
+        studentDao.deleteStudentDni(dni);
+        return "redirect:../list";
     }
 }
