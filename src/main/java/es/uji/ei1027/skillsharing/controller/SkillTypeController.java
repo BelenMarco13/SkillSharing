@@ -29,8 +29,8 @@ public class SkillTypeController {
 
     //Send the form
     @RequestMapping(value="/add")
-    public String addStudent(Model model) {
-        model.addAttribute("skills", new SkillType());
+    public String addSkillType(Model model) {
+        model.addAttribute("skillType", new SkillType());
         return "skillType/add";
     }
 
@@ -46,7 +46,7 @@ public class SkillTypeController {
 
     //Send the form
     @RequestMapping(value="/update/{name}/{level}", method = RequestMethod.GET)
-    public String editSkill(Model model, @PathVariable String name, @PathVariable int level) {
+    public String editSkillType(Model model, @PathVariable String name, @PathVariable int level) {
         model.addAttribute("skillType", skillTypeDao.getSkillType(name, level));
         return "skillType/update";
     }
