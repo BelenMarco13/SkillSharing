@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.dao;
 
+import es.uji.ei1027.skillsharing.gender;
 import es.uji.ei1027.skillsharing.model.Student;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -20,6 +21,7 @@ public class StudentRowMapper implements RowMapper<Student> {
         student.setSkp(rs.getString("skp"));
         student.setAddress(rs.getString("address"));
         student.setAge(rs.getInt("age"));
+        student.setGender(rs.getObject("gender", gender.class));
         return student;
     }
 }

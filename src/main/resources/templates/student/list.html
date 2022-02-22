@@ -36,6 +36,7 @@
         <td th:text="${student.skp}"></td>
         <td th:text="${student.address}"></td>
         <td th:text="${student.age}"></td>
+        <td th:text="${student.gender}"></td>
         <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
         <td><a th:href="@{/student/delete/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
     </tr>
