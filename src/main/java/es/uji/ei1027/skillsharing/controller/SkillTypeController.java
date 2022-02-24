@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.controller;
 
+import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.dao.SkillTypeDao;
 import es.uji.ei1027.skillsharing.model.SkillType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class SkillTypeController {
 
     //Send the form
     @RequestMapping(value="/update/{name}/{level}", method = RequestMethod.GET)
-    public String editSkillType(Model model, @PathVariable String name, @PathVariable int level) {
+    public String editSkillType(Model model, @PathVariable String name, @PathVariable String level) {
         model.addAttribute("skillType", skillTypeDao.getSkillType(name, level));
         return "skillType/update";
     }
@@ -64,8 +65,8 @@ public class SkillTypeController {
 
     //Delete skillType
     @RequestMapping(value="/delete/{name}/{level}")
-    public String processDelete(@PathVariable String name, @PathVariable int level) {
-        skillTypeDao.deleteSkillKey(name, level);
+    public String processDelete(@PathVariable String name, @PathVariable Level level) {
+        skillTypeDao.deleteSkillKey(name, level.toString());
         return "redirect:../list";
     }
 }

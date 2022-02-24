@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.model;
-import es.uji.ei1027.skillsharing.gender;
+
+import es.uji.ei1027.skillsharing.Gender;
 
 public class Student {
     private String dni;
@@ -13,8 +14,7 @@ public class Student {
     private String skp;
     private String address;
     private int age;
-    private gender gender;
-
+    private Gender gender;
     public Student() {
     }
 
@@ -106,11 +106,11 @@ public class Student {
         this.age = age;
     }
 
-    public gender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

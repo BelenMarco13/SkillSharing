@@ -1,8 +1,10 @@
 package es.uji.ei1027.skillsharing.model;
 
+import es.uji.ei1027.skillsharing.Level;
+
 public class SkillType {
     private String name;
-    private int level;
+    private Level level;
     private String description;
 
     public SkillType(){}
@@ -15,11 +17,11 @@ public class SkillType {
         this.name = name;
     }
 
-    public int getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
 

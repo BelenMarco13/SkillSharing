@@ -17,7 +17,11 @@
         </tr>
         <tr>
             <td><label>Level</label></td>
-            <td><input type="number" th:field="*{level}" /></td>
+            <td><select type="text" th:field="*{level}">
+                <option value="NOVICE">Novice</option>
+                <option value="INTERMEDIATE">Intermediate</option>
+                <option value="EXPERT">Expert</option>
+            </select></td>
         </tr>
         <tr>
             <td><label>Description</label></td>

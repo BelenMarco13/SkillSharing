@@ -22,10 +22,10 @@ public class StudentDao {
 
     //Add the student to BBDD
     public void addStudent(Student student) {
-        jdbcTemplate.update("INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, cast(? as gender))",
                 student.getDni(), student.getName(), student.getEmail(), student.getUserName(),
                 student.getPwd(), student.getDegree(), student.getCourse(), student.getBalanceHours(),
-                student.getSkp(), student.getAddress(), student.getAge(), student.getGender());
+                student.getSkp(), student.getAddress(), student.getAge(), student.getGender().toString());
     }
 
     //Deletes the student from BBDD
@@ -41,10 +41,10 @@ public class StudentDao {
     //Updates the student
     public void updateStudent(Student student) {
         jdbcTemplate.update("UPDATE student SET name=?, email=?, user_name=?, pwd=?," +
-                        "degree=?, course=?, balance_hours=?, skp=?, address=?, age=?, gender=? WHERE dni=?",
+                        "degree=?, course=?, balance_hours=?, skp=?, address=?, age=?, gender=cast(? as gender) WHERE dni=?",
                 student.getName(), student.getEmail(), student.getUserName(), student.getPwd(),
                 student.getDegree(), student.getCourse(), student.getBalanceHours(),
-                student.getSkp(), student.getAddress(), student.getAge(), student.getDni(), student.getGender());
+                student.getSkp(), student.getAddress(), student.getAge(), student.getGender().toString(), student.getDni());
     }
 
     //Returns the student with the given dni

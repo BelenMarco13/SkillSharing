@@ -21,31 +21,31 @@ public class SkillTypeDao {
 
     //Add the skill to BBDD
     public void addSkillType(SkillType skillType) {
-        jdbcTemplate.update("INSERT INTO skill_type VALUES(?, ?, ?)",
-                skillType.getName(), skillType.getLevel(), skillType.getDescription());
+        jdbcTemplate.update("INSERT INTO skill_type VALUES(?, cast(? as Level), ?)",
+                skillType.getName(), skillType.getLevel().toString(), skillType.getDescription());
     }
 
     //Deletes the skill from BBDD
     public void deleteSkill(SkillType skillType) {
-        jdbcTemplate.update("DELETE FROM skill_type WHERE name=? and level=?",
-                skillType.getName(), skillType.getLevel());
+        jdbcTemplate.update("DELETE FROM skill_type WHERE name=? and level=cast(? as level)",
+                skillType.getName(), skillType.getLevel().toString());
     }
 
     //Deletes the skill from BBDD with name and level
-    public void deleteSkillKey(String name, int level) {
-        jdbcTemplate.update("DELETE FROM skill_type WHERE name=? and level=?", name, level);
+    public void deleteSkillKey(String name, String level) {
+        jdbcTemplate.update("DELETE FROM skill_type WHERE name=? and level=cast(? as level)", name, level);
     }
 
     //Updates the skills
     public void updateSkillType(SkillType skillType) {
-        jdbcTemplate.update("UPDATE skill_type SET description=? WHERE name=? and level=?",
-                skillType.getDescription(), skillType.getName(), skillType.getLevel());
+        jdbcTemplate.update("UPDATE skill_type SET description=? WHERE name=? and level=cast(? as level)",
+                skillType.getDescription(), skillType.getName(), skillType.getLevel().toString());
     }
 
     //Returns the skill with the given key
-    public SkillType getSkillType(String name, int level) {
+    public SkillType getSkillType(String name, String level) {
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM skill_type WHERE name=? and level=?",
+            return jdbcTemplate.queryForObject("SELECT * FROM skill_type WHERE name=? and level=cast(? as level)",
                     new SkillTypeRowMapper(), name, level);
         }catch (EmptyResultDataAccessException e) {
             return null;

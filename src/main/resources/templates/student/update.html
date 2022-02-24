@@ -53,7 +53,13 @@
     </tr>
     <tr>
       <td><label>Gender</label></td>
-      <td><input type="text" th:field="*{gender}" /></td>
+      <td>
+        <select type="text" th:field="*{gender}">
+          <option value="FEMALE">Female</option>
+          <option value="MALE">Male</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Update student" /></td>
