@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.dao;
 
+import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.model.Offer;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -19,7 +20,7 @@ public class OfferRowMapper implements RowMapper<Offer> {
         offer.setEndDate(rs.getObject("end_date", LocalDate.class));
         offer.setStudent(rs.getString("student"));
         offer.setTypeName(rs.getString("type_name"));
-        offer.setTypeLevel(rs.getInt("type_level"));
+        offer.setTypeLevel(Level.valueOf(rs.getString("type_level")));
         return offer;
     }
 }

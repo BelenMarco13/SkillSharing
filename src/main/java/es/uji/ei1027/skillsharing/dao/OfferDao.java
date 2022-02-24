@@ -22,9 +22,9 @@ public class OfferDao {
 
     // Afegeix la prova a la base de dades
     public void addOffer(Offer offer){
-        jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, ?, cast(? as type))",
                 offer.getId(), offer.getName(), offer.getDescription(), offer.getStartDate(),
-                offer.getEndDate(), offer.getStudent(), offer.getTypeName(), offer.getTypeLevel());
+                offer.getEndDate(), offer.getStudent(), offer.getTypeName(), offer.getTypeLevel().toString());
     }
 
     public void deleteOffer(Offer offer){
@@ -33,9 +33,9 @@ public class OfferDao {
 
     public void updateOffer(Offer offer){
         jdbcTemplate.update("UPDATE Offer SET name = ?, description = ?, start_date = ?, " +
-                "end_date = ?, student = ?, type_name = ?, type_level = ? WHERE id = ?",
+                "end_date = ?, student = ?, type_name = ?, type_level = cast(? as type) WHERE id = ?",
                 offer.getName(), offer.getDescription(), offer.getStartDate(), offer.getEndDate(),
-                offer.getStudent(), offer.getTypeName(), offer.getTypeLevel(), offer.getId());
+                offer.getStudent(), offer.getTypeName(), offer.getTypeLevel().toString(), offer.getId());
     }
 
     public Offer getOffer(String offer){

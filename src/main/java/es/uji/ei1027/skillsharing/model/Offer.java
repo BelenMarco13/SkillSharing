@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillsharing.model;
 
+import es.uji.ei1027.skillsharing.Level;
+
 import java.time.LocalDate;
 
 public class Offer {
@@ -10,7 +12,7 @@ public class Offer {
     private LocalDate endDate;
     private String student;
     private String typeName;
-    private int typeLevel;
+    private Level typeLevel;
 
     public Offer(){
     }
@@ -71,11 +73,11 @@ public class Offer {
         this.typeName = typeName;
     }
 
-    public int getTypeLevel() {
+    public Level getTypeLevel() {
         return typeLevel;
     }
 
-    public void setTypeLevel(int typeLevel) {
+    public void setTypeLevel(Level typeLevel) {
         this.typeLevel = typeLevel;
     }
 
