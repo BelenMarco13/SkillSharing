@@ -1,6 +1,7 @@
 package es.uji.ei1027.skillsharing.model;
 
 import es.uji.ei1027.skillsharing.Level;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -8,7 +9,9 @@ public class Offer {
     private int id;
     private String name;
     private String description;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
     private String student;
     private String typeName;

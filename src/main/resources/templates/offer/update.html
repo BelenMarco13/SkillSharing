@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar un nadador</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Update offer</h2>
+<form action="#" th:action="@{/offer/update}"
+      th:object="${offer}" method="post">
+    <table>
+        <tr>
+            <td><label>Offer</label></td>
+            <td><input type="number" th:field="*{id}" th:value="${offer.id}" disabled/></td>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" th:value="${offer.name}"/></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" th:value="${offer.description}"/></td>
+        </tr>
+        <tr>
+            <td><label>Start Date</label></td>
+            <td><input type="text" th:field="*{startDate}" th:value="${offer.startDate}"/></td>
+        </tr>
+        <tr>
+            <td><label>End Date</label></td>
+            <td><input type="text" th:field="*{endDate}" th:value="${offer.endDate}"/></td>
+        </tr>
+        <tr>
+            <td><label>Student</label></td>
+            <td><input type="text" th:field="*{student}" th:value="${offer.student}"/></td>
+        </tr>
+        <tr>
+            <td><label>Type Name</label></td>
+            <td><input type="text" th:field="*{typeName}" th:value="${offer.typeName}"/></td>
+        </tr>
+        <tr>
+            <td><label>Skill type level</label></td>
+            <td><select type="text" th:field="*{typeLevel}" th:value="${offer.typeLevel}">
+                <option value="NOVICE">Novice</option>
+                <option value="INTERMEDIATE">Intermediate</option>
+                <option value="EXPERT">Expert</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Edita  classificació" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

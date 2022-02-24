@@ -22,7 +22,7 @@ public class OfferDao {
 
     // Afegeix la prova a la base de dades
     public void addOffer(Offer offer){
-        jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, ?, cast(? as type))",
+        jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as level))",
                 offer.getId(), offer.getName(), offer.getDescription(), offer.getStartDate(),
                 offer.getEndDate(), offer.getStudent(), offer.getTypeName(), offer.getTypeLevel().toString());
     }
@@ -31,14 +31,18 @@ public class OfferDao {
         jdbcTemplate.update("DELETE FROM Offer WHERE id = ?", offer.getId());
     }
 
+    public void deleteOffer(int offerId){
+        jdbcTemplate.update("DELETE FROM Offer WHERE id = ?", offerId);
+    }
+
     public void updateOffer(Offer offer){
         jdbcTemplate.update("UPDATE Offer SET name = ?, description = ?, start_date = ?, " +
-                "end_date = ?, student = ?, type_name = ?, type_level = cast(? as type) WHERE id = ?",
+                "end_date = ?, student = ?, type_name = ?, type_level = cast(? as level) WHERE id = ?",
                 offer.getName(), offer.getDescription(), offer.getStartDate(), offer.getEndDate(),
                 offer.getStudent(), offer.getTypeName(), offer.getTypeLevel().toString(), offer.getId());
     }
 
-    public Offer getOffer(String offer){
+    public Offer getOffer(int offer){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM Offer WHERE id = ?", new OfferRowMapper(), offer);
         }catch (EmptyResultDataAccessException e){

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create new skillType</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>New Offer</h2>
+<form action="#" th:action="@{/offer/add}"
+      th:object="${offer}" method="post">
+    <table>
+        <tr>
+            <td><label>ID</label></td>
+            <td><input type="number" th:field="*{id}" /></td>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" /></td>
+        </tr>
+        <tr>
+            <td><label>Start date</label></td>
+            <td><input type="text" th:field="*{startDate}" /></td>
+        </tr>
+        <tr>
+            <td><label>End date</label></td>
+            <td><input type="text" th:field="*{endDate}" /></td>
+        </tr>
+        <tr>
+            <td><label>Student</label></td>
+            <td><input type="text" th:field="*{student}" /></td>
+        </tr>
+        <tr>
+            <td><label>Skill type name</label></td>
+            <td><input type="text" th:field="*{typeName}" /></td>
+        </tr>
+        <tr>
+            <td><label>Skill type level</label></td>
+            <td><select type="text" th:field="*{typeLevel}">
+                <option value="NOVICE">Novice</option>
+                <option value="INTERMEDIATE">Intermediate</option>
+                <option value="EXPERT">Expert</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Add skillType" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -32,8 +32,8 @@
         <td th:text="${offer.student}"></td>
         <td th:text="${offer.typeName}"></td>
         <td th:text="${offer.typeLevel}"></td>
-        <td><a th:href="www.google.es"><button type="button" class="btn btn-warning" >Edita</button></a></td>
-       <td><a th:href="wwww.google.es"><button type="button" class="btn btn-danger">Esborra</button></a></td>
+        <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Edita</button></a></td>
+       <td><a th:href="@{/offer/delete/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">Esborra</button></a></td>
 
     </tr>
     </tbody>
