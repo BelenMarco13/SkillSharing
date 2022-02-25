@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create new skillType</title>
+    <title>Create new offer</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -36,11 +36,11 @@
             <td><input type="text" th:field="*{student}" /></td>
         </tr>
         <tr>
-            <td><label>Skill type name</label></td>
+            <td><label>Skill type</label></td>
             <td><input type="text" th:field="*{typeName}" /></td>
         </tr>
         <tr>
-            <td><label>Skill type level</label></td>
+            <td><label>Level</label></td>
             <td><select type="text" th:field="*{typeLevel}">
                 <option value="NOVICE">Novice</option>
                 <option value="INTERMEDIATE">Intermediate</option>
@@ -48,7 +48,7 @@
             </select></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Add skillType" /></td>
+            <td colspan="2"><input type="submit" value="Add offer" /></td>
         </tr>
     </table>
 </form>

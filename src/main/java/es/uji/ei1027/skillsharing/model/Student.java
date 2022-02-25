@@ -11,7 +11,7 @@ public class Student {
     private String degree;
     private int course;
     private Float balanceHours;
-    private String skp;
+    private boolean skp;
     private String address;
     private int age;
     private Gender gender;
@@ -82,11 +82,11 @@ public class Student {
         this.balanceHours = balanceHours;
     }
 
-    public String getSkp() {
+    public boolean getSkp() {
         return skp;
     }
 
-    public void setSkp(String skp) {
+    public void setSkp(boolean skp) {
         this.skp = skp;
     }
 

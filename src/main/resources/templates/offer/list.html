@@ -16,8 +16,8 @@
         <th>Start Date</th>
         <th>End Date</th>
         <th>Student</th>
-        <th>Type Name</th>
-        <th>Type Level</th>
+        <th>Skill Type</th>
+        <th>Level</th>
         <th></th>
         <th></th>
     </tr>
@@ -32,12 +32,12 @@
         <td th:text="${offer.student}"></td>
         <td th:text="${offer.typeName}"></td>
         <td th:text="${offer.typeLevel}"></td>
-        <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Edita</button></a></td>
-       <td><a th:href="@{/offer/delete/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">Esborra</button></a></td>
+        <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+       <td><a th:href="@{/offer/delete/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
 
     </tr>
     </tbody>
 </table>
-<a href="add"><button type="button" class="btn btn-success">Afegeix prova</button></a>
+<a href="add"><button type="button" class="btn btn-success">Add offer</button></a>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Editar un nadador</title>
+    <title>Update offer</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,7 +13,7 @@
     <table>
         <tr>
             <td><label>Offer</label></td>
-            <td><input type="number" th:field="*{id}" th:value="${offer.id}" disabled/></td>
+            <td><input type="number" th:field="*{id}" th:value="${offer.id}" readonly/></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
@@ -36,11 +36,11 @@
             <td><input type="text" th:field="*{student}" th:value="${offer.student}"/></td>
         </tr>
         <tr>
-            <td><label>Type Name</label></td>
+            <td><label>Skill Type</label></td>
             <td><input type="text" th:field="*{typeName}" th:value="${offer.typeName}"/></td>
         </tr>
         <tr>
-            <td><label>Skill type level</label></td>
+            <td><label>Level</label></td>
             <td><select type="text" th:field="*{typeLevel}" th:value="${offer.typeLevel}">
                 <option value="NOVICE">Novice</option>
                 <option value="INTERMEDIATE">Intermediate</option>
@@ -48,7 +48,7 @@
             </select></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Edita  classificació" /></td>
+            <td colspan="2"><input type="submit" value="Update offer" /></td>
         </tr>
     </table>
 </form>
