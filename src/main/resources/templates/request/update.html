@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create new skillType</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Update Request</h2>
+<form action="#" th:action="@{/request/update}"
+      th:object="${request}" method="post">
+    <table>
+        <tr>
+            <td><label>Identificador </label></td>
+            <td><input type="number" min="1" th:field="*{id}" readonly/></td>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Student</label></td>
+            <td><input type="text" th:field="*{student}" value="12345675R" /></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" /></td>
+        </tr>
+        <tr>
+            <td><label>Start Date</label></td>
+            <td><input type="date" th:field="*{startDate}"></td>
+        </tr>
+        <tr>
+            <td><label>End Date</label></td>
+            <td><input type="date" th:field="*{endDate}"></td>
+        </tr>
+        <tr>
+            <td><label>Skill</label></td>
+            <td><input type="text" th:field="*{skillName}"></td>
+
+        </tr>
+
+        <tr>
+            <td><label>Level</label></td>
+            <td><select type="text" th:field="*{skillLevel}">
+                <option value="NOVICE">Novice</option>
+                <option value="INTERMEDIATE">Intermediate</option>
+                <option value="EXPERT">Expert</option>
+            </select></td>
+        </tr>
+        <tr>
+
+            <td colspan="2"><button type="submit" value="Update request" class="btn btn-outline-primary">Update request</button>
+            <td colspan="2"><a href="/request/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
+            </td>
+
+        </tr>
+    </table>
+</form>
+</body>
+</html>
