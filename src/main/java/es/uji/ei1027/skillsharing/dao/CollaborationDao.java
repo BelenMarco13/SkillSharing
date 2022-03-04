@@ -23,7 +23,7 @@ public class CollaborationDao {
 
     // Afegeix la prova a la base de dades
         public void addCollaboration(Collaboration collaboration){
-        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, cast(? as score), ?)",
+        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
                 collaboration.getIdRequest(), collaboration.getIdOffer(), collaboration.getStartDate(),
                 collaboration.getEndDate(), collaboration.getScore(), collaboration.getComment());
     }
