@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Update Collaboration</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Update Collaboration</h2>
+<form action="#" th:action="@{/collaboration/update}"
+      th:object="${offer}" method="post">
+  <table>
+    <tr>
+      <td><label>Collaboration</label></td>
+      <td><input type="number" th:field="*{id_request}" th:value="${collaboration.id_request}" readonly/></td>
+    </tr>
+    <tr>
+      <td><label>Offer</label></td>
+      <td><input type="text" th:field="*{id_offer}" th:value="${collaboration.id_offer}"/></td>
+    </tr>
+    <tr>
+      <td><label>Start Date</label></td>
+      <td><input type="text" th:field="*{startDate}" th:value="${collaboration.startDate}"/></td>
+    </tr>
+    <tr>
+      <td><label>End Date</label></td>
+      <td><input type="text" th:field="*{endDate}" th:value="${collaboration.endDate}"/></td>
+    </tr>
+    <tr>
+      <td><label>Score</label></td>
+      <td><input type="text" th:field="*{score}" th:value="${collaboration.student}"/></td>
+    </tr>
+    <tr>
+      <td><label>Comment</label></td>
+      <td><input type="text" th:field="*{comment}" th:value="${collaboration.typeName}"/></td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><input type="submit" value="Update Collaboration" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

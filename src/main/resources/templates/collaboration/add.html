@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create new skillType</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>New Collaboration</h2>
+<form action="#" th:action="@{/collaboration/add}"
+      th:object="${skillType}" method="post">
+  <table>
+    <tr>
+      <td><label>Request</label></td>
+      <td><input type="text" th:field="*{id_request}" /></td>
+    </tr>
+    <tr>
+      <td><label>Offer</label></td>
+      <td><input type="text" th:field="*{id_offer}" /></td>
+    </tr>
+
+    <tr>
+      <td><label>Start date</label></td>
+      <td><input type="text" th:field="*{startDate}" /></td>
+    </tr>
+    <tr>
+      <td><label>End date</label></td>
+      <td><input type="text" th:field="*{endDate}" /></td>
+    </tr>
+    <tr>
+      <td><label>Score</label></td>
+      <td><input type="text" th:field="*{score}" /></td>
+    </tr>
+
+    <tr>
+      <td><label>Comment</label></td>
+      <td><input type="text" th:field="*{score}" /></td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><input type="submit" value="Add collaboration" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
