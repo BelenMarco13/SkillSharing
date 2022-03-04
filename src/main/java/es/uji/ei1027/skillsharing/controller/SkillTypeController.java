@@ -67,6 +67,6 @@ public class SkillTypeController {
     @RequestMapping(value="/delete/{name}/{level}")
     public String processDelete(@PathVariable String name, @PathVariable Level level) {
         skillTypeDao.deleteSkillKey(name, level.toString());
-        return "redirect:../list";
+        return "redirect:/skillType/list";
     }
 }

@@ -23,7 +23,7 @@ public class CollaborationDao {
 
     // Afegeix la prova a la base de dades
         public void addCollaboration(Collaboration collaboration){
-        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, cast(? as score), ?)",
                 collaboration.getIdRequest(), collaboration.getIdOffer(), collaboration.getStartDate(),
                 collaboration.getEndDate(), collaboration.getScore(), collaboration.getComment());
     }
@@ -37,9 +37,10 @@ public class CollaborationDao {
     }
 
     public void updateCollaboration(Collaboration collaboration){
-        jdbcTemplate.update("UPDATE INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
-                collaboration.getIdRequest(), collaboration.getIdOffer(), collaboration.getStartDate(),
-                collaboration.getEndDate(), collaboration.getScore(), collaboration.getComment());
+        jdbcTemplate.update("UPDATE INTO Collaboration SET start_date=?, end_date=?, score=(cast ? as score), comment=?" +
+                        "WHERE id_request=? and id_offer=?",
+                collaboration.getStartDate(), collaboration.getEndDate(), collaboration.getScore().toString(),
+                collaboration.getComment(), collaboration.getIdRequest(), collaboration.getIdOffer());
     }
 
     public Collaboration getCollaboration(int idRequest, int idOffer){
