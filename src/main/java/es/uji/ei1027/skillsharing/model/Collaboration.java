@@ -2,7 +2,6 @@ package es.uji.ei1027.skillsharing.model;
 
 
 
-import es.uji.ei1027.skillsharing.Score;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ public class Collaboration {
     private LocalDate startDate;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
-    private Score score;
+    private int score;
     private String comment;
 
     public Collaboration() {
@@ -52,11 +51,11 @@ public class Collaboration {
         this.endDate = endDate;
     }
 
-    public String getScore() {
-        return score.getValor();
+    public int getScore() {
+        return score;
     }
 
-    public void setScore(Score score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

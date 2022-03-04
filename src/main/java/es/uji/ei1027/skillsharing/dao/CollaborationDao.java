@@ -37,9 +37,9 @@ public class CollaborationDao {
     }
 
     public void updateCollaboration(Collaboration collaboration){
-        jdbcTemplate.update("UPDATE INTO Collaboration SET start_date=?, end_date=?, score=(cast ? as score), comment=?" +
+        jdbcTemplate.update("UPDATE INTO Collaboration SET start_date=?, end_date=?, ?, comment=?" +
                         "WHERE id_request=? and id_offer=?",
-                collaboration.getStartDate(), collaboration.getEndDate(), collaboration.getScore().toString(),
+                collaboration.getStartDate(), collaboration.getEndDate(), collaboration.getScore(),
                 collaboration.getComment(), collaboration.getIdRequest(), collaboration.getIdOffer());
     }
 
