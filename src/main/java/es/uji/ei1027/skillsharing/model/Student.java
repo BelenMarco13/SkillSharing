@@ -15,6 +15,8 @@ public class Student {
     private String address;
     private int age;
     private Gender gender;
+    private Boolean blocked;
+
     public Student() {
     }
 
@@ -114,6 +116,14 @@ public class Student {
         this.gender = gender;
     }
 
+    public Boolean getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -125,10 +135,11 @@ public class Student {
                 ", degree='" + degree + '\'' +
                 ", course=" + course +
                 ", balanceHours=" + balanceHours +
-                ", skp='" + skp + '\'' +
+                ", skp=" + skp +
                 ", address='" + address + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
+                ", blocked=" + blocked +
                 '}';
     }
 }

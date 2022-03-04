@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.controller;
 
+import es.uji.ei1027.skillsharing.Gender;
 import es.uji.ei1027.skillsharing.dao.StudentDao;
 import es.uji.ei1027.skillsharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +32,18 @@ public class StudentController {
     @RequestMapping(value="/add")
     public String addStudent(Model model) {
         model.addAttribute("student", new Student());
+        model.addAttribute("values", Gender.values());
         return "student/add";
     }
 
     //Collect the form
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("student") Student student,
+    public String processAddSubmit(Model model, @ModelAttribute("student") Student student,
                                    BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("values", Gender.values());
             return "student/add";
+        }
         studentDao.addStudent(student);
         return "redirect:list";
     }
@@ -48,6 +52,7 @@ public class StudentController {
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
     public String editStudent(Model model, @PathVariable String dni) {
         model.addAttribute("student", studentDao.getStudent(dni));
+        model.addAttribute("values", Gender.values());
         return "student/update";
     }
 
