@@ -58,11 +58,12 @@ public class StudentController {
 
     //Collect the form
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("student") Student student,
+    public String processUpdateSubmit( Model model, @ModelAttribute("student") Student student,
             BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("values", Gender.values());
             return "student/update";
+        }
         studentDao.updateStudent(student);
         return "redirect:list";
     }

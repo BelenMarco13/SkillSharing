@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.controller;
 
+import es.uji.ei1027.skillsharing.Gender;
 import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.dao.SkillTypeDao;
 import es.uji.ei1027.skillsharing.model.SkillType;
@@ -32,15 +33,18 @@ public class SkillTypeController {
     @RequestMapping(value="/add")
     public String addSkillType(Model model) {
         model.addAttribute("skillType", new SkillType());
+        model.addAttribute("values", Level.values());
         return "skillType/add";
     }
 
     //Collect the form
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("skillType") SkillType skillType,
+    public String processAddSubmit(Model model, @ModelAttribute("skillType") SkillType skillType,
                                    BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("values", Level.values());
             return "skillType/add";
+        }
         skillTypeDao.addSkillType(skillType);
         return "redirect:list";
     }
@@ -49,16 +53,18 @@ public class SkillTypeController {
     @RequestMapping(value="/update/{name}/{level}", method = RequestMethod.GET)
     public String editSkillType(Model model, @PathVariable String name, @PathVariable String level) {
         model.addAttribute("skillType", skillTypeDao.getSkillType(name, level));
+        model.addAttribute("values", Level.values());
         return "skillType/update";
     }
 
     //Collect the form
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("skillType") SkillType skillType,
+    public String processUpdateSubmit(Model model, @ModelAttribute("skillType") SkillType skillType,
             BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("values", Level.values());
             return "skillType/update";
+        }
         skillTypeDao.updateSkillType(skillType);
         return "redirect:list";
     }
