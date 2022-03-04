@@ -22,23 +22,11 @@ public class RequestRowMapper implements RowMapper<Request> {
         request.setId(rs.getInt("id"));
         request.setName(rs.getString("name"));
         request.setDescription(rs.getString("description"));
-
-
-       /* DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        String stringend = rs.getString("end_date");
-        String stringstart = rs.getString("start_date");
-
-        //convert String to LocalDate
-        LocalDate start = LocalDate.parse(stringstart, formatter);
-        LocalDate end = LocalDate.parse(stringend,formatter);
-        request.setStartDate(start);
-        request.setEndDate(end);*/
         request.setStartDate(rs.getObject("start_date",LocalDate.class));
         request.setEndDate(rs.getObject("end_date", LocalDate.class));
-
         request.setStudent(rs.getString("student"));
-        request.setSkillName(rs.getString("type_name"));
-        request.setSkillLevel(Level.valueOf(rs.getString("type_level")));
+        request.setSkillName(rs.getString("skill_name"));
+        request.setSkillLevel(Level.valueOf(rs.getString("skill_level")));
         return request;
     }
 }

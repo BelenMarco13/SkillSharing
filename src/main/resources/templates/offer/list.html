@@ -30,8 +30,8 @@
         <td th:text="${offer.startDate}"></td>
         <td th:text="${offer.endDate}"></td>
         <td th:text="${offer.student}"></td>
-        <td th:text="${offer.typeName}"></td>
-        <td th:text="${offer.typeLevel}"></td>
+        <td th:text="${offer.skillName}"></td>
+        <td th:text="${offer.skillLevel}"></td>
         <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
        <td><a th:href="@{/offer/delete/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
 

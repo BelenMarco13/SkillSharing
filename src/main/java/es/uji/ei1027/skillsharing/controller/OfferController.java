@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillsharing.controller;
 
+import es.uji.ei1027.skillsharing.Gender;
+import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.dao.OfferDao;
 import es.uji.ei1027.skillsharing.model.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,19 +36,19 @@ public class OfferController {
     @RequestMapping("/add")
     public String addOffer(Model model){
         model.addAttribute("offer", new Offer());
+        model.addAttribute("values", Level.values());
         return "offer/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAndSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult){
+    public String processAndSubmit(Model model, @ModelAttribute("offer") Offer offer, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-
+            model.addAttribute("values", Level.values());
             for (ObjectError e: bindingResult.getAllErrors()){
                 System.out.println(e.toString());
             }
             return "offer/add";
         }
-
         offerDao.addOffer(offer);
         return "redirect:list";
     }
@@ -54,13 +56,16 @@ public class OfferController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String editOffer(Model model, @PathVariable int id){
         model.addAttribute("offer", offerDao.getOffer(id));
+        model.addAttribute("values", Level.values());
         return "offer/update";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateAndSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult){
-        if (bindingResult.hasErrors())
+    public String processUpdateAndSubmit(Model model, @ModelAttribute("offer") Offer offer, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("values", Level.values());
             return "offer/update";
+        }
         offerDao.updateOffer(offer);
         return "redirect:list";
     }

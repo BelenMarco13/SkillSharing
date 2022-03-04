@@ -24,7 +24,7 @@ public class OfferDao {
     public void addOffer(Offer offer){
         jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as level))",
                 offer.getId(), offer.getName(), offer.getDescription(), offer.getStartDate(),
-                offer.getEndDate(), offer.getStudent(), offer.getTypeName(), offer.getTypeLevel().toString());
+                offer.getEndDate(), offer.getStudent(), offer.getSkillName(), offer.getSkillLevel().toString());
     }
 
     public void deleteOffer(Offer offer){
@@ -37,9 +37,9 @@ public class OfferDao {
 
     public void updateOffer(Offer offer){
         jdbcTemplate.update("UPDATE Offer SET name = ?, description = ?, start_date = ?, " +
-                "end_date = ?, student = ?, type_name = ?, type_level = cast(? as level) WHERE id = ?",
+                "end_date = ?, student = ?, skill_name = ?, skill_level = cast(? as level) WHERE id = ?",
                 offer.getName(), offer.getDescription(), offer.getStartDate(), offer.getEndDate(),
-                offer.getStudent(), offer.getTypeName(), offer.getTypeLevel().toString(), offer.getId());
+                offer.getStudent(), offer.getSkillName(), offer.getSkillLevel().toString(), offer.getId());
     }
 
     public Offer getOffer(int offer){

@@ -37,14 +37,12 @@
         </tr>
         <tr>
             <td><label>Skill type</label></td>
-            <td><input type="text" th:field="*{typeName}" /></td>
+            <td><input type="text" th:field="*{skillName}" /></td>
         </tr>
         <tr>
             <td><label>Level</label></td>
-            <td><select type="text" th:field="*{typeLevel}">
-                <option value="NOVICE">Novice</option>
-                <option value="INTERMEDIATE">Intermediate</option>
-                <option value="EXPERT">Expert</option>
+            <td><select type="text" th:field="*{skillLevel}">
+                <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
             </select></td>
         </tr>
         <tr>

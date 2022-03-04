@@ -14,8 +14,8 @@ public class Offer {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
     private String student;
-    private String typeName;
-    private Level typeLevel;
+    private String skillName;
+    private Level skillLevel;
 
     public Offer(){
     }
@@ -68,20 +68,20 @@ public class Offer {
         this.student = student;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getSkillName() {
+        return skillName;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
     }
 
-    public Level getTypeLevel() {
-        return typeLevel;
+    public Level getSkillLevel() {
+        return skillLevel;
     }
 
-    public void setTypeLevel(Level typeLevel) {
-        this.typeLevel = typeLevel;
+    public void setSkillLevel(Level skillLevel) {
+        this.skillLevel = skillLevel;
     }
 
     @Override
@@ -93,8 +93,8 @@ public class Offer {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", student='" + student + '\'' +
-                ", typeName='" + typeName + '\'' +
-                ", typeLevel=" + typeLevel +
+                ", skillName='" + skillName + '\'' +
+                ", skillLevel=" + skillLevel +
                 '}';
     }
 }

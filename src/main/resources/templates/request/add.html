@@ -44,9 +44,7 @@
         <tr>
             <td><label>Level</label></td>
             <td><select type="text" th:field="*{skillLevel}">
-                <option value="NOVICE">Novice</option>
-                <option value="INTERMEDIATE">Intermediate</option>
-                <option value="EXPERT">Expert</option>
+                <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
             </select></td>
         </tr>
         <tr>

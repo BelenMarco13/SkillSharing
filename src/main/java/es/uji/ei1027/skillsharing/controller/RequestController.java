@@ -40,44 +40,45 @@ public class RequestController {
 
     @RequestMapping("/add")
     public String addRequest(Model model) {
-
         Request request;
         model.addAttribute("request",  request = new Request());
+        model.addAttribute("values", Level.values());
         log.info(request.toString());
         return "request/add";
     }
 
     //Collect the form
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("request") Request request,
+    public String processAddSubmit(Model model, @ModelAttribute("request") Request request,
                                    BindingResult bindingResult) {
 
         log.info(request.toString());
         if (bindingResult.hasErrors()){
             log.info("El error essssss: \n");
             log.info(bindingResult.toString());
+            model.addAttribute("values", Level.values());
             return "request/add";}
 
         requestDao.addRequest(request);
         return "redirect:list";
     }
 
-
     //Send the form
     @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
     public String editRequest(Model model, @PathVariable int id) {
         model.addAttribute("request", requestDao.getRequest(id));
+        model.addAttribute("values", Level.values());
         log.info("cojo la info");
         return "request/update";
     }
 
     //Collect the form
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("request") Request request,
+    public String processUpdateSubmit(Model model, @ModelAttribute("request") Request request,
             BindingResult bindingResult) {
         log.info(request.toString());
         if (bindingResult.hasErrors()) {
+            model.addAttribute("values", Level.values());
             return "request/update";
         }
         requestDao.updateRequest(request);

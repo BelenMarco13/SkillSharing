@@ -19,8 +19,8 @@ public class OfferRowMapper implements RowMapper<Offer> {
         offer.setStartDate(rs.getObject("start_date", LocalDate.class));
         offer.setEndDate(rs.getObject("end_date", LocalDate.class));
         offer.setStudent(rs.getString("student"));
-        offer.setTypeName(rs.getString("type_name"));
-        offer.setTypeLevel(Level.valueOf(rs.getString("type_level")));
+        offer.setSkillName(rs.getString("skill_name"));
+        offer.setSkillLevel(Level.valueOf(rs.getString("skill_level")));
         return offer;
     }
 }
