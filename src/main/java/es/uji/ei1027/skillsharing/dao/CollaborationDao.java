@@ -42,7 +42,16 @@ public class CollaborationDao {
                 collaboration.getEndDate(), collaboration.getScore(), collaboration.getComment());
     }
 
-    public List<Collaboration> getCollaboration(){
+    public Collaboration getCollaboration(int idRequest, int idOffer){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM Collaboration WHERE id_request=? AND id_offer=?",
+                    new CollaborationRowMapper(), idRequest, idOffer);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    public List<Collaboration> getCollaborations(){
         try{
             return jdbcTemplate.query("SELECT * FROM Collaboration", new CollaborationRowMapper());
         }catch (EmptyResultDataAccessException e){

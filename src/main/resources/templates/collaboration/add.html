@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Create new skillType</title>
+  <title>Create new collaboration</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -9,15 +9,15 @@
 <body>
 <h2>New Collaboration</h2>
 <form action="#" th:action="@{/collaboration/add}"
-      th:object="${skillType}" method="post">
+      th:object="${collaboration}" method="post">
   <table>
     <tr>
       <td><label>Request</label></td>
-      <td><input type="text" th:field="*{id_request}" /></td>
+      <td><input type="text" th:field="*{idRequest}" /></td>
     </tr>
     <tr>
       <td><label>Offer</label></td>
-      <td><input type="text" th:field="*{id_offer}" /></td>
+      <td><input type="text" th:field="*{idOffer}" /></td>
     </tr>
 
     <tr>
@@ -35,11 +35,12 @@
 
     <tr>
       <td><label>Comment</label></td>
-      <td><input type="text" th:field="*{score}" /></td>
+      <td><input type="text" th:field="*{comment}" /></td>
     </tr>
 
     <tr>
       <td colspan="2"><input type="submit" value="Add collaboration" /></td>
+      <td colspan="2"><a href="/collaboration/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
     </tr>
   </table>
 </form>

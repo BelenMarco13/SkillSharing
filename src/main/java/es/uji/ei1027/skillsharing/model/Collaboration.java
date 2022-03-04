@@ -24,7 +24,7 @@ public class Collaboration {
     }
 
     public void setIdRequest(int id) {
-        this.idRequest = idRequest;
+        this.idRequest = id;
     }
 
     public int getIdOffer() {
@@ -32,7 +32,7 @@ public class Collaboration {
     }
 
     public void setIdOffer(int id) {
-        this.idOffer = idOffer;
+        this.idOffer = id;
     }
 
     public LocalDate getStartDate() {
@@ -55,7 +55,7 @@ public class Collaboration {
         return score;
     }
 
-    public void setScore(int id) {
+    public void setScore(int score) {
         this.score = score;
     }
 
@@ -77,7 +77,6 @@ public class Collaboration {
                 ", endDate=" + endDate +
                 ", score=" + score + '\'' +
                 ", comment='" + comment + '\'' +
-
                 '}';
     }
 

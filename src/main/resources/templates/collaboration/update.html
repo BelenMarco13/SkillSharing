@@ -13,11 +13,11 @@
   <table>
     <tr>
       <td><label>Collaboration</label></td>
-      <td><input type="number" th:field="*{id_request}" th:value="${collaboration.id_request}" readonly/></td>
+      <td><input type="number" th:field="*{idRequest}" th:value="${collaboration.idRequest}" readonly/></td>
     </tr>
     <tr>
       <td><label>Offer</label></td>
-      <td><input type="text" th:field="*{id_offer}" th:value="${collaboration.id_offer}"/></td>
+      <td><input type="text" th:field="*{idOffer}" th:value="${collaboration.idOffer}"/></td>
     </tr>
     <tr>
       <td><label>Start Date</label></td>
@@ -29,15 +29,16 @@
     </tr>
     <tr>
       <td><label>Score</label></td>
-      <td><input type="text" th:field="*{score}" th:value="${collaboration.student}"/></td>
+      <td><input type="text" th:field="*{score}" th:value="${collaboration.score}"/></td>
     </tr>
     <tr>
       <td><label>Comment</label></td>
-      <td><input type="text" th:field="*{comment}" th:value="${collaboration.typeName}"/></td>
+      <td><input type="text" th:field="*{comment}" th:value="${collaboration.comment}"/></td>
     </tr>
 
     <tr>
       <td colspan="2"><input type="submit" value="Update Collaboration" /></td>
+      <td colspan="2"><a href="/collaboration/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
     </tr>
   </table>
 </form>
