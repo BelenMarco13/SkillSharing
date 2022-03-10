@@ -73,6 +73,6 @@ public class OfferController {
     @RequestMapping("/delete/{id}")
     public String processDelete(@PathVariable int id){
         offerDao.deleteOffer(id);
-        return "redirect:list";
+        return "redirect:../list";
     }
 }
