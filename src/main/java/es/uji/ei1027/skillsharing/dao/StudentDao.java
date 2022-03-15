@@ -22,10 +22,10 @@ public class StudentDao {
 
     //Add the student to BBDD
     public void addStudent(Student student) {
-        jdbcTemplate.update("INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, cast(? as gender))",
+        jdbcTemplate.update("INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, cast(? as gender),?)",
                 student.getDni(), student.getName(), student.getEmail(), student.getUserName(),
                 student.getPwd(), student.getDegree(), student.getCourse(), student.getBalanceHours(),
-                student.getSkp(), student.getAddress(), student.getAge(), student.getGender().toString());
+                student.getSkp(), student.getAddress(), student.getAge(), student.getGender().toString(), false);
     }
 
     //Deletes the student from BBDD
@@ -45,6 +45,16 @@ public class StudentDao {
                 student.getName(), student.getEmail(), student.getUserName(), student.getPwd(),
                 student.getDegree(), student.getCourse(), student.getBalanceHours(),
                 student.getSkp(), student.getAddress(), student.getAge(), student.getGender().toString(), student.getDni());
+    }
+
+    //Block student
+    public void block(Student student){
+        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", true, student.getDni());
+    }
+
+    //Unblock student
+    public void unblock(Student student){
+        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", false, student.getDni());
     }
 
     //Returns the student with the given dni

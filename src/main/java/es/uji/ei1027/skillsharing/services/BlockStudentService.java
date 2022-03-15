@@ -3,6 +3,7 @@ package es.uji.ei1027.skillsharing.services;
 import es.uji.ei1027.skillsharing.dao.CollaborationDao;
 import es.uji.ei1027.skillsharing.dao.OfferDao;
 import es.uji.ei1027.skillsharing.dao.RequestDao;
+import es.uji.ei1027.skillsharing.dao.StudentDao;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Request;
@@ -19,6 +20,9 @@ public class BlockStudentService {
     RequestDao requestDao;
 
     @Autowired
+    StudentDao studentDao;
+
+    @Autowired
     OfferDao offerDao;
 
     @Autowired
@@ -29,13 +33,16 @@ public class BlockStudentService {
         List<Request> lRequest = new ArrayList<>();
         List<Offer> lOffer = new ArrayList<>();
 
+        // 0. Blocking student
+        studentDao.block(student);
+
         // 1. First modify the date of all student requests
         for (Request request:
                 requestDao.getRequests()) {
             if (request.getStudent().equals(student.getDni())){
 
                 // Modify the request
-                request.setEndDate(LocalDate.MIN);
+                request.setEndDate(LocalDate.now());
 
                 // Update the request
                 requestDao.updateRequest(request);
@@ -51,7 +58,7 @@ public class BlockStudentService {
             if (offer.getStudent().equals(student.getDni())){
 
                 // Modify the offer
-                offer.setEndDate(LocalDate.MIN);
+                offer.setEndDate(LocalDate.now());
 
                 // Update the offer
                 offerDao.updateOffer(offer);
@@ -67,7 +74,7 @@ public class BlockStudentService {
 
             // Modify the date of the collaboration if the bloqued student apears on the request or in the offer
             if (lOffer.contains(offerDao.getOffer(collaboration.getIdOffer())) || lRequest.contains(requestDao.getRequest(collaboration.getIdRequest())))
-                collaboration.setEndDate(LocalDate.MIN);
+                collaboration.setEndDate(LocalDate.now());
         }
     }
 }
