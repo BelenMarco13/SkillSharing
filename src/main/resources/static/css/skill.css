@@ -1,0 +1,32 @@
+body {
+   font-family: Helvetica, Arial, sans-serif;
+   background-color: gray;
+}
+
+h1 {
+   font-size: x-large;
+   color: red;
+}
+
+h2 {
+   font-size: large;
+   color: black;
+}
+
+/* Error */
+.error {
+     color: red;
+     font-size:80%
+}
+
+.needcorrection {
+     color: red;
+     background-color:yellow;
+}
+
+/* Login */
+.loggeduser {
+color: gray;
+text-align: right;
+margin-right: 10pt;
+}

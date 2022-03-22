@@ -1,6 +1,8 @@
 package es.uji.ei1027.skillsharing.dao;
 
+import es.uji.ei1027.skillsharing.Gender;
 import es.uji.ei1027.skillsharing.model.Student;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,12 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class StudentDao {
 
     private JdbcTemplate jdbcTemplate;
+    final Map<String, Student> knownStudents = new HashMap<String, Student>();
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -26,6 +31,7 @@ public class StudentDao {
                 student.getDni(), student.getName(), student.getEmail(), student.getUserName(),
                 student.getPwd(), student.getDegree(), student.getCourse(), student.getBalanceHours(),
                 student.getSkp(), student.getAddress(), student.getAge(), student.getGender().toString(), false);
+        knownStudents.put(student.getDni(),student);
     }
 
     //Deletes the student from BBDD
@@ -74,6 +80,20 @@ public class StudentDao {
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Student>();
+        }
+    }
+
+    public Student loadStudentByDni(String dni, String pwd){
+        Student student = getStudent(dni);
+        if(student == null){
+            return null;
+        }
+        //BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        //if(passwordEncryptor.checkPassword(pwd, student.getPwd())){
+        if(pwd.equals(student.getPwd())){
+            return student;
+        }else{
+            return null;
         }
     }
 }

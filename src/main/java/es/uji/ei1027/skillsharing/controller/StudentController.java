@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -23,7 +25,12 @@ public class StudentController {
     }
 
     @RequestMapping("/list")
-    public String listStudents(Model model) {
+    public String listStudents(HttpSession session, Model model) {
+        if(session.getAttribute("student") == null) {
+            model.addAttribute("student", new Student());
+            session.setAttribute("nextUrl", "student/list");
+            return "login";
+        }
         model.addAttribute("students", studentDao.getStudents());
         return "student/list";
     }
