@@ -1,0 +1,41 @@
+body{
+    background-color: #F5F5F5;
+    margin:2% 7%;
+}
+
+form{
+    padding: 2% 10%;
+    margin: 0 30%;
+    align-content: center;
+    font-family: "Comic Sans MS", sans-serif;
+    border-style: solid;
+    border-color: gray;
+    border-width: 3px;
+
+}
+
+input, textarea, select{
+    margin: 3% 7%;
+}
+
+h1{
+    color: darkorange;
+}
+
+button{
+    margin-left: 5px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+#hours{
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5%;
+    text-align: center;
+}
+

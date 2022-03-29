@@ -5,11 +5,23 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+          th:href="@{/css/skillsharing.css}"/>
 </head>
 <body>
-<h2>New Offer</h2>
+<div class="header">
+    <h1>Skill Sharing</h1>
+    <div>
+        <img src="/profile_picture.png" alt="profile_picture">
+        <h3>María Perez</h3>
+        <h5 id="hours">Hours: +3</h5>
+    </div>
+</div>
+
+
 <form action="#" th:action="@{/offer/add}"
       th:object="${offer}" method="post">
+    <h2>New Offer</h2>
     <table>
         <tr>
             <td><label>ID</label></td>
@@ -21,15 +33,23 @@
         </tr>
         <tr>
             <td><label>Description</label></td>
-            <td><input type="text" th:field="*{description}" /></td>
+            <td><textarea th:field="*{description}" /></td>
         </tr>
         <tr>
             <td><label>Start date</label></td>
-            <td><input type="date" th:field="*{startDate}" /></td>
+
+            <td>
+                <input type="date" th:field="*{startDate}" />
+                <img src="/calendar.png" alt="calendar_picture">
+            </td>
         </tr>
         <tr>
             <td><label>End date</label></td>
-            <td><input type="date" th:field="*{endDate}" /></td>
+            <td>
+                <input type="date" th:field="*{endDate}" />
+                <img src="/calendar.png" alt="calendar_picture">
+            </td>
+
         </tr>
         <tr>
             <td><label>Student</label></td>
@@ -41,13 +61,13 @@
         </tr>
         <tr>
             <td><label>Level</label></td>
-            <td><select type="text" th:field="*{skillLevel}">
+            <td><select type="text" th:field="*{skillLevel}" class="btn btn-outline-secondary">
                 <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
             </select></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Add offer" /></td>
-            <td colspan="2"><a href="/offer/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
+            <td><input type="submit" value="Add offer" class="btn btn-outline-secondary"/></td>
+            <td><a href="/offer/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
         </tr>
     </table>
 </form>
