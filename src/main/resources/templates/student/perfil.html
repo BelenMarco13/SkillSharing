@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="/css/skill.css"
+      th:href="@{/css/skill.css}"/>
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <h1>Skill Sharing</h1>
+    <h2>Perfil</h2>
+
+    <tr th:each="student: ${student}">
+        <td th:text="${student.dni}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.userName}"></td>
+        <td th:text="${student.degree}"></td>
+        <td th:text="${student.course}"></td>
+        <td th:text="${student.balanceHours}"></td>
+        <td th:text="${student.skp}"></td>
+        <td th:text="${student.address}"></td>
+        <td th:text="${student.age}"></td>
+        <td th:text="${student.gender}"></td>
+        <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+    </tr>
+
+</body>
+</html>

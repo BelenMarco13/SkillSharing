@@ -17,5 +17,17 @@ public class StudentValidator implements Validator {
             errors.rejectValue("dni", "required","ID required");
         if(student.getPwd().trim().equals(""))
             errors.rejectValue("pwd", "required","Password required");
+        if(student.getAddress().trim().equals(""))
+            errors.rejectValue("address", "required","Address required");
+        if(student.getDegree().trim().equals(""))
+            errors.rejectValue("degree", "required","Degree required");
+        if(student.getEmail().trim().equals(""))
+            errors.rejectValue("email", "required","Email required");
+        if(student.getUserName().trim().equals(""))
+            errors.rejectValue("user", "required","User name required");
+        if(student.getAge() == 0)
+            errors.rejectValue("age", "required","Age required");
+        if(student.getCourse() == 0)
+            errors.rejectValue("course", "required","Course required");
     }
 }

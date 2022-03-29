@@ -35,11 +35,23 @@ public class StudentController {
         return "student/list";
     }
 
+    @RequestMapping("/perfil")
+    public String perfilStudent(HttpSession session, Model model) {
+        if(session.getAttribute("student") == null) {
+            model.addAttribute("student", new Student());
+            session.setAttribute("nextUrl", "/student/login");
+            return "login";
+        }
+        model.addAttribute("student", session.getAttribute("student"));
+        return "student/perfil";
+    }
+
     //Send the form
     @RequestMapping(value="/add")
-    public String addStudent(Model model) {
+    public String addStudent(Model model, HttpSession session) {
         model.addAttribute("student", new Student());
         model.addAttribute("values", Gender.values());
+        session.setAttribute("nextUrl","student/perfil");
         return "student/add";
     }
 
@@ -47,6 +59,10 @@ public class StudentController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(Model model, @ModelAttribute("student") Student student,
                                    BindingResult bindingResult) {
+
+        StudentValidator studentValidator = new StudentValidator();
+        studentValidator.validate(student, bindingResult);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("values", Gender.values());
             return "student/add";
