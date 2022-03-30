@@ -17,6 +17,14 @@ public class StudentValidator implements Validator {
             errors.rejectValue("dni", "required","ID required");
         if(student.getPwd().trim().equals(""))
             errors.rejectValue("pwd", "required","Password required");
+    }
+
+    public void validateRegister(Object obj, Errors errors) {
+        Student student = (Student) obj;
+        if(student.getDni().trim().equals(""))
+            errors.rejectValue("dni", "required","ID required");
+        if(student.getPwd().trim().equals(""))
+            errors.rejectValue("pwd", "required","Password required");
         if(student.getAddress().trim().equals(""))
             errors.rejectValue("address", "required","Address required");
         if(student.getDegree().trim().equals(""))

@@ -11,19 +11,30 @@
     <h2>Perfil</h2>
 
     <tr th:each="student: ${student}">
-        <td th:text="${student.dni}"></td>
-        <td th:text="${student.name}"></td>
-        <td th:text="${student.email}"></td>
-        <td th:text="${student.userName}"></td>
-        <td th:text="${student.degree}"></td>
-        <td th:text="${student.course}"></td>
-        <td th:text="${student.balanceHours}"></td>
-        <td th:text="${student.skp}"></td>
-        <td th:text="${student.address}"></td>
-        <td th:text="${student.age}"></td>
-        <td th:text="${student.gender}"></td>
+        <td th:text="ID"></td>
+        <td th:text="${student.dni}"></td><br>
+        <td th:text="Name"></td>
+        <td th:text="${student.name}"></td><br>
+        <td th:text="Email"></td>
+        <td th:text="${student.email}"></td><br>
+        <td th:text="User"></td>
+        <td th:text="${student.userName}"></td><br>
+        <td th:text="Degree"></td>
+        <td th:text="${student.degree}"></td><br>
+        <td th:text="Course"></td>
+        <td th:text="${student.course}"></td><br>
+        <td th:text="Hours"></td>
+        <td th:text="${student.balanceHours}"></td><br>
+        <td th:text="SKP"></td>
+        <td th:text="${student.skp}"></td><br>
+        <td th:text="Address"></td>
+        <td th:text="${student.address}"></td><br>
+        <td th:text="Age"></td>
+        <td th:text="${student.age}"></td><br>
+        <td th:text="Gender"></td>
+        <td th:text="${student.gender}"></td><br>
         <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+        <td colspan="2"><a href="/"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
     </tr>
-
 </body>
 </html>

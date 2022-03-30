@@ -68,7 +68,7 @@ public class StudentController {
             return "student/add";
         }
         studentDao.addStudent(student);
-        return "redirect:list";
+        return "redirect:perfil";
     }
 
     //Send the form
@@ -88,7 +88,7 @@ public class StudentController {
             return "student/update";
         }
         studentDao.updateStudent(student);
-        return "redirect:list";
+        return "redirect:perfil";
     }
 
     //Delete student

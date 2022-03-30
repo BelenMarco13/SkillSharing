@@ -47,12 +47,44 @@ public class LoginController {
             session.removeAttribute(nextUrl);
             return "redirect:" + nextUrl;
         }
-        return "redirect:/";
+        return "redirect:/student/perfil";
     }
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
+        return "redirect:/";
+    }
+
+    @RequestMapping("/signUp")
+    public String signUp(Model model) {
+        model.addAttribute("student", new Student());
+        return "perfil";
+    }
+
+    @RequestMapping(value="/signUp", method= RequestMethod.POST)
+    public String checkSignUp(@ModelAttribute("student") Student student,
+                             BindingResult bindingResult, HttpSession session) {
+        StudentValidator studentValidator = new StudentValidator();
+        studentValidator.validate(student, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "perfil";
+        }
+
+        student = studentDao.loadStudentByDni(student.getDni(), student.getPwd());
+        if (student == null) {
+            bindingResult.rejectValue("pwd", "badpwd", "Bad password");
+            return "login";
+        }
+
+        session.setAttribute("student", student);
+
+        String nextUrl = (String) session.getAttribute("nextUrl");
+        if(nextUrl != null){
+            session.removeAttribute(nextUrl);
+            return "redirect:" + nextUrl;
+        }
         return "redirect:/";
     }
 }
