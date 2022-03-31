@@ -42,11 +42,11 @@ public class LoginController {
 
         session.setAttribute("student", student);
 
-        String nextUrl = (String) session.getAttribute("nextUrl");
+       /* String nextUrl = (String) session.getAttribute("nextUrl");
         if(nextUrl != null){
             session.removeAttribute(nextUrl);
             return "redirect:" + nextUrl;
-        }
+        }*/
         return "redirect:/student/perfil";
     }
 

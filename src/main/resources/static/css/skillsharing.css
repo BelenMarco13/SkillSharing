@@ -11,7 +11,6 @@ form{
     border-style: solid;
     border-color: gray;
     border-width: 3px;
-
 }
 
 input, textarea, select{
@@ -37,5 +36,9 @@ button{
     border-width: 1px;
     padding: 5%;
     text-align: center;
+}
+
+.error{
+    color: red;
 }
 

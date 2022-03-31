@@ -3,38 +3,61 @@
 <link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
       th:href="@{/css/skillsharing.css}"/>
 <head>
-    <title>Login</title>
+    <title>Perfil</title>
     <meta charset="UTF-8"/>
 </head>
 <body>
     <h1>Skill Sharing</h1>
     <h2>Perfil</h2>
-
+    <form>
     <tr th:each="student: ${student}">
-        <td th:text="ID"></td>
-        <td th:text="${student.dni}"></td><br>
-        <td th:text="Name"></td>
-        <td th:text="${student.name}"></td><br>
-        <td th:text="Email"></td>
-        <td th:text="${student.email}"></td><br>
-        <td th:text="User"></td>
-        <td th:text="${student.userName}"></td><br>
-        <td th:text="Degree"></td>
-        <td th:text="${student.degree}"></td><br>
-        <td th:text="Course"></td>
-        <td th:text="${student.course}"></td><br>
-        <td th:text="Hours"></td>
-        <td th:text="${student.balanceHours}"></td><br>
-        <td th:text="SKP"></td>
-        <td th:text="${student.skp}"></td><br>
-        <td th:text="Address"></td>
-        <td th:text="${student.address}"></td><br>
-        <td th:text="Age"></td>
-        <td th:text="${student.age}"></td><br>
-        <td th:text="Gender"></td>
-        <td th:text="${student.gender}"></td><br>
+        <p>
+            <th>ID</th>
+            <td th:text="${student.dni}"></td><br>
+        </p>
+        <p>
+            <th>Name</th>
+            <td th:text="${student.name}"></td><br>
+        </p>
+        <p>
+            <th>Email</th>
+            <td th:text="${student.email}"></td><br>
+        </p>
+        <p>
+            <th>User</th>
+            <td th:text="${student.userName}"></td><br>
+        </p>
+        <p>
+            <th>Email</th>
+            <td th:text="${student.degree}"></td><br>
+        </p>
+        <p>
+            <th>Course</th>
+            <td th:text="${student.course}"></td><br>
+        </p>
+        <p>
+            <th>Hours</th>
+            <td th:text="${student.balanceHours}"></td><br>
+        </p>
+        <p>
+            <th>SKP</th>
+            <td th:text="${student.skp}"></td><br>
+        </p>
+        <p>
+            <th>Address</th>
+            <td th:text="${student.address}"></td><br>
+        </p>
+        <p>
+            <th>Age</th>
+            <td th:text="${student.age}"></td><br>
+        </p>
+        <p>
+            <th>Gender</th>
+            <td th:text="${student.gender}"></td><br>
+        </p>
         <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
-        <td colspan="2"><a href="/"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
+        <td><a href="/"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
     </tr>
+    </form>
 </body>
 </html>
