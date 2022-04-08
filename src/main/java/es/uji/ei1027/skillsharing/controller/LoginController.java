@@ -27,6 +27,7 @@ public class LoginController {
     @RequestMapping(value="/login", method= RequestMethod.POST)
     public String checkLogin(@ModelAttribute("student") Student student,
                              BindingResult bindingResult, HttpSession session) {
+
         StudentValidator studentValidator = new StudentValidator();
         studentValidator.validate(student, bindingResult);
 
@@ -35,6 +36,7 @@ public class LoginController {
         }
 
         student = studentDao.loadStudentByDni(student.getDni(), student.getPwd());
+
         if (student == null) {
             bindingResult.rejectValue("pwd", "badpwd", "Bad password");
             return "login";
@@ -42,12 +44,13 @@ public class LoginController {
 
         session.setAttribute("student", student);
 
-       /* String nextUrl = (String) session.getAttribute("nextUrl");
+        String nextUrl = (String) session.getAttribute("nextUrl");
         if(nextUrl != null){
             session.removeAttribute(nextUrl);
+            System.out.println("redirect:" + nextUrl);
             return "redirect:" + nextUrl;
-        }*/
-        return "redirect:/student/perfil";
+        }
+        return "redirect:/";
     }
 
     @RequestMapping("/logout")
@@ -59,7 +62,7 @@ public class LoginController {
     @RequestMapping("/signUp")
     public String signUp(Model model) {
         model.addAttribute("student", new Student());
-        return "perfil";
+        return "student/perfil";
     }
 
     @RequestMapping(value="/signUp", method= RequestMethod.POST)
@@ -69,10 +72,11 @@ public class LoginController {
         studentValidator.validate(student, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "perfil";
+            return "student/perfil";
         }
 
         student = studentDao.loadStudentByDni(student.getDni(), student.getPwd());
+
         if (student == null) {
             bindingResult.rejectValue("pwd", "badpwd", "Bad password");
             return "login";

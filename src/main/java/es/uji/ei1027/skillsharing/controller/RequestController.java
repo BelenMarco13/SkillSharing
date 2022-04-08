@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -39,7 +40,13 @@ public class RequestController {
     }
 
     @RequestMapping("/add")
-    public String addRequest(Model model) {
+    public String addRequest(Model model, HttpSession session) {
+
+        if (session.getAttribute("student") == null){
+            session.setAttribute("nextUrl", "/request/add");
+            return "redirect:../login";
+        }
+
         Request request;
         model.addAttribute("request",  request = new Request());
         model.addAttribute("values", Level.values());

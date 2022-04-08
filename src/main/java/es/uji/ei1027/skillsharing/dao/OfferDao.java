@@ -1,12 +1,15 @@
 package es.uji.ei1027.skillsharing.dao;
 
 import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import javax.websocket.Session;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +24,10 @@ public class OfferDao {
     }
 
     // Afegeix la prova a la base de dades
-    public void addOffer(Offer offer){
+    public void addOffer(Offer offer, Student student){
         jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as level))",
                 offer.getId(), offer.getName(), offer.getDescription(), offer.getStartDate(),
-                offer.getEndDate(), offer.getStudent(), offer.getSkillName(), offer.getSkillLevel().toString());
+                offer.getEndDate(), student.getDni(), offer.getSkillName(), offer.getSkillLevel().toString());
     }
 
     public void deleteOffer(Offer offer){
