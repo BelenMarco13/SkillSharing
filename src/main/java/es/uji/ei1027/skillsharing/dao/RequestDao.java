@@ -3,6 +3,7 @@ package es.uji.ei1027.skillsharing.dao;
 import es.uji.ei1027.skillsharing.SkillsharingApplication;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Request;
+import es.uji.ei1027.skillsharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,10 +26,10 @@ public class RequestDao {
     }
 
     // Afegeix la prova a la base de dades
-    public void addRequest(Request request){
+    public void addRequest(Request request, Student student){
         jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as Level))",
                 request.getId(), request.getName(), request.getDescription(), request.getStartDate(),
-                request.getEndDate(), request.getStudent(), request.getSkillName(), request.getSkillLevel().toString());
+                request.getEndDate(), student.getDni(), request.getSkillName(), request.getSkillLevel().toString());
     }
 
     public void deleteRequest(int id){

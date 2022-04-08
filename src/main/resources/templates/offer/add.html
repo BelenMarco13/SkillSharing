@@ -6,13 +6,13 @@
     <title>Create new offer</title>
     <meta charset="UTF-8" />
 </head>
-<body>
+<body th:object="${session}">
 <div class="header">
     <h1>Skill Sharing</h1>
     <div>
         <img src="/profile_picture.png" alt="profile_picture">
-        <h3>María Perez</h3>
-        <h5 id="hours">Hours: +3</h5>
+        <h3 th:text="*{student.name}"></h3>
+        <h5 th:text="*{student.balanceHours}"></h5>
     </div>
 </div>
 
@@ -36,22 +36,11 @@
         <tr>
             <td><label>Start date</label></td>
 
-            <td>
-                <input type="date" th:field="*{startDate}" />
-                <img src="/calendar.png" alt="calendar_picture">
-            </td>
+            <td><input type="date" th:field="*{startDate}" /></td>
         </tr>
         <tr>
             <td><label>End date</label></td>
-            <td>
-                <input type="date" th:field="*{endDate}" />
-                <img src="/calendar.png" alt="calendar_picture">
-            </td>
-
-        </tr>
-        <tr>
-            <td><label>Student</label></td>
-            <td><input type="text" th:field="*{student}" /></td>
+            <td><input type="date" th:field="*{endDate}" /></td>
         </tr>
         <tr>
             <td><label>Skill type</label></td>

@@ -50,23 +50,19 @@ public class RequestController {
         Request request;
         model.addAttribute("request",  request = new Request());
         model.addAttribute("values", Level.values());
-        log.info(request.toString());
         return "request/add";
     }
 
     //Collect the form
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(Model model, @ModelAttribute("request") Request request,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, HttpSession session) {
 
-        log.info(request.toString());
         if (bindingResult.hasErrors()){
-            log.info("El error essssss: \n");
-            log.info(bindingResult.toString());
             model.addAttribute("values", Level.values());
             return "request/add";}
 
-        requestDao.addRequest(request);
+        requestDao.addRequest(request, (Student)session.getAttribute("student"));
         return "redirect:list";
     }
 

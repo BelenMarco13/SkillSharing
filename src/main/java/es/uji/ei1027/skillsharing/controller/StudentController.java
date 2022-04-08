@@ -38,8 +38,7 @@ public class StudentController {
     @RequestMapping("/perfil")
     public String perfilStudent(HttpSession session, Model model) {
         if(session.getAttribute("student") == null) {
-            model.addAttribute("student", new Student());
-            session.setAttribute("nextUrl", "/student/login");
+            session.setAttribute("nextUrl", "/student/perfil");
             return "login";
         }
         model.addAttribute("student", session.getAttribute("student"));

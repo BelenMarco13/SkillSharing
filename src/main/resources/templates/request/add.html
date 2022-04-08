@@ -3,56 +3,56 @@
 <link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
       th:href="@{/css/skillsharing.css}"/>
 <head>
-    <title>Create new skillType</title>
+    <title>Create new request</title>
     <meta charset="UTF-8" />
 </head>
-<body>
-<h2>New Request</h2>
+<body th:object="${session}">
+<div class="header">
+    <h1>Skill Sharing</h1>
+    <div>
+        <img src="/profile_picture.png" alt="profile_picture">
+        <h3 th:text="*{student.name}"></h3>
+        <h5 th:text="*{student.balanceHours}"></h5>
+    </div>
+</div>
+
 <form action="#" th:action="@{/request/add}"
       th:object="${request}" method="post">
+    <h2>New Request</h2>
     <table>
         <tr>
-            <td><label>Identificador </label></td>
-            <td><input type="number" min="1" th:field="*{id}" /></td>
+            <td><label>ID</label></td>
+            <td><input type="number" th:field="*{id}" /></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
             <td><input type="text" th:field="*{name}" /></td>
         </tr>
         <tr>
-            <td><label>Student</label></td>
-            <td><input type="text" th:field="*{student}" value="12345675R" /></td>
-        </tr>
-        <tr>
             <td><label>Description</label></td>
-            <td><input type="text" th:field="*{description}" /></td>
+            <td><textarea th:field="*{description}" /></td>
         </tr>
         <tr>
-            <td><label>Start Date</label></td>
-            <td><input type="date" th:field="*{startDate}"></td>
+            <td><label>Start date</label></td>
+            <td><input type="date" th:field="*{startDate}" /></td>
         </tr>
         <tr>
-            <td><label>End Date</label></td>
-            <td><input type="date" th:field="*{endDate}"></td>
+            <td><label>End date</label></td>
+            <td><input type="date" th:field="*{endDate}" /></td>
         </tr>
         <tr>
-            <td><label>Skill</label></td>
-            <td><input type="text" th:field="*{skillName}"></td>
-
+            <td><label>Skill type</label></td>
+            <td><input type="text" th:field="*{skillName}" /></td>
         </tr>
-
         <tr>
             <td><label>Level</label></td>
-            <td><select type="text" th:field="*{skillLevel}">
+            <td><select type="text" th:field="*{skillLevel}" class="btn btn-outline-secondary">
                 <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
             </select></td>
         </tr>
         <tr>
-
-            <td colspan="2"><button type="submit" value="Add request" class="btn btn-outline-success">Add request</button>
-            <td colspan="2"><a href="/request/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
-            </td>
-
+            <td><input type="submit" value="Add request" class="btn btn-outline-secondary"/></td>
+            <td><a href="/request/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
         </tr>
     </table>
 </form>
