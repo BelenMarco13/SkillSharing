@@ -14,12 +14,6 @@ public class HomeController {
    @RequestMapping("/")
     public String index(HttpSession session){
 
-
-        System.out.println("Here we are");
-        System.out.println(session.getAttribute("student"));
-
-
-
         return "index";
     }
 
