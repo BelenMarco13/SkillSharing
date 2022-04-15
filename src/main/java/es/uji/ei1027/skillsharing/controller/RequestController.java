@@ -7,6 +7,7 @@ import es.uji.ei1027.skillsharing.dao.RequestDao;
 import es.uji.ei1027.skillsharing.model.Request;
 import es.uji.ei1027.skillsharing.model.SkillType;
 import es.uji.ei1027.skillsharing.model.Student;
+import es.uji.ei1027.skillsharing.services.GetSkillTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,10 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/request")
 public class RequestController {
+
+    @Autowired
+    private GetSkillTypesService getSkillTypesService;
+
     private RequestDao requestDao;
     private static final Logger log =
             Logger.getLogger(SkillsharingApplication.class.getName());
@@ -47,8 +52,8 @@ public class RequestController {
             return "redirect:../login";
         }
 
-        Request request;
-        model.addAttribute("request",  request = new Request());
+        model.addAttribute("request", new Request());
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
         model.addAttribute("values", Level.values());
         return "request/add";
     }
