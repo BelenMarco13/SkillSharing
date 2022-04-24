@@ -11,12 +11,16 @@ body{
 
 form{
     padding: 2% 10%;
-    margin: 0 30%;
+    margin: 0 25%;
     align-content: center;
     font-family: "Comic Sans MS", sans-serif;
     border-style: solid;
     border-color: gray;
     border-width: 3px;
+}
+
+form table{
+    width: 100%;
 }
 
 input, textarea, select{
