@@ -1,0 +1,11 @@
+<div class="header" th:object="${session}" xmlns:th="http://www.thymeleaf.org">
+  <p th:if="*{student == null}">
+    Don't register <a href="/login" th:href="@{/login}">Sign in</a>
+  </p>
+  <p th:unless="*{student == null}">
+    Welcome <span th:text="*{student.name}"></span>
+      <img src="/profile_picture.png" alt="profile_picture">
+      <h3 th:text="*{student.name}"></h3>
+      <h5 th:text="*{student.balanceHours}"></h5>
+  </p>
+</div>

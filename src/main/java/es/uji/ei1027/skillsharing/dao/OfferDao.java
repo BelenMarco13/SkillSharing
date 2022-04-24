@@ -17,13 +17,11 @@ import java.util.List;
 public class OfferDao {
     private JdbcTemplate jdbcTemplate;
 
-    // Obte el jdbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    // Afegeix la prova a la base de dades
     public void addOffer(Offer offer, Student student){
         jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as level))",
                 offer.getId(), offer.getName(), offer.getDescription(), offer.getStartDate(),

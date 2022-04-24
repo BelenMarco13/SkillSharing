@@ -29,10 +29,10 @@ public class RequestController {
 
     @Autowired
     private GetSkillTypesService getSkillTypesService;
-
     private RequestDao requestDao;
     private static final Logger log =
             Logger.getLogger(SkillsharingApplication.class.getName());
+
     @Autowired
     public void setRequestDao(RequestDao requestDao){
         this.requestDao = requestDao;

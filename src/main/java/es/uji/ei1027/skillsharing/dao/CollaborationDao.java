@@ -15,13 +15,11 @@ import java.util.List;
 public class CollaborationDao {
     private JdbcTemplate jdbcTemplate;
 
-    // Obte el jdbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    // Afegeix la prova a la base de dades
         public void addCollaboration(Collaboration collaboration){
         jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
                 collaboration.getIdRequest(), collaboration.getIdOffer(), collaboration.getStartDate(),

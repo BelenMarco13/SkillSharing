@@ -3,6 +3,12 @@ body{
     margin:2% 7%;
 }
 
+.loggeduser {
+ color: gray;
+ text-align: right;
+ margin-right: 10pt;
+ }
+
 form{
     padding: 2% 10%;
     margin: 0 30%;

@@ -5,6 +5,7 @@ import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.dao.OfferDao;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Student;
+import es.uji.ei1027.skillsharing.services.GetSkillTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpSession;
 public class OfferController {
 
     private OfferDao offerDao;
+    private GetSkillTypesService getSkillTypesService;
 
     @Autowired
     public void setOfferDao(OfferDao offerDao){
@@ -44,6 +46,7 @@ public class OfferController {
         }
 
         model.addAttribute("offer", new Offer());
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
         model.addAttribute("values", Level.values());
         return "offer/add";
     }

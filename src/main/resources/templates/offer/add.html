@@ -18,7 +18,6 @@
     </div>
 </div>
 
-
 <form action="#" th:action="@{/offer/add}"
       th:object="${offer}" method="post">
     <h2>New Offer</h2>
@@ -37,7 +36,6 @@
         </tr>
         <tr>
             <td><label>Start date</label></td>
-
             <td><input type="date" th:field="*{startDate}" /></td>
         </tr>
         <tr>
@@ -46,7 +44,9 @@
         </tr>
         <tr>
             <td><label>Skill type</label></td>
-            <td><input type="text" th:field="*{skillName}" /></td>
+            <td><select type="text" th:field="*{skillName}" class="btn btn-outline-secondary">
+                <option th:each="skillType: ${skillTypes}" th:value="${skillType.name}" th:text="${skillType.name}"></option>
+            </select></td>
         </tr>
         <tr>
             <td><label>Level</label></td>

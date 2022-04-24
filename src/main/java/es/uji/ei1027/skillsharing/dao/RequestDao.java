@@ -25,7 +25,6 @@ public class RequestDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    // Afegeix la prova a la base de dades
     public void addRequest(Request request, Student student){
         jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as Level))",
                 request.getId(), request.getName(), request.getDescription(), request.getStartDate(),
