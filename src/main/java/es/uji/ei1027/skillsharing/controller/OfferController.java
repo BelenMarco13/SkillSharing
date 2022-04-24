@@ -71,6 +71,7 @@ public class OfferController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String editOffer(Model model, @PathVariable int id){
         model.addAttribute("offer", offerDao.getOffer(id));
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
         model.addAttribute("values", Level.values());
         return "offer/update";
     }

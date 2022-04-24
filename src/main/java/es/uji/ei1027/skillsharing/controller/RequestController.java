@@ -76,6 +76,8 @@ public class RequestController {
     public String editRequest(Model model, @PathVariable int id) {
         model.addAttribute("request", requestDao.getRequest(id));
         model.addAttribute("values", Level.values());
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
+
         log.info("cojo la info");
         return "request/update";
     }

@@ -38,8 +38,10 @@
             <td><input type="date" th:field="*{endDate}"></td>
         </tr>
         <tr>
-            <td><label>Skill</label></td>
-            <td><input type="text" th:field="*{skillName}"></td>
+            <td><label>Skill type</label></td>
+            <td><select type="text" th:field="*{skillName}" class="btn btn-outline-secondary">
+                <option th:each="skillType: ${skillTypes}" th:value="${skillType.name}" th:text="${skillType.name}"></option>
+            </select></td>
         </tr>
 
         <tr>
