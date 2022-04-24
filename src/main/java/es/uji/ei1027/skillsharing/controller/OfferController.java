@@ -23,8 +23,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/offer")
 public class OfferController {
 
-    private OfferDao offerDao;
+    @Autowired
     private GetSkillTypesService getSkillTypesService;
+    private OfferDao offerDao;
 
     @Autowired
     public void setOfferDao(OfferDao offerDao){
