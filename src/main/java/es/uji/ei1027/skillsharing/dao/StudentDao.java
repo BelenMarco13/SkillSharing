@@ -39,11 +39,6 @@ public class StudentDao {
         jdbcTemplate.update("DELETE FROM student WHERE dni=?", student.getDni());
     }
 
-    //Deletes the student from BBDD with dni
-    public void deleteStudentDni(String dni) {
-        jdbcTemplate.update("DELETE FROM student WHERE dni=?", dni);
-    }
-
     //Updates the student
     public void updateStudent(Student student) {
         jdbcTemplate.update("UPDATE student SET name=?, email=?, user_name=?," +
@@ -53,14 +48,14 @@ public class StudentDao {
                 student.getAge(), student.getGender().toString(), student.getDni());
     }
 
-    //Block student
-    public void block(Student student){
-        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", true, student.getDni());
+    //Cancel account
+    public void cancelAccount(String dni){
+        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", true, dni);
     }
 
-    //Unblock student
-    public void unblock(Student student){
-        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", false, student.getDni());
+    //Return account
+    public void returnAccount(String dni){
+        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", false, dni);
     }
 
     //Returns the student with the given dni
@@ -88,8 +83,7 @@ public class StudentDao {
         if(student == null){
             return null;
         }
-        //BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-        //if(passwordEncryptor.checkPassword(pwd, student.getPwd())){
+
         if(pwd.equals(student.getPwd())){
             return student;
         }else{

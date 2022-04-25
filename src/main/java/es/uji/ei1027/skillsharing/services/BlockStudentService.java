@@ -34,7 +34,7 @@ public class BlockStudentService {
         List<Offer> lOffer = new ArrayList<>();
 
         // 0. Blocking student
-        studentDao.block(student);
+        studentDao.cancelAccount(student.getDni());
 
         // 1. First modify the date of all student requests
         for (Request request:

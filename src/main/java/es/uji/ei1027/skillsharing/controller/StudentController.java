@@ -67,7 +67,7 @@ public class StudentController {
             return "student/add";
         }
         studentDao.addStudent(student);
-        return "redirect:perfil";
+        return "redirect:../list";
     }
 
     //Send the form
@@ -87,13 +87,19 @@ public class StudentController {
             return "student/update";
         }
         studentDao.updateStudent(student);
-        return "redirect:perfil";
+        return "redirect:../";
     }
 
-    //Delete student
-    @RequestMapping(value="/delete/{dni}")
-    public String processDelete(@PathVariable String dni) {
-        studentDao.deleteStudentDni(dni);
+    //Cancel account
+    @RequestMapping(value="/cancelAccount/{dni}")
+    public String processCancelAccount(@PathVariable String dni) {
+        studentDao.cancelAccount(dni);
+        return "redirect:../list";
+    }
+    //Return account
+    @RequestMapping(value="/returnAccount/{dni}")
+    public String processReturnAccount(@PathVariable String dni) {
+        studentDao.returnAccount(dni);
         return "redirect:../list";
     }
 }
