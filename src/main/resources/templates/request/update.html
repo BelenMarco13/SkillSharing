@@ -43,10 +43,9 @@
                 <option th:each="skillType: ${skillTypes}" th:value="${skillType.name}" th:text="${skillType.name}"></option>
             </select></td>
         </tr>
-
         <tr>
             <td><label>Level</label></td>
-            <td><select type="text" th:field="*{skillLevel}">
+            <td><select type="text" th:field="*{skillLevel}" class="btn btn-outline-secondary">
                 <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
             </select></td>
         </tr>

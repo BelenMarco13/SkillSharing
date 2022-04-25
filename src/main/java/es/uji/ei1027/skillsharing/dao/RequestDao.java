@@ -39,9 +39,9 @@ public class RequestDao {
         log.info("updateeeee:");
         log.info(request.toString());
         jdbcTemplate.update("UPDATE Request SET name = ?, description = ?, start_date = ?, " +
-                        "end_date = ?, student = ?, skill_name = ?, skill_level = cast(? as Level) WHERE id = ?",
+                        "end_date = ?, skill_name = ?, skill_level = cast(? as Level) WHERE id = ?",
                 request.getName(), request.getDescription(), request.getStartDate(), request.getEndDate(),
-                request.getStudent(), request.getSkillName(), request.getSkillLevel().toString(), request.getId());
+                request.getSkillName(), request.getSkillLevel().toString(), request.getId());
     }
 
     public Request getRequest(int id){

@@ -19,11 +19,11 @@
     </div>
 
     <div>
-        <td colspan="2"><a href="/offer/list"> <button type="button" value="return" class="btn btn-outline-secondary">See offers</button></a></td>
-        <td colspan="2"><a href="/request/list"> <button type="button" value="return" class="btn btn-outline-secondary">See requests</button></a></td>
+        <td colspan="2"><a href="/offer/list"> <button type="button" value="offers" class="btn btn-outline-secondary">See offers</button></a></td>
+        <td colspan="2"><a href="/request/list"> <button type="button" value="requests" class="btn btn-outline-secondary">See requests</button></a></td>
         <td th:if="*{student == null}" colspan="2"><a href="/login"> <button type="button" value="return" class="btn btn-outline-secondary">Sign in</button></a></td>
         <td th:if="*{student != null and student.skp == true}" colspan="2"><a href="/menu.html"> <button type="button" value="menu skp" class="btn btn-outline-secondary">Menu skp</button></a></td>
-        <td th:unless="*{student == null}" colspan="2"><a href="/logout"> <button type="button" value="return" class="btn btn-outline-secondary">Sign out</button></a></td>
+        <td th:unless="*{student == null}" colspan="2"><a href="/logout"> <button type="button" value="sign out" class="btn btn-outline-secondary">Sign out</button></a></td>
     </div>
 
 </body>
