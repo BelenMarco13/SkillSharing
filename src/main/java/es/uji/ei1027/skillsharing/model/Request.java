@@ -11,12 +11,12 @@ public class Request {
     private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private String student;
     private String skillName;
     private Level skillLevel;
+    private String skillTypeLevel;
 
     public Request(){
     }
@@ -84,6 +84,10 @@ public class Request {
     public void setSkillLevel(Level skillLevel) {
         this.skillLevel = skillLevel;
     }
+
+    public String getSkillTypeLevel() { return skillTypeLevel; }
+
+    public void setSkillTypeLevel(String skillTypeLevel) { this.skillTypeLevel = skillTypeLevel; }
 
     @Override
     public String toString() {

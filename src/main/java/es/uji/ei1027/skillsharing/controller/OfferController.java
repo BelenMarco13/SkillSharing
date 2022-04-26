@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.print.DocFlavor;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/offer")
@@ -47,8 +48,7 @@ public class OfferController {
         }
 
         model.addAttribute("offer", new Offer());
-        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
-        model.addAttribute("values", Level.values());
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "offer/add";
     }
 
@@ -71,8 +71,7 @@ public class OfferController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String editOffer(Model model, @PathVariable int id){
         model.addAttribute("offer", offerDao.getOffer(id));
-        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
-        model.addAttribute("values", Level.values());
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "offer/update";
     }
 
@@ -89,6 +88,12 @@ public class OfferController {
     @RequestMapping("/delete/{id}")
     public String processDelete(@PathVariable int id){
         offerDao.deleteOffer(id);
+        return "redirect:../list";
+    }
+
+    @RequestMapping("/end/{id}")
+    public String processEnd(@PathVariable int id){
+        offerDao.endOffer(id);
         return "redirect:../list";
     }
 }

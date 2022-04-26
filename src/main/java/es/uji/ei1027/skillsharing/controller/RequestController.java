@@ -53,8 +53,7 @@ public class RequestController {
         }
 
         model.addAttribute("request", new Request());
-        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
-        model.addAttribute("values", Level.values());
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "request/add";
     }
 
@@ -65,7 +64,8 @@ public class RequestController {
 
         if (bindingResult.hasErrors()){
             model.addAttribute("values", Level.values());
-            return "request/add";}
+            return "request/add";
+        }
 
         requestDao.addRequest(request, (Student)session.getAttribute("student"));
         return "redirect:list";
@@ -75,8 +75,7 @@ public class RequestController {
     @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
     public String editRequest(Model model, @PathVariable int id) {
         model.addAttribute("request", requestDao.getRequest(id));
-        model.addAttribute("values", Level.values());
-        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypes());
+        model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
 
         log.info("cojo la info");
         return "request/update";
@@ -102,6 +101,11 @@ public class RequestController {
         return "redirect:../list";
     }
 
+    @RequestMapping("/end/{id}")
+    public String processEnd(@PathVariable int id){
+        requestDao.endRequest(id);
+        return "redirect:../list";
+    }
 
 
 }

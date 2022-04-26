@@ -35,15 +35,9 @@
             <td><input type="date" th:field="*{endDate}" th:value="${offer.endDate}"/></td>
         </tr>
         <tr>
-            <td><label>Skill type</label></td>
-            <td><select type="text" th:field="*{skillName}" class="btn btn-outline-secondary">
-                <option th:each="skillType: ${skillTypes}" th:value="${skillType.name}" th:text="${skillType.name}"></option>
-            </select></td>
-        </tr>
-        <tr>
-            <td><label>Level</label></td>
-            <td><select type="text" th:field="*{skillLevel}" class="btn btn-outline-secondary">
-                <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
+            <td><label>Skill type and level</label></td>
+            <td><select type="text" th:field="*{skillTypeLevel}" class="btn btn-outline-secondary">
+                <option th:each="skillType: ${skillTypes}" th:value="${skillType}" th:text="${skillType}"></option>
             </select></td>
         </tr>
         <tr>

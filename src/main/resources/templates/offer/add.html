@@ -42,18 +42,14 @@
             <td><label>End date</label></td>
             <td><input type="date" th:field="*{endDate}" /></td>
         </tr>
+
         <tr>
-            <td><label>Skill type</label></td>
-            <td><select type="text" th:field="*{skillName}" class="btn btn-outline-secondary">
-                <option th:each="skillType: ${skillTypes}" th:value="${skillType.name}" th:text="${skillType.name}"></option>
+            <td><label>Skill type and level</label></td>
+            <td><select type="text" th:field="*{skillTypeLevel}" class="btn btn-outline-secondary">
+                <option th:each="skillType: ${skillTypes}" th:value="${skillType}" th:text="${skillType}"></option>
             </select></td>
         </tr>
-        <tr>
-            <td><label>Level</label></td>
-            <td><select type="text" th:field="*{skillLevel}" class="btn btn-outline-secondary">
-                <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
-            </select></td>
-        </tr>
+
         <tr>
             <td><input type="submit" value="Add offer" class="btn btn-outline-secondary"/></td>
             <td><a href="/offer/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>

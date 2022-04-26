@@ -37,8 +37,7 @@
         <td th:text="${request.skillName}"></td>
         <td th:text="${request.skillLevel}"></td>
         <td><a th:href="@{/request/update/{id}(id=${request.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
-        <td><a th:href="@{/request/delete/{id}(id=${request.id})}"><button type="button" class="btn btn-danger">End request</button></a></td>
-
+        <td><a th:href="@{/request/end/{id}(id=${request.id})}"><button type="button" class="btn btn-danger">End request</button></a></td>
     </tr>
     </tbody>
 </table>

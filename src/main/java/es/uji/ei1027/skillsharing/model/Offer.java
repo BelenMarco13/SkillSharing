@@ -16,6 +16,7 @@ public class Offer {
     private String student;
     private String skillName;
     private Level skillLevel;
+    private String skillTypeLevel;
 
     public Offer(){
     }
@@ -84,6 +85,10 @@ public class Offer {
         this.skillLevel = skillLevel;
     }
 
+    public String getSkillTypeLevel() { return skillTypeLevel; }
+
+    public void setSkillTypeLevel(String skillTypeLevel) { this.skillTypeLevel = skillTypeLevel; }
+
     @Override
     public String toString() {
         return "Offer{" +
@@ -97,4 +102,5 @@ public class Offer {
                 ", skillLevel=" + skillLevel +
                 '}';
     }
+
 }

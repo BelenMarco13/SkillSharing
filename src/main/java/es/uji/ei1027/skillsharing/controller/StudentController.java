@@ -50,7 +50,6 @@ public class StudentController {
     public String addStudent(Model model, HttpSession session) {
         model.addAttribute("student", new Student());
         model.addAttribute("values", Gender.values());
-        session.setAttribute("nextUrl","student/perfil");
         return "student/add";
     }
 
@@ -67,7 +66,7 @@ public class StudentController {
             return "student/add";
         }
         studentDao.addStudent(student);
-        return "redirect:../list";
+        return "redirect:/";
     }
 
     //Send the form

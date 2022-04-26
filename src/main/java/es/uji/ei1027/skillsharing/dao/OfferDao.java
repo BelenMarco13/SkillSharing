@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import javax.websocket.Session;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,22 +26,24 @@ public class OfferDao {
     public void addOffer(Offer offer, Student student){
         jdbcTemplate.update("INSERT INTO Offer VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as level))",
                 offer.getId(), offer.getName(), offer.getDescription(), offer.getStartDate(),
-                offer.getEndDate(), student.getDni(), offer.getSkillName(), offer.getSkillLevel().toString());
-    }
-
-    public void deleteOffer(Offer offer){
-        jdbcTemplate.update("DELETE FROM Offer WHERE id = ?", offer.getId());
+                offer.getEndDate(), student.getDni(), offer.getSkillTypeLevel().split(" ")[0],
+                offer.getSkillTypeLevel().split(" ")[1]);
     }
 
     public void deleteOffer(int offerId){
         jdbcTemplate.update("DELETE FROM Offer WHERE id = ?", offerId);
     }
 
+    public void endOffer(int offerId){
+        jdbcTemplate.update("UPDATE Offer SET end_date = ? WHERE id = ?", LocalDate.now(), offerId);
+    }
+
     public void updateOffer(Offer offer){
         jdbcTemplate.update("UPDATE Offer SET name = ?, description = ?, start_date = ?, " +
                 "end_date = ?, skill_name = ?, skill_level = cast(? as level) WHERE id = ?",
                 offer.getName(), offer.getDescription(), offer.getStartDate(), offer.getEndDate(),
-                offer.getSkillName(), offer.getSkillLevel().toString(), offer.getId());
+                offer.getSkillTypeLevel().split(" ")[0],
+                offer.getSkillTypeLevel().split(" ")[1], offer.getId());
     }
 
     public Offer getOffer(int offer){

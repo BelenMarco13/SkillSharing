@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -28,20 +29,25 @@ public class RequestDao {
     public void addRequest(Request request, Student student){
         jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as Level))",
                 request.getId(), request.getName(), request.getDescription(), request.getStartDate(),
-                request.getEndDate(), student.getDni(), request.getSkillName(), request.getSkillLevel().toString());
+                request.getEndDate(), student.getDni(), request.getSkillTypeLevel().split(" ")[0],
+                request.getSkillTypeLevel().split(" ")[1]);
     }
 
     public void deleteRequest(int id){
         jdbcTemplate.update("DELETE FROM Request WHERE id = ?", id);
     }
 
+    public void endRequest(int requestId){
+        jdbcTemplate.update("UPDATE Request SET end_date = ? WHERE id = ?", LocalDate.now(), requestId);
+    }
+
     public void updateRequest(Request request){
-        log.info("updateeeee:");
         log.info(request.toString());
         jdbcTemplate.update("UPDATE Request SET name = ?, description = ?, start_date = ?, " +
                         "end_date = ?, skill_name = ?, skill_level = cast(? as Level) WHERE id = ?",
                 request.getName(), request.getDescription(), request.getStartDate(), request.getEndDate(),
-                request.getSkillName(), request.getSkillLevel().toString(), request.getId());
+                request.getSkillTypeLevel().split(" ")[0],
+                request.getSkillTypeLevel().split(" ")[1], request.getId());
     }
 
     public Request getRequest(int id){
