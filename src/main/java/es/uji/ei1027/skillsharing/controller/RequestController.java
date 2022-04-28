@@ -44,6 +44,22 @@ public class RequestController {
         return "request/list";
     }
 
+    //lista de req del usuario
+    @RequestMapping("/listusu")
+    public String listReqsUsu(Model model, HttpSession session) throws NullPointerException {
+        Student student= (Student) session.getAttribute("student");
+        model.addAttribute("requestsUsuario", requestDao.getRequests(student));
+
+        return "request/listusu";
+    }
+
+    @RequestMapping("/listcolab/{skillName}/{skillLevel}")
+    public String listReqsColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel ) throws NullPointerException {
+        model.addAttribute("requestsColab", requestDao.getRequests(skillName,skillLevel));
+
+        return "request/listcolab";
+    }
+
     @RequestMapping("/add")
     public String addRequest(Model model, HttpSession session) {
 

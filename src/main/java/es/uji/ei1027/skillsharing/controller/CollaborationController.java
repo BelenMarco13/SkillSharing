@@ -67,4 +67,6 @@ class CollaborationController {
         collaborationDao.deleteCollaborationIdRequest(id);
         return "redirect:list";
     }
+
+    //añadir para puntuar la colaboración + coments.
 }
