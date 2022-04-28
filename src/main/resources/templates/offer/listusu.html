@@ -43,7 +43,7 @@
         <td th:text="${offer.skillLevel}"></td>
         <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
         <td><a th:href="@{/offer/end/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">End offer</button></a></td>
-        <td><a th:href="@{/request/listcolab/{skillName}{skillLevel}(skillName=${offer.skillName}),(skillLevel=${offer.skillLevel}"><button type="button" class="btn btn-warning" >Requests associated</button></a></td>
+        <td><a th:href="@{/request/listcolab/{skillName}/{skillLevel}(skillName=${offer.skillName},skillLevel=${offer.skillLevel})}"><button type="button" class="btn btn-warning" >Offers associated</button></a></td>
 
     </tr>
     </tbody>

@@ -79,7 +79,7 @@ public class RequestDao {
     public List<Request> getRequests(String skillName, Level skillLevel){
         try{
             return jdbcTemplate.query("SELECT * FROM Request" +
-                                             "WHERE skillName = ? AND skillLevel = ? ", new RequestRowMapper(),skillName,skillLevel);
+                                             " WHERE skill_name = ? AND skill_level = cast(? as Level) ", new RequestRowMapper(),skillName,skillLevel.toString());
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<Request>();
         }

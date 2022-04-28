@@ -17,7 +17,9 @@
         <h5 th:text="*{student.balanceHours}"></h5>
     </div>
 </div>
-<h2 >List of requests that match my offer</h2>
+<h2 >Match with: </h2>
+<h4 th:text="${skillName}"></h4>
+<h5 th:text="${skillLevel}"></h5>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -26,8 +28,6 @@
         <th>Description</th>
         <th>Start Date</th>
         <th>End Date</th>
-        <th>Skill Name</th>
-        <th>Skill Level</th>
         <th></th>
         <th></th>
     </tr>
@@ -39,8 +39,6 @@
         <td th:text="${request.description}"></td>
         <td th:text="${request.startDate}"></td>
         <td th:text="${request.endDate}"></td>
-        <td th:text="${request.skillName}"></td>
-        <td th:text="${request.skillLevel}"></td>
         <td>boton para aceptar colaboracion</td>
 
     </tr>

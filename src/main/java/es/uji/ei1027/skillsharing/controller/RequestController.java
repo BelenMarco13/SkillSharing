@@ -56,7 +56,8 @@ public class RequestController {
     @RequestMapping("/listcolab/{skillName}/{skillLevel}")
     public String listReqsColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel ) throws NullPointerException {
         model.addAttribute("requestsColab", requestDao.getRequests(skillName,skillLevel));
-
+        model.addAttribute("skillName",skillName);
+        model.addAttribute("skillLevel", skillLevel);
         return "request/listcolab";
     }
 
