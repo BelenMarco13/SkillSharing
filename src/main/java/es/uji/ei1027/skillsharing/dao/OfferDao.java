@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.dao;
 
+import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Request;
 import es.uji.ei1027.skillsharing.model.Student;
@@ -69,6 +70,15 @@ public class OfferDao {
     public List<Offer> getOffers(){
         try{
             return jdbcTemplate.query("SELECT * FROM Offer", new OfferRowMapper());
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<Offer>();
+        }
+    }
+
+    public List<Offer> getOffers(String skillName, Level skillLevel){
+        try{
+            return jdbcTemplate.query("SELECT * FROM Offer" +
+                    " WHERE skill_name = ? AND skill_level = cast(? as Level) ", new OfferRowMapper(),skillName,skillLevel.toString());
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<Offer>();
         }
