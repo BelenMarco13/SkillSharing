@@ -17,6 +17,7 @@ public class Request {
     private String skillName;
     private Level skillLevel;
     private String skillTypeLevel;
+    private boolean ended;
 
     public Request(){
     }
@@ -88,6 +89,10 @@ public class Request {
     public String getSkillTypeLevel() { return skillTypeLevel; }
 
     public void setSkillTypeLevel(String skillTypeLevel) { this.skillTypeLevel = skillTypeLevel; }
+
+    public boolean isEnded() { return ended; }
+
+    public void setEnded(boolean ended) { this.ended = ended; }
 
     @Override
     public String toString() {

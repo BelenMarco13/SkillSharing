@@ -36,7 +36,14 @@ public class OfferDao {
     }
 
     public void endOffer(int offerId){
-        jdbcTemplate.update("UPDATE Offer SET end_date = ? WHERE id = ?", LocalDate.now(), offerId);
+        getOffer(offerId).setEnded(true);
+        if (getOffer(offerId).getStartDate().compareTo(LocalDate.now()) >= 0){
+            jdbcTemplate.update("UPDATE Offer SET end_date = ? WHERE id = ?",
+                    getOffer(offerId).getStartDate().plusDays(1), offerId);
+        }else{
+            jdbcTemplate.update("UPDATE Offer SET end_date = ? WHERE id = ?",
+                    LocalDate.now(), offerId);
+        }
     }
 
     public void updateOffer(Offer offer){
@@ -57,7 +64,7 @@ public class OfferDao {
 
     public List<Offer> getOffers(Student student){
         try{
-            return jdbcTemplate.query("SELECT * FROM Request WHERE student = ?", new OfferRowMapper(), student.getDni());
+            return jdbcTemplate.query("SELECT * FROM Offer WHERE student = ?", new OfferRowMapper(), student.getDni());
         }catch (EmptyResultDataAccessException e) {
             return new ArrayList<Offer>();
         }catch(NullPointerException ex){

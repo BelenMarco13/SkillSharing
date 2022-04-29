@@ -1,7 +1,5 @@
 package es.uji.ei1027.skillsharing.model;
 
-
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;

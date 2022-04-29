@@ -38,8 +38,15 @@ public class RequestDao {
         jdbcTemplate.update("DELETE FROM Request WHERE id = ?", id);
     }
 
-    public void endRequest(int requestId){
-        jdbcTemplate.update("UPDATE Request SET end_date = ? WHERE id = ?", LocalDate.now(), requestId);
+    public void endRequest(int requestId) {
+        getRequest(requestId).setEnded(true);
+        if (getRequest(requestId).getStartDate().compareTo(LocalDate.now()) >= 0) {
+            jdbcTemplate.update("UPDATE Request SET end_date = ? WHERE id = ?",
+                    getRequest(requestId).getStartDate().plusDays(1), requestId);
+        } else {
+            jdbcTemplate.update("UPDATE Request SET end_date = ? WHERE id = ?",
+                    LocalDate.now(), requestId);
+        }
     }
 
     public void updateRequest(Request request){

@@ -27,18 +27,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="offer: ${offers}">
-        <td th:text="${offer.id}"></td>
-        <td th:text="${offer.name}"></td>
-        <td th:text="${offer.description}"></td>
-        <td th:text="${offer.startDate}"></td>
-        <td th:text="${offer.endDate}"></td>
-        <td th:text="${offer.student}"></td>
-        <td th:text="${offer.skillName}"></td>
-        <td th:text="${offer.skillLevel}"></td>
-        <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
-        <td><a th:href="@{/offer/end/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">End offer</button></a></td>
-    </tr>
+        <tr th:each="offer: ${offers}">
+            <div th:if="*{offer.ended == false}">
+                <td th:text="${offer.id}"></td>
+                <td th:text="${offer.name}"></td>
+                <td th:text="${offer.description}"></td>
+                <td th:text="${offer.startDate}"></td>
+                <td th:text="${offer.endDate}"></td>
+                <td th:text="${offer.student}"></td>
+                <td th:text="${offer.skillName}"></td>
+                <td th:text="${offer.skillLevel}"></td>
+                <td th:text="${offer.ended}"></td>
+            </div>
+        </tr>
     </tbody>
 </table>
 
