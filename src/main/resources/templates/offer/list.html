@@ -22,8 +22,6 @@
         <th>Student</th>
         <th>Skill Type</th>
         <th>Level</th>
-        <th></th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -36,8 +34,6 @@
         <td th:text="${offer.student}"></td>
         <td th:text="${offer.skillName}"></td>
         <td th:text="${offer.skillLevel}"></td>
-        <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
-        <td><a th:href="@{/offer/end/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">End offer</button></a></td>
     </tr>
     </tbody>
 </table>
