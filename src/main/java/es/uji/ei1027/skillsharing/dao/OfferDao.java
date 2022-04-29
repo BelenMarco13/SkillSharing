@@ -37,7 +37,11 @@ public class OfferDao {
     }
 
     public void endOffer(int offerId){
-        jdbcTemplate.update("UPDATE Offer SET end_date = ? WHERE id = ?", LocalDate.now(), offerId);
+        if ( getOffer(offerId).getStartDate().compareTo(LocalDate.now())> 0){
+            jdbcTemplate.update("UPDATE Offer SET end_date = ? WHERE id = ?", getOffer(offerId).getStartDate().plusDays(1), offerId);
+        }else {
+            jdbcTemplate.update("UPDATE Offer SET end_date = ? WHERE id = ?", LocalDate.now(), offerId);
+        }
     }
 
     public void updateOffer(Offer offer){
