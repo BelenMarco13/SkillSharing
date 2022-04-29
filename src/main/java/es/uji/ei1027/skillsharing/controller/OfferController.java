@@ -47,6 +47,14 @@ public class OfferController {
         return "offer/listusu";
     }
 
+    @RequestMapping("/listcolab/{skillName}/{skillLevel}")
+    public String listOffersColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel ) throws NullPointerException {
+        model.addAttribute("offersColab", offerDao.getOffers(skillName,skillLevel));
+        model.addAttribute("skillName",skillName);
+        model.addAttribute("skillLevel", skillLevel);
+        return "offer/listcolab";
+    }
+
 
     @RequestMapping("/add")
     public String addOffer(Model model, HttpSession session){
