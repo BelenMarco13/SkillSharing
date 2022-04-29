@@ -3,6 +3,8 @@ package es.uji.ei1027.skillsharing.controller;
 import es.uji.ei1027.skillsharing.dao.CollaborationDao;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.SkillType;
+import es.uji.ei1027.skillsharing.model.Student;
+import es.uji.ei1027.skillsharing.services.GetCollaborationsByStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.print.DocFlavor;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/collaboration")
 class CollaborationController {
 
     private CollaborationDao collaborationDao;
+
+    @Autowired
+    private GetCollaborationsByStudentService getCollaborationsByStudentService;
 
     @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
@@ -29,6 +35,15 @@ class CollaborationController {
     @RequestMapping("/list")
     public String listCollaborations(Model model){
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
+        return "collaboration/list";
+    }
+
+    //lista de collaborations del usuario
+    @RequestMapping("/listusu")
+    public String listOffersUsu(Model model, HttpSession session) throws NullPointerException {
+        Student student= (Student) session.getAttribute("student");
+        model.addAttribute("offersUsuario", getCollaborationsByStudentService.getCollaboraionsByStudent(student));
+
         return "collaboration/list";
     }
 

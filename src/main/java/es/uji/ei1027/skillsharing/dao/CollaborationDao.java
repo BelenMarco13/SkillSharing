@@ -1,6 +1,8 @@
 package es.uji.ei1027.skillsharing.dao;
 
 import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.model.Request;
+import es.uji.ei1027.skillsharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,6 +49,17 @@ public class CollaborationDao {
                     new CollaborationRowMapper(), idRequest, idOffer);
         }catch (EmptyResultDataAccessException e){
             return null;
+        }
+    }
+
+    public List<Request> getRequests(Student student){
+        try{
+            return jdbcTemplate.query("SELECT * FROM Collaboration WHERE student = ?", new RequestRowMapper(), student.getDni());
+        }catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Request>();
+        }catch(NullPointerException ex){
+            return new ArrayList<Request>();
+
         }
     }
 
