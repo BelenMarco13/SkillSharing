@@ -62,7 +62,7 @@ public class OfferDao {
 
     public List<Offer> getOffers(Student student){
         try{
-            return jdbcTemplate.query("SELECT * FROM Request WHERE student = ?", new OfferRowMapper(), student.getDni());
+            return jdbcTemplate.query("SELECT * FROM Offer WHERE student = ?", new OfferRowMapper(), student.getDni());
         }catch (EmptyResultDataAccessException e) {
             return new ArrayList<Offer>();
         }catch(NullPointerException ex){
@@ -86,5 +86,8 @@ public class OfferDao {
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<Offer>();
         }
+    }
+    public int getLastid(){
+        return getOffers().size()+1;
     }
 }

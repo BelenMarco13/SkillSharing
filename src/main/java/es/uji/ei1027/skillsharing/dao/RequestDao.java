@@ -22,6 +22,8 @@ public class RequestDao {
     private JdbcTemplate jdbcTemplate;
     private static final Logger log =
             Logger.getLogger(SkillsharingApplication.class.getName());
+
+    private int lastId;
     @Autowired
     public void setDataSource(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -83,5 +85,9 @@ public class RequestDao {
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<Request>();
         }
+    }
+
+    public int getLastid(){
+        return getRequests().size()+1;
     }
 }

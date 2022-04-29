@@ -63,7 +63,8 @@ public class OfferController {
             session.setAttribute("nextUrl", "/offer/add");
             return "redirect:../login";
         }
-
+        int id = offerDao.getLastid();
+        model.addAttribute("id",id);
         model.addAttribute("offer", new Offer());
         model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "offer/add";
@@ -80,13 +81,14 @@ public class OfferController {
             }
             return "offer/add";
         }
-
+        offer.setId(offerDao.getLastid());
         offerDao.addOffer(offer, (Student)session.getAttribute("student"));
         return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String editOffer(Model model, @PathVariable int id){
+
         model.addAttribute("offer", offerDao.getOffer(id));
         model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "offer/update";

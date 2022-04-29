@@ -23,8 +23,8 @@
       th:object="${request}" method="post">
     <table>
         <tr>
-            <td><label>ID</label></td>
-            <td><input type="number" th:field="*{id}" /></td>
+            <td><label>ID </label></td>
+            <td th:text="${id}" ></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
@@ -50,7 +50,7 @@
         </tr>
         <tr>
             <td><input type="submit" value="Add request" class="btn btn-outline-secondary"/></td>
-            <td><a href="/request/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
+            <td><a href="/request/listusu"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
         </tr>
     </table>
 </form>
