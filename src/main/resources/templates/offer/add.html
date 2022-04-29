@@ -24,7 +24,7 @@
     <table>
         <tr>
             <td><label>ID</label></td>
-            <td><input type="number" th:field="*{id}" /></td>
+            <td th:text="${id}"></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
@@ -52,7 +52,7 @@
 
         <tr>
             <td><input type="submit" value="Add offer" class="btn btn-outline-secondary"/></td>
-            <td><a href="/offer/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
+            <td><a href="/offer/listusu"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
         </tr>
     </table>
 </form>

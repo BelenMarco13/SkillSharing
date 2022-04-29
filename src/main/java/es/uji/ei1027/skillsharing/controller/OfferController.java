@@ -38,13 +38,22 @@ public class OfferController {
         model.addAttribute("offers", offerDao.getOffers());
         return "offer/list";
     }
-    //lista de req del usuario
+
+    //lista de offers del usuario
     @RequestMapping("/listusu")
     public String listOffersUsu(Model model, HttpSession session) throws NullPointerException {
         Student student= (Student) session.getAttribute("student");
         model.addAttribute("offersUsuario", offerDao.getOffers(student));
 
         return "offer/listusu";
+    }
+
+    @RequestMapping("/listcolab/{skillName}/{skillLevel}")
+    public String listOffersColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel ) throws NullPointerException {
+        model.addAttribute("offersColab", offerDao.getOffers(skillName,skillLevel));
+        model.addAttribute("skillName",skillName);
+        model.addAttribute("skillLevel", skillLevel);
+        return "offer/listcolab";
     }
 
 
@@ -55,7 +64,8 @@ public class OfferController {
             session.setAttribute("nextUrl", "/offer/add");
             return "redirect:../login";
         }
-
+        int id = offerDao.getLastid();
+        model.addAttribute("id",id);
         model.addAttribute("offer", new Offer());
         model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "offer/add";
@@ -72,13 +82,14 @@ public class OfferController {
             }
             return "offer/add";
         }
-
+        offer.setId(offerDao.getLastid());
         offerDao.addOffer(offer, (Student)session.getAttribute("student"));
         return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String editOffer(Model model, @PathVariable int id){
+
         model.addAttribute("offer", offerDao.getOffer(id));
         model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "offer/update";

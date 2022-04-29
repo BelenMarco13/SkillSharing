@@ -33,17 +33,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="request: ${requestsColab}">
-        <td th:text="${request.id}"></td>
-        <td th:text="${request.name}"></td>
-        <td th:text="${request.description}"></td>
-        <td th:text="${request.startDate}"></td>
-        <td th:text="${request.endDate}"></td>
+    <tr th:each="offer: ${offersColab}">
+        <td th:text="${offer.id}"></td>
+        <td th:text="${offer.name}"></td>
+        <td th:text="${offer.description}"></td>
+        <td th:text="${offer.startDate}"></td>
+        <td th:text="${offer.endDate}"></td>
         <td>boton para aceptar colaboracion</td>
 
     </tr>
     </tbody>
 </table>
-<a href="/offer/listusu"><button type="button" class="btn btn-secondary">Return</button></a>
+<a href="/request/listusu"><button type="button" class="btn btn-secondary">Return</button></a>
 </body>
 </html>

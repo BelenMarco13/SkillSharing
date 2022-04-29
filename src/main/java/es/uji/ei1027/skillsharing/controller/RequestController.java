@@ -68,7 +68,8 @@ public class RequestController {
             session.setAttribute("nextUrl", "/request/add");
             return "redirect:../login";
         }
-
+        int id= requestDao.getLastid();
+        model.addAttribute("id",id);
         model.addAttribute("request", new Request());
         model.addAttribute("skillTypes", getSkillTypesService.getSkillTypeLevel());
         return "request/add";
@@ -83,7 +84,7 @@ public class RequestController {
             model.addAttribute("values", Level.values());
             return "request/add";
         }
-
+        request.setId(requestDao.getLastid());
         requestDao.addRequest(request, (Student)session.getAttribute("student"));
         return "redirect:list";
     }
