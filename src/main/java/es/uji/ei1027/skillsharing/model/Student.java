@@ -15,7 +15,7 @@ public class Student {
     private String address;
     private int age;
     private Gender gender;
-    private Boolean blocked;
+    private Boolean locked;
 
     public Student() {
     }
@@ -116,12 +116,12 @@ public class Student {
         this.gender = gender;
     }
 
-    public Boolean getBlocked() {
-        return blocked;
+    public Boolean getLocked() {
+        return locked;
     }
 
-    public void setBlocked(Boolean blocked) {
-        this.blocked = blocked;
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class Student {
                 ", address='" + address + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
-                ", blocked=" + blocked +
+                ", locked=" + locked +
                 '}';
     }
 }

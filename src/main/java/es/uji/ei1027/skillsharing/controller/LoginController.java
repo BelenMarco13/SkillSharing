@@ -42,6 +42,11 @@ public class LoginController {
             return "login";
         }
 
+        if (student.getLocked()){
+            bindingResult.rejectValue("pwd", "lockedAccount", "This account is locked");
+            return "login";
+        }
+
         session.setAttribute("student", student);
 
         String nextUrl = (String) session.getAttribute("nextUrl");

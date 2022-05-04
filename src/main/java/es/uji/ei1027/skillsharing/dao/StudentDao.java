@@ -49,12 +49,12 @@ public class StudentDao {
 
     //Cancel account
     public void cancelAccount(String dni){
-        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", true, dni);
+        jdbcTemplate.update("UPDATE student SET locked=? WHERE dni=?", true, dni);
     }
 
     //Return account
     public void returnAccount(String dni){
-        jdbcTemplate.update("UPDATE student SET blocked=? WHERE dni=?", false, dni);
+        jdbcTemplate.update("UPDATE student SET locked=? WHERE dni=?", false, dni);
     }
 
     //Returns the student with the given dni

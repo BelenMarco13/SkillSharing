@@ -44,8 +44,8 @@
         <td th:text="${student.gender}"></td>
         <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
         <td>
-            <a th:if="*{student.blocked == false}" th:href="@{/student/cancelAccount/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-danger">Cancel account</button></a>
-            <a th:unless="*{student.blocked == false}" th:href="@{/student/returnAccount/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-success">Return account</button></a>
+            <a th:if="*{student.locked == false}" th:href="@{/student/cancelAccount/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-danger">Cancel account</button></a>
+            <a th:unless="*{student.locked == false}" th:href="@{/student/returnAccount/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-success">Return account</button></a>
         </td>
     </tr>
     </tbody>
