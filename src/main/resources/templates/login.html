@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <h1>Skill Sharing</h1>
+    <h2>Login</h2>
+    <form action="#" th:action="@{/login}"
+          th:object="${student}" method="post">
+        <p>
+            <label>User ID (DNI):</label>
+            <input class="form_control" type="text" th:field="*{dni}" maxlength="9"/>
+        <div class="error" th:if="${#fields.hasErrors('dni')}"
+             th:errors="*{dni}"></div>
+        </p>
+        <p>
+            <label>Password:</label>
+            <input class="form_control" type="password" th:field="*{pwd}"/>
+        <div class="error" th:if="${#fields.hasErrors('pwd')}"
+             th:errors="*{pwd}"></div>
+        </p>
+        <input type="submit" value="Login"/>
+        <a href="/student/add"><button type="button" class="btn btn-success">Sign up</button></a>
+        <a href="/"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
+    </form>
+</body>
+</html>

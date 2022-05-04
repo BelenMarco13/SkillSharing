@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
+<head>
+    <title>Offer Management</title>
+    <meta charset="UTF-8" />
+</head>
+<body th:object="${session}">
+<div class="header">
+    <h1>Skill Sharing</h1>
+    <div th:if="*{student != null}">
+        <img src="/profile_picture.png" alt="profile_picture">
+        <h3 th:text="*{student.name}"></h3>
+        <h5 th:text="*{student.balanceHours}"></h5>
+    </div>
+</div>
+<h2 >Match with: </h2>
+<h4 th:text="${skillName}"></h4>
+<h5 th:text="${skillLevel}"></h5>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="request: ${requestsColab}">
+        <td th:text="${request.id}"></td>
+        <td th:text="${request.name}"></td>
+        <td th:text="${request.description}"></td>
+        <td th:text="${request.startDate}"></td>
+        <td th:text="${request.endDate}"></td>
+        <td>boton para aceptar colaboracion</td>
+
+    </tr>
+    </tbody>
+</table>
+<a href="../"><button type="button" class="btn btn-secondary">Return</button></a>
+</body>
+</html>

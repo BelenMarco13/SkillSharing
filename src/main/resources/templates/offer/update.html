@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
+<head>
+    <title>Update offer</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h1>Skill Sharing</h1>
+<h2>Update offer</h2>
+<form action="#" th:action="@{/offer/update}"
+      th:object="${offer}" method="post">
+    <table>
+        <tr>
+            <td><label>Offer</label></td>
+            <td><input type="number" th:field="*{id}" th:value="${offer.id}" readonly/></td>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" th:value="${offer.name}"/></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" th:value="${offer.description}"/></td>
+        </tr>
+        <tr>
+            <td><label>Start Date</label></td>
+            <td><input type="date" th:field="*{startDate}" th:value="${offer.startDate}"/></td>
+        </tr>
+        <tr>
+            <td><label>End Date</label></td>
+            <td><input type="date" th:field="*{endDate}" th:value="${offer.endDate}"/></td>
+        </tr>
+        <tr>
+            <td><label>Skill type and level</label></td>
+            <td><select type="text" th:field="*{skillTypeLevel}" class="btn btn-outline-secondary">
+                <option th:each="skillType: ${skillTypes}" th:value="${skillType}" th:text="${skillType}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Update offer" /></td>
+            <td colspan="2"><a href="/offer/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

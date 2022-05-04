@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
+<head>
+    <title>Perfil</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <h1>Skill Sharing</h1>
+    <h2>Perfil</h2>
+    <form>
+    <tr th:each="student: ${student}">
+        <p>
+            <th>ID</th>
+            <td th:text="${student.dni}"></td><br>
+        </p>
+        <p>
+            <th>Name</th>
+            <td th:text="${student.name}"></td><br>
+        </p>
+        <p>
+            <th>Email</th>
+            <td th:text="${student.email}"></td><br>
+        </p>
+        <p>
+            <th>User</th>
+            <td th:text="${student.userName}"></td><br>
+        </p>
+        <p>
+            <th>Email</th>
+            <td th:text="${student.degree}"></td><br>
+        </p>
+        <p>
+            <th>Course</th>
+            <td th:text="${student.course}"></td><br>
+        </p>
+        <p>
+            <th>Hours</th>
+            <td th:text="${student.balanceHours}"></td><br>
+        </p>
+        <p>
+            <th>SKP</th>
+            <td th:text="${student.skp}"></td><br>
+        </p>
+        <p>
+            <th>Address</th>
+            <td th:text="${student.address}"></td><br>
+        </p>
+        <p>
+            <th>Age</th>
+            <td th:text="${student.age}"></td><br>
+        </p>
+        <p>
+            <th>Gender</th>
+            <td th:text="${student.gender}"></td><br>
+        </p>
+        <td><a th:href="@{/student/update/{dni}(dni=${student.dni})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+        <td><a href="/"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
+    </tr>
+    </form>
+</body>
+</html>

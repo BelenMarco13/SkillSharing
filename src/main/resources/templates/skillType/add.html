@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
+<head>
+    <title>Create new skillType</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h1>Skill Sharing</h1>
+<h2>New skillType</h2>
+<form action="#" th:action="@{/skillType/add}"
+      th:object="${skillType}" method="post">
+    <table>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Level</label></td>
+            <td><select type="text" th:field="*{level}">
+                <option th:each="value: ${values}" th:value="${value}" th:text="${value}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Add skillType" /></td>
+            <td colspan="2"><a href="/skillType/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

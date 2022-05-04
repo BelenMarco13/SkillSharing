@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
+<head>
+    <title>Skill management</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h1>Skill Sharing</h1>
+<h2>List of skill's type</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="skillType: ${skills}">
+        <td th:text="${skillType.name}"></td>
+        <td th:text="${skillType.level}"></td>
+        <td th:text="${skillType.description}"></td>
+        <td><a th:href="@{/skillType/update/{name}/{level}(name=${skillType.name},level=${skillType.level})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+        <td><a th:href="@{/skillType/delete/{name}/{level}(name=${skillType.name},level=${skillType.level})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="add"><button type="button" class="btn btn-success">Add skillType</button></a>
+<a href="../"><button type="button" class="btn btn-secondary">Return</button></a>
+
+</body>
+</html>

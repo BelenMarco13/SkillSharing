@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
+<head>
+    <title>Offer Management</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h1>Skill Sharing</h1>
+<h2>List of requests</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Student</th>
+        <th>Skill Name</th>
+        <th>Skill Level</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="request: ${requests}">
+        <td th:text="${request.id}"></td>
+        <td th:text="${request.name}"></td>
+        <td th:text="${request.description}"></td>
+        <td th:text="${request.startDate}"></td>
+        <td th:text="${request.endDate}"></td>
+        <td th:text="${request.student}"></td>
+        <td th:text="${request.skillName}"></td>
+        <td th:text="${request.skillLevel}"></td>
+        <td><a th:href="@{/request/update/{id}(id=${request.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
+        <td><a th:href="@{/request/end/{id}(id=${request.id})}"><button type="button" class="btn btn-danger">End request</button></a></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/request/add}"><button type="button" class="btn btn-success">Add request</button></a>
+<a href="../"><button type="button" class="btn btn-secondary">Return</button></a>
+</body>
+</html>
