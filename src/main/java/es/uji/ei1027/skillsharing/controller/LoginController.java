@@ -74,10 +74,10 @@ public class LoginController {
     public String checkSignUp(@ModelAttribute("student") Student student,
                              BindingResult bindingResult, HttpSession session) {
         StudentValidator studentValidator = new StudentValidator();
-        studentValidator.validate(student, bindingResult);
+        studentValidator.validateRegister(student, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "student/perfil";
+            return "student/add";
         }
 
         student = studentDao.loadStudentByDni(student.getDni(), student.getPwd());

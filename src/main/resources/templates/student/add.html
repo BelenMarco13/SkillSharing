@@ -15,40 +15,49 @@
       th:object="${student}" method="post">
   <table>
     <tr>
-      <td><label>DNI</label></td>
-      <td><input type="text" th:field="*{dni}" maxlength="9"/></td>
+        <td><label>DNI</label></td>
+        <td><input type="text" th:field="*{dni}" maxlength="9"/></td>
+        <div class="error" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
     </tr>
     <tr>
       <td><label>Name</label></td>
       <td><input type="text" th:field="*{name}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
     </tr>
     <tr>
       <td><label>Email</label></td>
       <td><input type="text" th:field="*{email}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
     </tr>
     <tr>
       <td><label>UserName</label></td>
       <td><input type="text" th:field="*{userName}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
     </tr>
     <tr>
       <td><label>Password</label></td>
       <td><input type="password" th:field="*{pwd}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></div>
     </tr>
     <tr>
       <td><label>Degree</label></td>
       <td><input type="text" th:field="*{degree}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></div>
     </tr>
     <tr>
       <td><label>Course</label></td>
       <td><input type="number" th:field="*{course}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('course')}" th:errors="*{course}"></div>
     </tr>
     <tr>
       <td><label>Address</label></td>
       <td><input type="text" th:field="*{address}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
     </tr>
     <tr>
       <td><label>Age</label></td>
       <td><input type="number" th:field="*{age}" /></td>
+      <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
     </tr>
     <tr>
       <td><label>Gender</label></td>
