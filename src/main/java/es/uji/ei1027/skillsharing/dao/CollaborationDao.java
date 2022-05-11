@@ -57,5 +57,7 @@ public class CollaborationDao {
             return new ArrayList<Collaboration>();
         }
     }
+
+
 }
 

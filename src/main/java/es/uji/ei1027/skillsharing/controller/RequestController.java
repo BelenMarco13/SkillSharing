@@ -85,7 +85,7 @@ public class RequestController {
         }
 
         requestDao.addRequest(request, (Student)session.getAttribute("student"));
-        return "redirect:list";
+        return "redirect:listusu";
     }
 
     //Send the form

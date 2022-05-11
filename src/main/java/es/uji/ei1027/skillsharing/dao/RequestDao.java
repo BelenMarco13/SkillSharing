@@ -28,8 +28,9 @@ public class RequestDao {
     }
 
     public void addRequest(Request request, Student student){
+        int id = getId();
         jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?, ?, ?, ?, cast(? as Level))",
-                request.getId(), request.getName(), request.getDescription(), request.getStartDate(),
+                id, request.getName(), request.getDescription(), request.getStartDate(),
                 request.getEndDate(), student.getDni(), request.getSkillTypeLevel().split(" ")[0],
                 request.getSkillTypeLevel().split(" ")[1]);
     }
@@ -83,5 +84,10 @@ public class RequestDao {
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<Request>();
         }
+    }
+
+    public int getId(){
+        int id = getRequests().size()+1;
+        return id;
     }
 }
