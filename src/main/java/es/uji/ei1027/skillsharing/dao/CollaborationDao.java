@@ -1,9 +1,12 @@
 package es.uji.ei1027.skillsharing.dao;
 
 import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.services.AddCollabService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import es.uji.ei1027.skillsharing.dao.CollaborationRowMapper;
 
@@ -15,6 +18,8 @@ import java.util.List;
 public class CollaborationDao {
     private JdbcTemplate jdbcTemplate;
 
+
+
     @Autowired
     public void setDataSource(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -25,6 +30,8 @@ public class CollaborationDao {
                 collaboration.getIdRequest(), collaboration.getIdOffer(), collaboration.getStartDate(),
                 collaboration.getEndDate(), collaboration.getScore(), collaboration.getComment());
     }
+
+
 
     public void deleteCollaboration(Collaboration collaboration){
         jdbcTemplate.update("DELETE FROM Collaboration WHERE id_request = ?", collaboration.getIdRequest());

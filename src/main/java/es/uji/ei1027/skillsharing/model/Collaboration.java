@@ -18,6 +18,12 @@ public class Collaboration {
 
     public Collaboration() {
     }
+    public Collaboration(int idRequest, int idOffer, LocalDate startDate, LocalDate endDate){
+        this.idRequest=idRequest;
+        this.idOffer = idOffer;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public int getIdRequest() {
         return idRequest;

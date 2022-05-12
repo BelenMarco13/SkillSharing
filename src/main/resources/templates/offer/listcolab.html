@@ -39,7 +39,7 @@
         <td th:text="${offer.description}"></td>
         <td th:text="${offer.startDate}"></td>
         <td th:text="${offer.endDate}"></td>
-        <td>boton para aceptar colaboracion</td>
+        <td><a th:href="@{/collaboration/add/{idreq}/{idof}(idreq=${idreq}, idof=${offer.id})}"><button type="button" class="btn btn-success">Accept Collaboration</button></a></td>
 
     </tr>
     </tbody>

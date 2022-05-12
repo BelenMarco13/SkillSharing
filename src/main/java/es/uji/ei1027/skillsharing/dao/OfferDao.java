@@ -31,6 +31,7 @@ public class OfferDao {
                 id, offer.getName(), offer.getDescription(), offer.getStartDate(),
                 offer.getEndDate(), student.getDni(), offer.getSkillTypeLevel().split(" ")[0],
                 offer.getSkillTypeLevel().split(" ")[1]);
+
     }
 
     public void deleteOffer(int offerId){

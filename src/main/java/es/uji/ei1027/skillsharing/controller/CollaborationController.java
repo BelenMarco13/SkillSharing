@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import es.uji.ei1027.skillsharing.services.AddCollabService;
 import javax.print.DocFlavor;
 
 @Controller
@@ -20,7 +20,8 @@ import javax.print.DocFlavor;
 class CollaborationController {
 
     private CollaborationDao collaborationDao;
-
+    @Autowired
+    private AddCollabService addCollabService;
     @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
         this.collaborationDao = collaborationDao;
@@ -29,6 +30,13 @@ class CollaborationController {
     @RequestMapping("/list")
     public String listCollaborations(Model model){
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
+        return "collaboration/list";
+    }
+
+    @RequestMapping("/add/{idreq}/{idof}")
+    public String añadirColab(Model model, @PathVariable int idreq, @PathVariable int idof){
+        Collaboration collaboration = addCollabService.addColab(idreq,idof);
+        collaborationDao.addCollaboration(collaboration);
         return "collaboration/list";
     }
 
@@ -46,6 +54,7 @@ class CollaborationController {
         collaborationDao.addCollaboration(collaboration);
         return "redirect:list";
     }
+
 
     @RequestMapping(value="/update/{idRequest}/{idOffer}", method = RequestMethod.GET)
     public String editSkillType(Model model, @PathVariable int idRequest, @PathVariable int idOffer) {
@@ -68,5 +77,5 @@ class CollaborationController {
         return "redirect:list";
     }
 
-    //añadir para puntuar la colaboración + coments.
+
 }
