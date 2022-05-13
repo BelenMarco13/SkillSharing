@@ -47,6 +47,6 @@ public class AddCollabService {
 
     }
     public void sendEmail(Request req, Offer offer){
-            log.info("Se envia un mensaje");
+
     }
 }
