@@ -20,7 +20,6 @@
         <th>End Date</th>
         <th>Score</th>
         <th>Comment</th>
-        <th>Level</th>
         <th></th>
         <th></th>
     </tr>
@@ -33,6 +32,7 @@
         <td th:text="${collaboration.endDate}"></td>
         <td th:text="${collaboration.score}"></td>
         <td th:text="${collaboration.comment}"></td>
+        <td><a th:unless="@{${collaboration.endDate} > ${hoy}} " th:href="{@/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}),(idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a>></td>
         <td><a th:href="@{/collaboration/update/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}),(idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
         <td><a th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}),(idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
 

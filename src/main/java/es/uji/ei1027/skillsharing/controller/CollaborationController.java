@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.skillsharing.services.AddCollabService;
 import javax.print.DocFlavor;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/collaboration")
@@ -34,6 +35,8 @@ class CollaborationController {
             session.setAttribute("nextUrl", "/collaboration/list");
             return "redirect:/login";
         }
+
+        model.addAttribute("hoy", LocalDate.now());
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
         return "collaboration/list";
     }

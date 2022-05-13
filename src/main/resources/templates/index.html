@@ -41,6 +41,16 @@
             <p>My Requests</p>
         </div>
 
+        <div th:unless="*{student == null}" class="menu_item" onclick="window.location='collaboration/list';">
+            <div class=small_image_container>
+                <img th:if="*{student.gender.name() == 'FEMALE'}" src="/woman.png" alt="profile_picture">
+                <img th:if="*{student.gender.name() != 'FEMALE'}" src="/man.png" alt="profile_picture">
+                <img src="/collaboration.png" alt="Collaboration image">
+            </div>
+            <p>My Collaborations</p>
+        </div>
+
+
         <div th:if="*{student != null and student.skp == true}" class="menu_item" onclick="window.location='menu';">
             <div class=medium_image_container>
                 <img th:if="*{student.gender.name() == 'FEMALE'}" src="/SKP_woman.png" alt="profile_picture">
