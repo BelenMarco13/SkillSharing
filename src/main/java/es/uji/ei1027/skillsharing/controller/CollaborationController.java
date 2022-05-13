@@ -42,7 +42,7 @@ class CollaborationController {
     public String añadirColab(Model model, @PathVariable int idreq, @PathVariable int idof){
         Collaboration collaboration = addCollabService.addColab(idreq,idof);
         collaborationDao.addCollaboration(collaboration);
-        return "collaboration/addprevio";
+        return "redirect:/collaboration/list";
     }
 
     @RequestMapping("/add")

@@ -49,4 +49,15 @@ public class AddCollabService {
     public void sendEmail(Request req, Offer offer){
 
     }
+    public boolean exists(int idreq, int idof){
+        if( collaborationDao.getCollaboration(idreq,idof)!= null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public List<Collaboration> getCollabsReq(int idreq){
+        List<Collaboration> collabs = collaborationDao.getCollaborations(idreq);
+        return collabs;
+    }
 }

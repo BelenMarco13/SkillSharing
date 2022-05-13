@@ -3,6 +3,7 @@ package es.uji.ei1027.skillsharing.controller;
 import es.uji.ei1027.skillsharing.Gender;
 import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.dao.OfferDao;
+import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.services.GetSkillTypesService;
@@ -15,10 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import es.uji.ei1027.skillsharing.services.AddCollabService;
 import javax.print.DocFlavor;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/offer")
@@ -26,6 +28,9 @@ public class OfferController {
 
     @Autowired
     private GetSkillTypesService getSkillTypesService;
+
+    @Autowired
+    private AddCollabService addCollabService;
     private OfferDao offerDao;
 
     @Autowired
@@ -79,10 +84,21 @@ public class OfferController {
 
     @RequestMapping("/listcolab/{skillName}/{skillLevel}/{idreq}")
     public String listReqsColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel, @PathVariable int idreq ) throws NullPointerException {
-        model.addAttribute("offersColab", offerDao.getOffers(skillName,skillLevel));
+        List<Collaboration> colabs = addCollabService.getCollabsReq(idreq);
+        List<Offer> offers = offerDao.getOffers(skillName,skillLevel);
+        for( Collaboration colab : colabs){
+            for( Offer offer : offers){
+                if( colab.getIdOffer() == offer.getId()){
+                    offers.remove(offer);
+                }
+            }
+        }
+        model.addAttribute("offersColab", offers);
         model.addAttribute("skillName",skillName);
         model.addAttribute("skillLevel", skillLevel);
         model.addAttribute("idreq", idreq);
+
+
         return "offer/listcolab";
     }
 

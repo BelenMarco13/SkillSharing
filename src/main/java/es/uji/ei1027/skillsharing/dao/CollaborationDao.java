@@ -52,6 +52,14 @@ public class CollaborationDao {
             return null;
         }
     }
+    public List<Collaboration> getCollaborations(int idRequest){
+        try{
+            return jdbcTemplate.query("SELECT * FROM Collaboration WHERE id_request=?",
+                    new CollaborationRowMapper(), idRequest);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 
     public List<Collaboration> getCollaborations(){
         try{
