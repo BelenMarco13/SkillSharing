@@ -11,6 +11,7 @@
 <body th:object="${session}">
     <div class="header">
         <h1>Skill Sharing</h1>
+        <h2>MENU</h2>
         <div th:if="*{student != null}">
             <img src="/profile_picture.png" alt="profile_picture">
             <h3 th:text="*{student.name}"></h3>
@@ -18,14 +19,59 @@
         </div>
     </div>
 
-    <div>
-        <td colspan="2"><a href="/offer/list"> <button type="button" value="offers" class="btn btn-outline-secondary">See offers</button></a></td>
-        <td colspan="2"><a href="/request/list"> <button type="button" value="requests" class="btn btn-outline-secondary">See requests</button></a></td>
-        <td th:if="*{student == null}" colspan="2"><a href="/login"> <button type="button" value="return" class="btn btn-outline-secondary">Sign in</button></a></td>
-        <td th:if="*{student != null and student.skp == true}" colspan="2"><a href="/menu"> <button type="button" value="menu skp" class="btn btn-outline-secondary">Menu skp</button></a></td>
-        <td th:unless="*{student == null}" colspan="2"><a href="/request/listusu"> <button type="button" value="my requests" class="btn btn-outline-secondary">See my requests</button></a></td>
-        <td th:unless="*{student == null}" colspan="2"><a href="/offer/listusu"> <button type="button" value="my offers" class="btn btn-outline-secondary">See my offers</button></a></td>
-        <td th:unless="*{student == null}" colspan="2"><a href="/logout"> <button type="button" value="sign out" class="btn btn-outline-secondary">Sign out</button></a></td>
+    <div class="menu_container">
+        <div th:unless="*{student == null}" class="menu_item" onclick="window.location='offer/listusu';">
+            <div class="small_image_container">
+                <img src="/man.png" alt="Man image">
+                <img src="/offer.png" alt="Offer image">
+            </div>
+            <p>My Offers</p>
+        </div>
+
+        <div th:unless="*{student == null}" class="menu_item" onclick="window.location='request/listusu';">
+            <div class=small_image_container>
+                <img src="/man.png" alt="Man image">
+                <img src="/request.png" alt="Request image">
+            </div>
+            <p>My Requests</p>
+        </div>
+
+        <div th:if="*{student != null and student.skp == true}" class="menu_item" onclick="window.location='menu';">
+            <div class=medium_image_container>
+                <img src="/SKP_man.png" alt="SKP image">
+            </div>
+            <p>SKP Menu</p>
+        </div>
+    </div>
+
+    <div class="menu_container">
+        <div class="menu_item" onclick="window.location='offer/list';">
+            <div class="medium_image_container">
+                <img src="/offer.png" alt="Offer image" class="medium_image">
+            </div>
+            <p>Offers</p>
+        </div>
+
+        <div class="menu_item" onclick="window.location='request/list';">
+            <div class=medium_image_container>
+                <img src="/request.png" alt="Request image" class="medium_image">
+            </div>
+            <p>Requests</p>
+        </div>
+
+        <div th:if="*{student == null}" class="menu_item" onclick="window.location='login';">
+            <div class="medium_image_container">
+                <img src="/login.png" alt="Login image" class="medium_image">
+            </div>
+            <p>Login</p>
+        </div>
+
+        <div th:unless="*{student == null}" class="menu_item" onclick="window.location='logout';">
+            <div class="medium_image_container">
+                <img src="/logout.png" alt="Logout image" class="medium_image">
+            </div>
+            <p>Logout</p>
+        </div>
     </div>
 
 </body>
