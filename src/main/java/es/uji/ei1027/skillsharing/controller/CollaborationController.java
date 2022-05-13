@@ -33,11 +33,11 @@ class CollaborationController {
         return "collaboration/list";
     }
 
-    @RequestMapping("/add/{idreq}/{idof}")
+    @RequestMapping("/addprevio/{idreq}/{idof}")
     public String añadirColab(Model model, @PathVariable int idreq, @PathVariable int idof){
         Collaboration collaboration = addCollabService.addColab(idreq,idof);
         collaborationDao.addCollaboration(collaboration);
-        return "collaboration/list";
+        return "collaboration/addprevio";
     }
 
     @RequestMapping("/add")
