@@ -22,7 +22,7 @@
 
     <div class="menu_container">
         <div class="menu_item" onclick="window.location='student/list';">
-            <div class="medium_image_container">
+            <div class="medium_image_container" th:if="*{student != null}">
                 <img th:if="*{student.gender.name() == 'FEMALE'}" src="/woman.png" alt="profile_picture">
                 <img th:if="*{student.gender.name() != 'FEMALE'}" src="/man.png" alt="profile_picture">
             </div>
@@ -30,14 +30,14 @@
         </div>
 
         <div class="menu_item" onclick="window.location='skillType/list';">
-            <div class=medium_image_container>
+            <div class=medium_image_container th:if="*{student != null}">
                 <img src="/skill.png" alt="Skill image">
             </div>
             <p>Skill Management</p>
         </div>
 
         <div class="menu_item" onclick="window.location='collaboration/list';">
-            <div class=medium_image_container>
+            <div class=medium_image_container th:if="*{student != null}">
                 <img src="/collaboration.png" alt="Collaboration image">
             </div>
             <p>Collaboration Management</p>
@@ -46,14 +46,14 @@
 
     <div class="menu_container">
         <div class="menu_item" onclick="window.location='offer/list';">
-            <div class="medium_image_container">
+            <div class="medium_image_container" th:if="*{student != null}">
                 <img src="/offer.png" alt="Offer image">
             </div>
             <p>Offer Management</p>
         </div>
 
         <div class="menu_item" onclick="window.location='request/list';">
-            <div class=medium_image_container>
+            <div class=medium_image_container th:if="*{student != null}">
                 <img src="/request.png" alt="Request image">
             </div>
             <p>Request Management</p>

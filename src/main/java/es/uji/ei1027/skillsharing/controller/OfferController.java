@@ -38,7 +38,8 @@ public class OfferController {
         model.addAttribute("offers", offerDao.getOffers());
         return "offer/list";
     }
-    //lista de req del usuario
+
+    //lista requests del usuario
     @RequestMapping("/listusu")
     public String listOffersUsu(Model model, HttpSession session) throws NullPointerException {
         Student student= (Student) session.getAttribute("student");
@@ -46,7 +47,6 @@ public class OfferController {
 
         return "offer/listusu";
     }
-
 
     @RequestMapping("/add")
     public String addOffer(Model model, HttpSession session){

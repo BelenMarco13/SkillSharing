@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.skillsharing.services.AddCollabService;
 import javax.print.DocFlavor;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/collaboration")
@@ -28,7 +29,11 @@ class CollaborationController {
     }
 
     @RequestMapping("/list")
-    public String listCollaborations(Model model){
+    public String listCollaborations(Model model, HttpSession session){
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", "/collaboration/list");
+            return "redirect:/login";
+        }
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
         return "collaboration/list";
     }
@@ -41,7 +46,11 @@ class CollaborationController {
     }
 
     @RequestMapping("/add")
-    public String addCollaboration(Model model){
+    public String addCollaboration(Model model, HttpSession session){
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", "/collaboration/add");
+            return "login";
+        }
         model.addAttribute("collaboration", new Collaboration());
         return "collaboration/add";
     }

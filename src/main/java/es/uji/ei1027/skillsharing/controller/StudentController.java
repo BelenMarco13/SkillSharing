@@ -48,6 +48,10 @@ public class StudentController {
     //Send the form
     @RequestMapping(value="/add")
     public String addStudent(Model model, HttpSession session) {
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", "/student/add");
+            return "login";
+        }
         model.addAttribute("student", new Student());
         model.addAttribute("values", Gender.values());
         return "student/add";
@@ -95,6 +99,7 @@ public class StudentController {
         studentDao.cancelAccount(dni);
         return "redirect:../list";
     }
+
     //Return account
     @RequestMapping(value="/returnAccount/{dni}")
     public String processReturnAccount(@PathVariable String dni) {

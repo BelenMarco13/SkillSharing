@@ -10,10 +10,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-
    @RequestMapping("/")
     public String index(HttpSession session){
-
         return "index";
     }
 
