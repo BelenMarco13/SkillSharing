@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class AddCollabService {
+public class CollabService {
 
     @Autowired
     OfferDao offerDao;
