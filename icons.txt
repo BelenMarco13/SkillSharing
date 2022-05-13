@@ -1,0 +1,21 @@
+man - https://www.flaticon.com/premium-icon/businessman_3220244
+woman - https://www.flaticon.com/premium-icon/businesswoman_3220268
+
+SKP man - https://www.flaticon.com/free-icon/builder_1085392
+SKP woman - https://www.flaticon.com/premium-icon/builder_823125
+
+offer - https://www.flaticon.com/premium-icon/info_1321675
+request - https://www.flaticon.com/premium-icon/question_1321678
+collaboration - https://www.flaticon.com/premium-icon/deal_2449806
+
+skill - https://www.flaticon.com/free-icon/test_782711
+skill2 - https://www.flaticon.com/free-icon/competence_2640598
+
+login - https://www.flaticon.com/free-icon/login_158732
+logout - https://www.flaticon.com/free-icon/logout_126467
+
+
+non-downloaded
+
+boy - https://www.flaticon.com/free-icon/man_2922540
+girl - https://www.flaticon.com/free-icon/woman_2922585
