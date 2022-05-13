@@ -13,7 +13,10 @@
         <h1>Skill Sharing</h1>
         <h2>MENU</h2>
         <div th:if="*{student != null}">
-            <img src="/profile_picture.png" alt="profile_picture">
+            <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == true}" src="/SKP_woman.png" alt="profile_picture">
+            <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == true}" src="/SKP_man.png" alt="profile_picture">
+            <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == false}" src="/woman.png" alt="profile_picture">
+            <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == false}" src="/man.png" alt="profile_picture">
             <h3 th:text="*{student.name}"></h3>
             <h5 th:text="*{student.balanceHours}"></h5>
         </div>
@@ -22,7 +25,8 @@
     <div class="menu_container">
         <div th:unless="*{student == null}" class="menu_item" onclick="window.location='offer/listusu';">
             <div class="small_image_container">
-                <img src="/man.png" alt="Man image">
+                <img th:if="*{student.gender.name() == 'FEMALE'}" src="/woman.png" alt="profile_picture">
+                <img th:if="*{student.gender.name() != 'FEMALE'}" src="/man.png" alt="profile_picture">
                 <img src="/offer.png" alt="Offer image">
             </div>
             <p>My Offers</p>
@@ -30,7 +34,8 @@
 
         <div th:unless="*{student == null}" class="menu_item" onclick="window.location='request/listusu';">
             <div class=small_image_container>
-                <img src="/man.png" alt="Man image">
+                <img th:if="*{student.gender.name() == 'FEMALE'}" src="/woman.png" alt="profile_picture">
+                <img th:if="*{student.gender.name() != 'FEMALE'}" src="/man.png" alt="profile_picture">
                 <img src="/request.png" alt="Request image">
             </div>
             <p>My Requests</p>
@@ -38,7 +43,8 @@
 
         <div th:if="*{student != null and student.skp == true}" class="menu_item" onclick="window.location='menu';">
             <div class=medium_image_container>
-                <img src="/SKP_man.png" alt="SKP image">
+                <img th:if="*{student.gender.name() == 'FEMALE'}" src="/SKP_woman.png" alt="profile_picture">
+                <img th:if="*{student.gender.name() != 'FEMALE'}" src="/SKP_man.png" alt="profile_picture">
             </div>
             <p>SKP Menu</p>
         </div>
