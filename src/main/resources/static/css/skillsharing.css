@@ -3,6 +3,10 @@ body{
     margin:2% 7%;
 }
 
+.header img{
+    width: 25%;
+}
+
 .loggeduser {
  color: gray;
  text-align: right;
