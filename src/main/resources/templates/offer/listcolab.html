@@ -20,6 +20,7 @@
 <h2 >Match with: </h2>
 <h4 th:text="${skillName}"></h4>
 <h5 th:text="${skillLevel}"></h5>
+<h5 th:text="${idreq}"></h5>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -28,6 +29,7 @@
         <th>Description</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th> Student</th>
         <th></th>
         <th></th>
     </tr>
@@ -39,6 +41,7 @@
         <td th:text="${offer.description}"></td>
         <td th:text="${offer.startDate}"></td>
         <td th:text="${offer.endDate}"></td>
+        <td th:text="${offer.student}"></td>
 
 
         </td>

@@ -4,6 +4,7 @@ import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.dao.OfferDao;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Request;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.services.GetSkillTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,22 +83,18 @@ public class OfferController {
 
     @RequestMapping("/listcolab/{skillName}/{skillLevel}/{idreq}")
     public String listReqsColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel, @PathVariable int idreq ) throws NullPointerException {
-        List<Collaboration> colabs = collabService.getCollabsReq(idreq);
-        List<Offer> offers = offerDao.getOffers(skillName,skillLevel);
-        for( Collaboration colab : colabs){
-            for( Offer offer : offers){
-                if( colab.getIdOffer() == offer.getId()){
-                    offers.remove(offer);
-                }
-            }
-        }
-        model.addAttribute("offersColab", offers);
+        List<Offer> offers = collabService.getOptionsColabs(idreq, skillLevel,skillName);
         model.addAttribute("skillName",skillName);
         model.addAttribute("skillLevel", skillLevel);
         model.addAttribute("idreq", idreq);
+        if (offers.isEmpty()){
+            return "offer/listcolabvacio";
+        }
+        else{
+            model.addAttribute("offersColab", offers);
+            return "offer/listcolab";
+        }
 
-
-        return "offer/listcolab";
     }
 
 

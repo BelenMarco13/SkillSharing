@@ -2,6 +2,9 @@ package es.uji.ei1027.skillsharing.controller;
 
 import es.uji.ei1027.skillsharing.dao.CollaborationDao;
 import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Request;
+import es.uji.ei1027.skillsharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import es.uji.ei1027.skillsharing.services.CollabService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/collaboration")
@@ -33,17 +37,21 @@ class CollaborationController {
             session.setAttribute("nextUrl", "/collaboration/list");
             return "redirect:/login";
         }
+        //buscar skillname y skill level para info !!
 
         model.addAttribute("hoy", LocalDate.now());
-        model.addAttribute("collaborations", collaborationDao.getCollaborations());
+        List<Collaboration> colabs = collaborationDao.getCollaborations();
+        model.addAttribute("colabInfo", collabService.getCollabsInfo(colabs));
+        model.addAttribute("collaborations", colabs);
         return "collaboration/list";
     }
 
     @RequestMapping("/addprevio/{idreq}/{idof}")
     public String añadirColab(Model model, @PathVariable int idreq, @PathVariable int idof){
-        Collaboration collaboration = collabService.addColab(idreq,idof);
-        collaborationDao.addCollaboration(collaboration);
-        return "redirect:/collaboration/list";
+            Collaboration collaboration = collabService.addColab(idreq, idof);
+            collaborationDao.addCollaboration(collaboration);
+            return "redirect:/collaboration/list";
+
     }
 
     @RequestMapping("/add")
@@ -63,6 +71,19 @@ class CollaborationController {
             return "collaboration/add";
         collaborationDao.addCollaboration(collaboration);
         return "redirect:list";
+    }
+
+    @RequestMapping("/info/{idRequest}/{idOffer}")
+    public String informationCollab(Model model, @PathVariable int idRequest, @PathVariable int idOffer) throws NullPointerException{
+        Request request = collabService.getRequest(idRequest);
+        Offer offer = collabService.getOffer(idOffer);
+        Student studentReq = collabService.getStudent(request.getStudent());
+        Student studentOf = collabService.getStudent(offer.getStudent());
+        model.addAttribute("request", request);
+        model.addAttribute("offer",offer);
+        model.addAttribute("studentReq", studentReq);
+        model.addAttribute("studentOf", studentOf);
+        return "/collaboration/info";
     }
 
 
