@@ -72,6 +72,17 @@ public class StudentDao {
         }
     }
 
+    //Returns the skp
+    public Student getSkp() {
+        try{
+            List<Student> lista = jdbcTemplate.query("SELECT * FROM student WHERE skp = ?",
+                    new StudentRowMapper(), true);
+            return lista.get(0);
+        }catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
     //Returns all the students from the BBDD
     public List<Student> getStudents() {
         try {

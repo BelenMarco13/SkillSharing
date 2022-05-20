@@ -3,6 +3,7 @@ package es.uji.ei1027.skillsharing.controller;
 import es.uji.ei1027.skillsharing.Gender;
 import es.uji.ei1027.skillsharing.dao.StudentDao;
 import es.uji.ei1027.skillsharing.model.Student;
+import es.uji.ei1027.skillsharing.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/student")
 public class StudentController {
     private StudentDao studentDao;
+    private EmailService emailService = new EmailService();
 
     @Autowired
     public void setStudentDao(StudentDao studentDao) {
@@ -101,6 +103,17 @@ public class StudentController {
     @RequestMapping(value="/cancelAccount/{dni}")
     public String processCancelAccount(@PathVariable String dni) {
         studentDao.cancelAccount(dni);
+
+        //Email Service
+        String destinatario = studentDao.getStudent(dni).getEmail();
+        String nombre = studentDao.getStudent(dni).getName();
+        String skpEmail = studentDao.getSkp().getEmail();
+        String cuerpo = "Hello " + nombre + ",\n\nYour account in the Skill Exchange Application has been blocked, " +
+                "if you believe this is an error please contact the administrator at the following e-mail address " +
+                skpEmail + "\n\n\tThe Skill Sharing Team.";
+        String asunto = "Cancel Account";
+        emailService.enviarConGMail(destinatario,asunto,cuerpo);
+
         return "redirect:../list";
     }
 
@@ -108,6 +121,15 @@ public class StudentController {
     @RequestMapping(value="/returnAccount/{dni}")
     public String processReturnAccount(@PathVariable String dni) {
         studentDao.returnAccount(dni);
+
+        //Email Service
+        String destinatario = studentDao.getStudent(dni).getEmail();
+        String nombre = studentDao.getStudent(dni).getName();
+        String cuerpo = "Hello " + nombre + ",\n\nYour account in Skill Sharing Application has been reinstated." +
+                "\n\n\tThe Skill Sharing Team.";
+        String asunto = "Reinstated Account.";
+        emailService.enviarConGMail(destinatario,asunto,cuerpo);
+
         return "redirect:../list";
     }
 }
