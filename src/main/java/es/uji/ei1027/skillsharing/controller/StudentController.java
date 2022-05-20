@@ -48,10 +48,6 @@ public class StudentController {
     //Send the form
     @RequestMapping(value="/add")
     public String addStudent(Model model, HttpSession session) {
-        if(session.getAttribute("student") == null) {
-            session.setAttribute("nextUrl", "/student/add");
-            return "login";
-        }
         model.addAttribute("student", new Student());
         model.addAttribute("values", Gender.values());
         return "student/add";
@@ -63,12 +59,20 @@ public class StudentController {
                                    BindingResult bindingResult) {
 
         StudentValidator studentValidator = new StudentValidator();
-        studentValidator.validate(student, bindingResult);
+        studentValidator.validateRegister(student, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("values", Gender.values());
             return "student/add";
         }
+
+        Student user = studentDao.getStudent(student.getDni());
+
+        if (user != null) {
+            bindingResult.rejectValue("dni", "registeredDni", "This dni is already registered");
+            return "student/add";
+        }
+
         studentDao.addStudent(student);
         return "redirect:/";
     }

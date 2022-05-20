@@ -43,7 +43,7 @@ public class LoginController {
         }
 
         if (student.getLocked()){
-            bindingResult.rejectValue("pwd", "lockedAccount", "This account is locked");
+            bindingResult.rejectValue("pwd", "lockedAccount", "Sorry, it seems like your account has been disabled, contact with an administrator if you think this is an error");
             return "login";
         }
 
@@ -63,36 +63,4 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @RequestMapping("/signUp")
-    public String signUp(Model model) {
-        model.addAttribute("student", new Student());
-        return "student/perfil";
-    }
-
-    @RequestMapping(value="/signUp", method= RequestMethod.POST)
-    public String checkSignUp(@ModelAttribute("student") Student student,
-                             BindingResult bindingResult, HttpSession session) {
-        StudentValidator studentValidator = new StudentValidator();
-        studentValidator.validateRegister(student, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "student/add";
-        }
-
-        student = studentDao.loadStudentByDni(student.getDni(), student.getPwd());
-
-        if (student == null) {
-            bindingResult.rejectValue("pwd", "badpwd", "Bad password");
-            return "login";
-        }
-
-        session.setAttribute("student", student);
-
-        String nextUrl = (String) session.getAttribute("nextUrl");
-        if(nextUrl != null){
-            session.removeAttribute(nextUrl);
-            return "redirect:" + nextUrl;
-        }
-        return "redirect:/";
-    }
 }

@@ -16,48 +16,66 @@
   <table>
     <tr>
         <td><label>DNI</label></td>
-        <td><input type="text" th:field="*{dni}" maxlength="9"/></td>
-        <div class="error" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
+        <td>
+          <input type="text" th:field="*{dni}" maxlength="9"/>
+          <div class="error" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
+        </td>
     </tr>
     <tr>
       <td><label>Name</label></td>
-      <td><input type="text" th:field="*{name}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+      <td>
+        <input type="text" th:field="*{name}" />
+        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>Email</label></td>
-      <td><input type="text" th:field="*{email}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+      <td>
+        <input type="text" th:field="*{email}" />
+        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>UserName</label></td>
-      <td><input type="text" th:field="*{userName}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
+      <td>
+        <input type="text" th:field="*{userName}" />
+        <div class="error" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>Password</label></td>
-      <td><input type="password" th:field="*{pwd}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></div>
+      <td>
+        <input type="password" th:field="*{pwd}" />
+        <div class="error" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>Degree</label></td>
-      <td><input type="text" th:field="*{degree}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></div>
+      <td>
+        <input type="text" th:field="*{degree}" />
+        <div class="error" th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>Course</label></td>
-      <td><input type="number" th:field="*{course}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('course')}" th:errors="*{course}"></div>
+      <td>
+        <input type="number" th:field="*{course}" />
+        <div class="error" th:if="${#fields.hasErrors('course')}" th:errors="*{course}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>Address</label></td>
-      <td><input type="text" th:field="*{address}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+      <td>
+        <input type="text" th:field="*{address}" />
+        <div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>Age</label></td>
-      <td><input type="number" th:field="*{age}" /></td>
-      <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+      <td>
+        <input type="number" th:field="*{age}" />
+        <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+      </td>
     </tr>
     <tr>
       <td><label>Gender</label></td>
