@@ -61,6 +61,8 @@ button{
     color: red;
 }
 
+/* Items in main menu and skp menu */
+
 .menu_container{
     display: flex;
     margin-top: 7%;
@@ -100,4 +102,22 @@ button{
     width: 22.5%;
     height: auto;
 }
+
+
+/* Items in /list */
+
+.list_item{
+    width: 20%;
+    padding: 1%;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.list_item *{
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+}
+
 
