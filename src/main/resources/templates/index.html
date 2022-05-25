@@ -11,7 +11,10 @@
 <body th:object="${session}">
     <div class="header">
         <h1>Skill Sharing</h1>
-        <h2>MENU</h2>
+        <h5>Do you need help in any subject?
+            Are you willing to provide help in exchange for it?
+            Have a look at the offers and requests of your colleagues.</h5>
+
         <div th:if="*{student != null}">
             <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == true}" src="/SKP_woman.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
             <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == true}" src="/SKP_man.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
