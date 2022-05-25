@@ -16,7 +16,7 @@
 
     <div class="list_item" th:each="offer: ${listContainer}">
 
-        <h5 th:text="${offer.name}"></h5>
+        <h4 th:text="${offer.name}"></h4>
         <h5 th:text="${offer.startDate}+' → '+${offer.endDate}"></h5>
         <p th:text="${offer.description}"></p>
         <h5 th:text="${offer.skillName}+' - '+${offer.skillLevel}"></h5>

@@ -4,6 +4,7 @@ import es.uji.ei1027.skillsharing.Level;
 import es.uji.ei1027.skillsharing.SkillsharingApplication;
 import es.uji.ei1027.skillsharing.dao.OfferDao;
 import es.uji.ei1027.skillsharing.dao.RequestDao;
+import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Request;
 import es.uji.ei1027.skillsharing.model.SkillType;
 import es.uji.ei1027.skillsharing.model.Student;
@@ -40,7 +41,20 @@ public class RequestController {
 
     @RequestMapping("/list")
     public String listOffers(Model model){
-        model.addAttribute("requests", requestDao.getRequests());
+
+
+        List<List<Request>> listContainers = new ArrayList<>();
+        List<Request> requests = requestDao.getRequests();
+        for (int i = 0; i < requests.size() / 3; i++) {
+            listContainers.add(List.of(requests.get(i), requests.get(i+1), requests.get(i+2)));
+        }
+        if (requests.size()%3 == 1)
+            listContainers.add(List.of(requests.get(requests.size()-1)));
+        else if (requests.size()%3 == 2)
+            listContainers.add(List.of(requests.get(requests.size()-2),requests.get(requests.size()-1)));
+
+        model.addAttribute("listContainers", listContainers);
+
         return "request/list";
     }
 

@@ -71,6 +71,7 @@ button{
 .menu_container{
     display: flex;
     margin-top: 7%;
+    margin-bottom: 2%;
     justify-content: space-evenly;
 }
 
@@ -123,6 +124,10 @@ button{
 .list_item *{
     padding-top: 2.5%;
     padding-bottom: 2.5%;
+}
+
+.list_item h4{
+    font-weight: bold;
 }
 
 

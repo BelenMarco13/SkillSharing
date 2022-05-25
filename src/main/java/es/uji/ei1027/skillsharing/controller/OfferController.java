@@ -42,8 +42,6 @@ public class OfferController {
     public String listOffers(Model model){
 
         List<List<Offer>> listContainers = new ArrayList<>();
-
-
         List<Offer> offers = offerDao.getOffers();
         for (int i = 0; i < offers.size() / 3; i++) {
             listContainers.add(List.of(offers.get(i), offers.get(i+1), offers.get(i+2)));
