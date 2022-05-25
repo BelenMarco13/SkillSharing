@@ -55,8 +55,13 @@ class CollaborationController {
     }
 
     @RequestMapping("/add/{id_request}/{id_offer}")
-    public String addCollaboration(Model model, HttpSession httpSession,
+    public String addCollaboration(Model model, HttpSession session,
                                    @PathVariable String id_request, @PathVariable String id_offer){
+
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", "/collaboration/add/"+id_request+"/"+id_offer);
+            return "redirect:/login";
+        }
 
         Request request;
         Offer offer;
@@ -73,7 +78,7 @@ class CollaborationController {
         }
 
         // 2. Redirigir al menú de all collaboration para que el usuario introduzca las fechas de incio y fin deseadas
-        httpSession.setAttribute("collaboration", collaboration);
+        session.setAttribute("collaboration", collaboration);
         return "redirect:/collaboration/add";
     }
 
@@ -81,7 +86,7 @@ class CollaborationController {
     public String addCollaboration(Model model, HttpSession session){
         if(session.getAttribute("student") == null) {
             session.setAttribute("nextUrl", "/collaboration/add");
-            return "login";
+            return "redirect:/login";
         }
 
         Collaboration collaboration = (Collaboration) session.getAttribute("collaboration");
