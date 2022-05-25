@@ -31,22 +31,24 @@
 
     <tr>
       <td><label>Start date</label></td>
-      <td><input type="text" th:field="*{startDate}" /></td>
+      <td><input type="date" th:min="${start_date}" th:max="${end_date}" th:field="*{startDate}"/></td>
     </tr>
     <tr>
       <td><label>End date</label></td>
-      <td><input type="text" th:field="*{endDate}" /></td>
+      <td><input type="date" th:min="${start_date}" th:max="${end_date}" th:field="*{endDate}"/></td>
     </tr>
+    <!-- todo: Añadir esto en cualquier fila de la tabla en caso de que de error al enviar la solicitud.
+    todo:      en caso contrario eliminar este bloque de comentarios
     <tr>
       <td><label>Score</label></td>
-      <td><input type="number" min="1" max="5" th:field="*{score}"/></td>
+      <td><input type="hidden" min="1" max="5" th:field="*{score}"/></td>
     </tr>
 
     <tr>
       <td><label>Comment</label></td>
-      <td><input type="text" th:field="*{comment}" /></td>
+      <td><input type="hidden" th:field="*{comment}" /></td>
     </tr>
-
+    -->
     <tr>
       <td colspan="2"><input type="submit" value="Add collaboration" /></td>
       <td colspan="2"><a href="/collaboration/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>

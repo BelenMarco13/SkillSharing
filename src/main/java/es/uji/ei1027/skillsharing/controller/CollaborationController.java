@@ -93,10 +93,15 @@ class CollaborationController {
         Request request = collabService.getRequest(collaboration.getIdRequest());
         Offer offer = collabService.getOffer(collaboration.getIdOffer());
 
-        if (request != null)
+        if (request != null){
             model.addAttribute("request_name", request.getName());
-        else if (offer != null)
+            model.addAttribute("start_date", request.getStartDate());
+            model.addAttribute("end_date", request.getEndDate());
+        } else if (offer != null) {
             model.addAttribute("offer_name", offer.getName());
+            model.addAttribute("start_date", offer.getStartDate());
+            model.addAttribute("end_date", offer.getEndDate());
+        }
 
         model.addAttribute("collaboration", collaboration);
 
