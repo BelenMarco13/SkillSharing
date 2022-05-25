@@ -54,13 +54,47 @@ class CollaborationController {
 
     }
 
+    @RequestMapping("/add/{id_request}/{id_offer}")
+    public String addCollaboration(Model model, HttpSession httpSession,
+                                   @PathVariable String id_request, @PathVariable String id_offer){
+
+        Request request;
+        Offer offer;
+        Collaboration collaboration = new Collaboration();
+
+        // 1. Obtener el último indice usado para representar una request/offer en la base de datos
+        // y crear la colaboración asignando ese índice al elemento que falte para crearla (offer/request)
+        if (id_request.equals("null")){
+            collaboration.setIdOffer(Integer.parseInt(id_offer));
+            collaboration.setIdRequest(collabService.getLastRequestId() + 1);
+        } else if (id_offer.equals("null")){
+            collaboration.setIdRequest(Integer.parseInt(id_request));
+            collaboration.setIdOffer(collabService.getLastOfferId() + 1);
+        }
+
+        // 2. Redirigir al menú de all collaboration para que el usuario introduzca las fechas de incio y fin deseadas
+        httpSession.setAttribute("collaboration", collaboration);
+        return "redirect:/collaboration/add";
+    }
+
     @RequestMapping("/add")
     public String addCollaboration(Model model, HttpSession session){
         if(session.getAttribute("student") == null) {
             session.setAttribute("nextUrl", "/collaboration/add");
             return "login";
         }
-        model.addAttribute("collaboration", new Collaboration());
+
+        Collaboration collaboration = (Collaboration) session.getAttribute("collaboration");
+        Request request = collabService.getRequest(collaboration.getIdRequest());
+        Offer offer = collabService.getOffer(collaboration.getIdOffer());
+
+        if (request != null)
+            model.addAttribute("request_name", request.getName());
+        else if (offer != null)
+            model.addAttribute("offer_name", offer.getName());
+
+        model.addAttribute("collaboration", collaboration);
+
         return "collaboration/add";
     }
 

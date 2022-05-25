@@ -138,5 +138,47 @@ public class CollabService {
     public Level getSkillLevel(int idreq){
         return requestDao.getRequest(idreq).getSkillLevel();
     }
+
+    /**
+     * Para poder crear una colaboración sin una request ya creada vamos a ponerle un id que no exista.
+     * Para ello vamos a mirar en las request y colabs de la base de datos
+     * @return último indice de request existente mirando tabla de request y de collabs
+     */
+    public int getLastRequestId() {
+
+        // Miramos el último existente en la tabla de requests
+        int ultimoIndice = requestDao.getRequests().get(requestDao.getRequests().size()-1).getId();
+
+        // Miramos el último y aexistente en la tabla de colaboraciones
+        List<Collaboration> collaborations= collaborationDao.getCollaborations();
+
+        for (Collaboration collaboration :
+                collaborations) {
+            if (collaboration.getIdRequest() > ultimoIndice)
+                ultimoIndice = collaboration.getIdRequest();
+        }
+        return ultimoIndice;
+    }
+
+    /**
+     * Para poder crear una colaboración sin una offer ya creada vamos a ponerle un id que no exista.
+     * Para ello vamos a mirar en las offers y colabs de la base de datos
+     * @return último indice de offer existente mirando tabla de offers y de collabs
+     */
+    public int getLastOfferId() {
+
+        // Miramos el último existente en la tabla de offers
+        int ultimoIndice = offerDao.getOffers().get(offerDao.getOffers().size()-1).getId();
+
+        // Miramos el último y aexistente en la tabla de colaboraciones
+        List<Collaboration> collaborations= collaborationDao.getCollaborations();
+
+        for (Collaboration collaboration :
+                collaborations) {
+            if (collaboration.getIdOffer() > ultimoIndice)
+                ultimoIndice = collaboration.getIdOffer();
+        }
+        return ultimoIndice;
+    }
 }
 

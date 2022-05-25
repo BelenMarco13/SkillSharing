@@ -14,13 +14,19 @@
 <form action="#" th:action="@{/collaboration/add}"
       th:object="${collaboration}" method="post">
   <table>
-    <tr>
+    <tr th:if="${request_name != null}">
       <td><label>Request</label></td>
-      <td><input type="text" th:field="*{idRequest}" /></td>
+      <td>
+        <label th:text="${request_name}"></label>
+        <input type="hidden" th:field="*{idRequest}" />
+      </td>
     </tr>
-    <tr>
+    <tr th:if="${offer_name != null}">
       <td><label>Offer</label></td>
-      <td><input type="text" th:field="*{idOffer}" /></td>
+      <td>
+        <label th:text="${offer_name}"/>
+        <input type="hidden" th:field="*{idOffer}" />
+      </td>
     </tr>
 
     <tr>

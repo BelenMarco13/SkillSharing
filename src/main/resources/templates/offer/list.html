@@ -20,7 +20,7 @@
         <h5 th:text="${offer.startDate}+' → '+${offer.endDate}"></h5>
         <p th:text="${offer.description}"></p>
         <h5 th:text="${offer.skillName}+' - '+${offer.skillLevel}"></h5>
-        <a th:href="@{/offer/listcolab/{skillName}/{skillLevel}/{id}(skillName=${offer.skillName},skillLevel=${offer.skillLevel}, id=${offer.id})}"><button type="button" class="btn btn-warning" >Requests associated</button></a>
+        <a th:href="@{/collaboration/add/{id_request}/{id_offer}(id_request='null', id_offer=${offer.id})}"><button type="button" class="btn btn-secondary" >Apply To</button></a>
 
 
     </div>
