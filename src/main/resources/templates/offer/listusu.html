@@ -18,35 +18,23 @@
     </div>
 </div>
 <h2 >List of my offers</h2>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Skill Name</th>
-        <th>Skill Level</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="offer: ${offersUsuario}">
-        <td th:text="${offer.id}"></td>
-        <td th:text="${offer.name}"></td>
-        <td th:text="${offer.description}"></td>
-        <td th:text="${offer.startDate}"></td>
-        <td th:text="${offer.endDate}"></td>
-        <td th:text="${offer.skillName}"></td>
-        <td th:text="${offer.skillLevel}"></td>
-        <td><a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
-        <td><a th:href="@{/offer/end/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">End offer</button></a></td>
 
-    </tr>
-    </tbody>
-</table>
+<div class="menu_container" th:each="listContainer: ${offersUsuario}">
+
+    <div class="list_item" th:each="offer: ${listContainer}">
+
+        <h4 th:text="${offer.name}"></h4>
+        <h5 th:text="${offer.startDate}+ ' → ' +${offer.endDate}"></h5>
+        <p th:text="${offer.description}"></p>
+        <h5 th:text="${offer.skillName}+ ' - ' +${offer.skillLevel}"></h5>
+        <a th:href="@{/offer/update/{id}(id=${offer.id})}"><button type="button" class="btn btn-warning" >Update</button></a>
+        <a th:href="@{/offer/end/{id}(id=${offer.id})}"><button type="button" class="btn btn-danger">End offer</button></a>
+        <br><br>
+        <a th:href="@{/request/listcolab/{skillName}/{skillLevel}/{idOffer}(skillName=${offer.skillName},skillLevel=${offer.skillLevel}, idOffer=${offer.id})}"><button type="button" class="btn btn-warning" >Requests associated</button></a>
+    </div>
+
+</div>
+
 <a th:href="@{/offer/add}"><button type="button" class="btn btn-success">Add offer</button></a>
 <a href="../"><button type="button" class="btn btn-secondary">Return</button></a>
 
