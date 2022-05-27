@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/skillsharing.css"
+      th:href="@{/css/skillsharing.css}"/>
 <head>
-    <meta charset="UTF-8">
-    <title>Collaboration Management</title>
+    <title>Valorate collaboration</title>
+    <meta charset="UTF-8" />
 </head>
-<body>
-fotm para comentar la colab
+<body th:object="${session}">
+<div class="header">
+    <h1>Skill Sharing</h1>
+    <h2>Assessment of the collaboration </h2>
+    <div>
+        <img src="/profile_picture.png" alt="profile_picture">
+        <h3 th:text="*{student.name}"></h3>
+        <h5 th:text="*{student.balanceHours}"></h5>
+    </div>
+</div>
+<form action="#" th:action="@{/collaboration/valorar}" th:object="${collaboration}" method="post">
+    <table>
+        <tr>
+            <td><label> Score </label></td>
+            <td><input type="number" min="1" max="5" th:field="*{score}"></td>
+        </tr>
+
+        <tr>
+            <td><label>Write a short review of the selected collaboration :</label></td>
+        </tr>
+        <tr>
+            <td><textarea th:field="*{comment}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Accept" class="btn btn-outline-secondary"/></td>
+            <td><a href="/collaboration/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
+        </tr>
+
+    </table>
+</form>
 
 </body>
 </html>
