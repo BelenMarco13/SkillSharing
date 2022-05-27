@@ -159,7 +159,6 @@ class CollaborationController {
 
         if(session.getAttribute("student") == null) {
             session.setAttribute("nextUrl", httpRequest.getRequestURI());
-            System.out.println(httpRequest.getRequestURI());
             return "redirect:/login";
         }
 
@@ -189,7 +188,7 @@ class CollaborationController {
 
         collaborationDao.addCollaboration(collaboration);
 
-        return "redirect:/list";
+        return "redirect:/collaboration/list";
     }
 
     @RequestMapping("/info/{idRequest}/{idOffer}")

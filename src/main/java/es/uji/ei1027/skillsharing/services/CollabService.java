@@ -183,8 +183,8 @@ public class CollabService {
 
     public void addRequest(int id_request, String dni_solicitante, LocalDate start_date, LocalDate end_date) {
         Request request = new Request();
-        request.setName("Collab request");
-        request.setDescription("Collab request");
+        request.setName("null");
+        request.setDescription("null");
         request.setId(id_request);
         request.setStartDate(start_date);
         request.setEndDate(end_date);
@@ -196,8 +196,8 @@ public class CollabService {
 
     public void addOffer(int id_offer, String dni_solicitante, LocalDate start_date, LocalDate end_date) {
         Offer offer = new Offer();
-        offer.setName("Collab offer");
-        offer.setDescription("Collab offer");
+        offer.setName("null");
+        offer.setDescription("null");
         offer.setId(id_offer);
         offer.setStartDate(start_date);
         offer.setEndDate(end_date);

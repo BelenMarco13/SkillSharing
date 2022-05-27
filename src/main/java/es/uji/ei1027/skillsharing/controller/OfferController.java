@@ -38,11 +38,17 @@ public class OfferController {
         this.offerDao = offerDao;
     }
 
-    @RequestMapping("/list")
-    public String listOffers(Model model){
-
+    private List<List<Offer>> getValidOfferInContainers(List<Offer> rawOfferList){
         List<List<Offer>> listContainers = new ArrayList<>();
-        List<Offer> offers = offerDao.getOffers();
+        List<Offer> offers = new ArrayList<>();
+
+        // Add just non-blank offers (which are used just to create a collaboration without offer)
+        for (Offer offer :
+                rawOfferList) {
+            if (!offer.getName().equals("null") && !offer.getDescription().equals("null"))
+                offers.add(offer);
+        }
+
         for (int i = 0; i < offers.size() / 3; i++) {
             listContainers.add(List.of(offers.get(i), offers.get(i+1), offers.get(i+2)));
         }
@@ -50,6 +56,14 @@ public class OfferController {
             listContainers.add(List.of(offers.get(offers.size()-1)));
         else if (offers.size()%3 == 2)
             listContainers.add(List.of(offers.get(offers.size()-2),offers.get(offers.size()-1)));
+
+        return listContainers;
+    }
+
+    @RequestMapping("/list")
+    public String listOffers(Model model){
+
+        List<List<Offer>> listContainers = getValidOfferInContainers(offerDao.getOffers());
 
         model.addAttribute("listContainers", listContainers);
         return "offer/list";

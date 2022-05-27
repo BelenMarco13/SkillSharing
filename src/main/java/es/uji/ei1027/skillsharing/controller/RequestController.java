@@ -39,12 +39,17 @@ public class RequestController {
         this.requestDao = requestDao;
     }
 
-    @RequestMapping("/list")
-    public String listOffers(Model model){
-
-
+    private List<List<Request>> getValidRequestsInContainers(List<Request> rawRequestList){
         List<List<Request>> listContainers = new ArrayList<>();
-        List<Request> requests = requestDao.getRequests();
+        List<Request> requests = new ArrayList<>();
+
+        // Add just non-blank requests (which are used just to create a collaboration without request)
+        for (Request request :
+                rawRequestList) {
+            if (!request.getName().equals("null") && !request.getDescription().equals("null"))
+                requests.add(request);
+        }
+
         for (int i = 0; i < requests.size() / 3; i++) {
             listContainers.add(List.of(requests.get(i), requests.get(i+1), requests.get(i+2)));
         }
@@ -52,6 +57,15 @@ public class RequestController {
             listContainers.add(List.of(requests.get(requests.size()-1)));
         else if (requests.size()%3 == 2)
             listContainers.add(List.of(requests.get(requests.size()-2),requests.get(requests.size()-1)));
+
+        return listContainers;
+    }
+
+    @RequestMapping("/list")
+    public String listOffers(Model model){
+
+
+        List<List<Request>> listContainers = getValidRequestsInContainers(requestDao.getRequests());
 
         model.addAttribute("listContainers", listContainers);
 
