@@ -35,6 +35,12 @@
             <td><input type="submit" value="Accept" class="btn btn-outline-secondary"/></td>
             <td><a href="/collaboration/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
         </tr>
+        <tr>
+            <input type="hidden" th:field="*{startDate}" />
+            <input type="hidden" th:field="*{endDate}" />
+            <input type="hidden" th:field="*{idRequest}" />
+            <input type="hidden" th:field="*{idOffer}" />
+        </tr>
 
     </table>
 </form>

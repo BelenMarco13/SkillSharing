@@ -9,47 +9,66 @@
     <meta charset="UTF-8" />
 </head>
 
-<body>
+<body th:object="${session}">
 <div class="header">
     <h1>Skill Sharing</h1>
+    <h2>Information about the collaboration.</h2>
     <div th:if="*{student != null}">
         <img src="/profile_picture.png" alt="profile_picture">
         <h3 th:text="*{student.name}"></h3>
         <h5 th:text="*{student.balanceHours}"></h5>
     </div>
 </div>
-<div  >
-    <div style="float: left; width: 50%;">
-        <table >
-            <tbody>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Student</th>
-                <th>Skill Name</th>
-                <th>Skill Level</th>
-                <th></th>
-            </tr>
-            </thead>
-            </tbody>
-        </table>
+
+
+
+<div class = "menu_container" >
+    <div class = "list_item">
+        <h4> Student who made the offer</h4>
+        <h5 th:text = "${studentOf.name}"></h5>
+        <p th:text="${studentOf.degree} + ': ' + ${studentOf.course}"></p>
+        <p th:text = "${studentOf.email}"></p>
     </div>
-    <div style="float: left; width: 50%;">
-        <table border="1" width="100%">
-            <tbody>
-            <tr>
-                <td>2</td>
-            </tr>
-            </tbody>
-        </table>
+
+    <div class = "list_item">
+        <h4> Offer details</h4>
+        <h5 th:text = "${offer.name}"></h5>
+        <p th:text="${offer.description}"></p>
+        <p th:text="${offer.startDate} + ' // ' + ${offer.endDate}"></p>
     </div>
-    <div style="clear: both;"></div>
+
 </div>
-</body>
+
+<div class="menu_container">
+    <div class = "list_item">
+        <h4> Student who made the request</h4>
+        <h5 th:text = "${studentReq.name}"></h5>
+        <p th:text="${studentReq.degree} + ': ' + ${studentReq.course}"></p>
+        <p th:text = "${studentReq.email}"></p>
+    </div>
+    <div class = "list_item">
+        <h4> Request details</h4>
+        <h5 th:text = "${offer.name}"></h5>
+        <p th:text="${offer.description}"></p>
+        <p th:text="${offer.startDate} + ' // ' + ${offer.endDate}"></p>
+    </div>
+</div>
+<div class="menu_container">
+    <div class="list_item" th:unless="${collaboration.comment == ' '}">
+        <h4> Collabortion details</h4>
+        <h5>Score of the Collaboration</h5>
+        <p th:text = "${collaboration.score} + ' points'"></p>
+        <h5>Comments about the collaboration</h5>
+        <p th:text = "${collaboration.comment}"></p>
+
+    </div>
+</div>
+<table class="table table-striped">
+    <tr><a th:unless="@{${collaboration.endDate} > ${hoy}} " th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a></tr>
+    <tr><a th:unless = "@{${collaboration.endDate} <= ${hoy}}" th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger"> Finish. </button></a></tr>
+    <tr><a href=" /collaboration/list"><button type="button" class="btn btn-secondary">Return.</button></a></tr>
+</table>
+
 
 </body>
 </html>

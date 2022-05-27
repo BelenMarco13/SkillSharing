@@ -45,7 +45,7 @@ class CollaborationController {
         }
         //buscar skillname y skill level para info !!
 
-        model.addAttribute("hoy", LocalDate.now());
+
         List<Collaboration> colabs = collaborationDao.getCollaborations();
         model.addAttribute("colabInfo", collabService.getCollabsInfo(colabs));
         model.addAttribute("collaborations", colabs);
@@ -144,7 +144,12 @@ class CollaborationController {
     }
 
     @RequestMapping("/info/{idRequest}/{idOffer}")
-    public String informationCollab(Model model, @PathVariable int idRequest, @PathVariable int idOffer) throws NullPointerException{
+    public String informationCollab(Model model, @PathVariable int idRequest, @PathVariable int idOffer,HttpSession session) throws NullPointerException{
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", "/collaboration/list");
+            return "redirect:/login";
+        }
+        Collaboration colab = collaborationDao.getCollaboration(idRequest,idOffer);
         Request request = collabService.getRequest(idRequest);
         Offer offer = collabService.getOffer(idOffer);
         Student studentReq = collabService.getStudent(request.getStudent());
@@ -153,6 +158,8 @@ class CollaborationController {
         model.addAttribute("offer",offer);
         model.addAttribute("studentReq", studentReq);
         model.addAttribute("studentOf", studentOf);
+        model.addAttribute("collaboration", colab);
+        model.addAttribute("hoy", LocalDate.now());
         return "/collaboration/info";
     }
 
@@ -175,19 +182,27 @@ class CollaborationController {
     @RequestMapping("/delete/{idRequest}/{idOffer}")
     public String processDelete(Model model, @PathVariable int idRequest, @PathVariable int idOffer){
         collaborationDao.finishCollaboration(idRequest,idOffer);
-        return "redirect:list";
+        return "redirect:collaboration/list";
     }
 
-    @RequestMapping("/valorar/{idRequest}/{idOffer}")
-    public String processvalorar(Model model, @PathVariable int idRequest, @PathVariable int idOffer){
+    @RequestMapping(value= "/valorar/{idRequest}/{idOffer}", method= RequestMethod.GET)
+    public String processvalorar(Model model, @PathVariable int idRequest, @PathVariable int idOffer,HttpSession session){
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", "/collaboration/list");
+            return "redirect:/login";
+        }
         Collaboration colab= collaborationDao.getCollaboration(idRequest,idOffer);
+
         model.addAttribute("collaboration",colab);
+        System.out.println(colab);
         return "collaboration/valorar";
     }
 
     @RequestMapping(value = "/valorar",method=RequestMethod.POST)
     public String processValorar(Model model, @ModelAttribute("collaboration") Collaboration collaboration){
         collaborationDao.updateCollaboration(collaboration);
+        System.out.println(collaboration);
+
         return "redirect:list";
     }
 

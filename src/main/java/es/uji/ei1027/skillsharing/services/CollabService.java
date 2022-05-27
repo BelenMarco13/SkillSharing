@@ -41,8 +41,8 @@ public class CollabService {
         Map<Collaboration, List<String>> mapa = new HashMap<>();
         for (Collaboration colab : colabs) {
             List<String> lista = new ArrayList<>();
-            String nameReq = studentDao.getStudent(requestDao.getRequest(colab.getIdRequest()).getStudent()).getName();
-            String nameOf = studentDao.getStudent(offerDao.getOffer(colab.getIdOffer()).getStudent()).getName();
+            String nameReq = studentDao.getStudent(requestDao.getRequest(colab.getIdRequest()).getStudent()).getUserName();
+            String nameOf = studentDao.getStudent(offerDao.getOffer(colab.getIdOffer()).getStudent()).getUserName();
             String SkillName = requestDao.getRequest(colab.getIdRequest()).getSkillName();
             String SkillLevel = String.valueOf(requestDao.getRequest(colab.getIdRequest()).getSkillLevel());
             lista.add(nameReq);
