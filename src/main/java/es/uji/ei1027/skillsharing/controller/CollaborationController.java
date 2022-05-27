@@ -7,6 +7,7 @@ import es.uji.ei1027.skillsharing.model.Request;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.skillsharing.services.CollabService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
@@ -130,17 +132,64 @@ class CollaborationController {
         System.out.println(collaboration);
 
         String receiver = (String)session.getAttribute("emailTo");
-        String sender = ((Student) session.getAttribute("student")).getName();
+        String senderName = ((Student) session.getAttribute("student")).getName();
+        String senderDNI = ((Student) session.getAttribute("student")).getDni();
         String activityName = (String) session.getAttribute("activityName");
 
 
         emailService.enviarConGMail(receiver,
-                ""+sender+" has applied to your activity '"+activityName+"'",
-                "If you want to accept the collaboration click in the following link: "+
-                "localhost:8090/collaboration/accept/"+collaboration.getIdRequest()+"/"+
-                collaboration.getIdOffer());
+                ""+senderName+" has applied to your activity '"+activityName+"'",
+                "The user '"+senderName+"' has applied to your activity '"+activityName+
+                        "' sugesting to start on "+collaboration.getStartDate()+" and ending on "+
+                        collaboration.getEndDate()+
+                        ".\n\nIf you want to accept the collaboration click on the following link: "+
+                        "http://localhost:8080/collaboration/accept/"+collaboration.getIdRequest()+
+                        "/"+collaboration.getIdOffer()+"/"+senderDNI+"/"+collaboration.getStartDate()+
+                        "/"+collaboration.getEndDate()+"\n\n\tThe Skill Sharing Team.");
         //collaborationDao.addCollaboration(collaboration);
         return "redirect:list";
+    }
+
+    @RequestMapping("/accept/{id_request}/{id_offer}/{dni_solicitante}/{start_date}/{end_date}")
+    public String acceptCollaboration(Model model, HttpSession session, HttpServletRequest httpRequest,
+                                      @PathVariable int id_request, @PathVariable int id_offer,
+                                      @PathVariable String dni_solicitante,
+                                      @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start_date,
+                                      @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end_date){
+
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", httpRequest.getRequestURI());
+            System.out.println(httpRequest.getRequestURI());
+            return "redirect:/login";
+        }
+
+        // Creamos la request/offer del solicitante ya que hasta ahora no se ha hecho
+        if (collabService.getRequest(id_request) == null){
+                if (!((Student)session.getAttribute("student")).getDni().equals(collabService.getOffer(id_offer).getStudent())){
+                    session.setAttribute("nextUrl", httpRequest.getRequestURI());
+                    return "redirect:/login";
+                }
+
+                collabService.addRequest(id_request, dni_solicitante, start_date, end_date);
+        } else if (collabService.getOffer(id_offer) == null){
+            if (!((Student)session.getAttribute("student")).getDni().equals(collabService.getRequest(id_request).getStudent())){
+                session.setAttribute("nextUrl", httpRequest.getRequestURI());
+                return "redirect:/login";
+            }
+
+            collabService.addOffer(id_offer, dni_solicitante, start_date, end_date);
+        }
+
+        // Creamos y guardamos la colaboración
+        Collaboration collaboration = new Collaboration();
+        collaboration.setIdOffer(id_offer);
+        collaboration.setIdRequest(id_request);
+        collaboration.setStartDate(start_date);
+        collaboration.setEndDate(end_date);
+
+        collaborationDao.addCollaboration(collaboration);
+
+        return "redirect:/list";
     }
 
     @RequestMapping("/info/{idRequest}/{idOffer}")

@@ -1,10 +1,7 @@
 package es.uji.ei1027.skillsharing.services;
 
 import es.uji.ei1027.skillsharing.Level;
-import es.uji.ei1027.skillsharing.dao.CollaborationDao;
-import es.uji.ei1027.skillsharing.dao.OfferDao;
-import es.uji.ei1027.skillsharing.dao.RequestDao;
-import es.uji.ei1027.skillsharing.dao.StudentDao;
+import es.uji.ei1027.skillsharing.dao.*;
 import es.uji.ei1027.skillsharing.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +25,9 @@ public class CollabService {
 
     @Autowired
     StudentDao studentDao;
+
+    @Autowired
+    SkillTypeDao skillTypeDao;
 
     @Autowired
     RequestDao requestDao;
@@ -180,5 +180,33 @@ public class CollabService {
         }
         return ultimoIndice;
     }
+
+    public void addRequest(int id_request, String dni_solicitante, LocalDate start_date, LocalDate end_date) {
+        Request request = new Request();
+        request.setName("Collab request");
+        request.setDescription("Collab request");
+        request.setId(id_request);
+        request.setStartDate(start_date);
+        request.setEndDate(end_date);
+        request.setSkillTypeLevel(skillTypeDao.getSkills().get(0).getName()+" "+
+                skillTypeDao.getSkills().get(0).getLevel());
+
+        requestDao.addRequest(request, studentDao.getStudent(dni_solicitante));
+    }
+
+    public void addOffer(int id_offer, String dni_solicitante, LocalDate start_date, LocalDate end_date) {
+        Offer offer = new Offer();
+        offer.setName("Collab offer");
+        offer.setDescription("Collab offer");
+        offer.setId(id_offer);
+        offer.setStartDate(start_date);
+        offer.setEndDate(end_date);
+        offer.setSkillTypeLevel(skillTypeDao.getSkills().get(0).getName()+" "+
+                skillTypeDao.getSkills().get(0).getLevel());
+
+        offerDao.addOffer(offer, studentDao.getStudent(dni_solicitante));
+    }
+
+
 }
 
