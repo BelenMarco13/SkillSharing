@@ -74,6 +74,15 @@ public class OfferController {
     public String listOffersUsu(Model model, HttpSession session) throws NullPointerException {
         Student student= (Student) session.getAttribute("student");
         model.addAttribute("offersUsuario", getValidOfferInContainers(offerDao.getOffers(student)));
+        model.addAttribute("title", "List of my offers");
+
+        return "offer/listusu";
+    }
+
+    @RequestMapping("/manage")
+    public String listOffersManage(Model model, HttpSession session) throws NullPointerException {
+        model.addAttribute("offersUsuario", getValidOfferInContainers(offerDao.getOffers()));
+        model.addAttribute("title", "List of offers");
 
         return "offer/listusu";
     }

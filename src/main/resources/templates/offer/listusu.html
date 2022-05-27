@@ -17,7 +17,7 @@
         <h5 th:text="*{student.balanceHours}"></h5>
     </div>
 </div>
-<h2 >List of my offers</h2>
+<h2 th:text="${title}"></h2>
 
 <div class="menu_container" th:each="listContainer: ${offersUsuario}">
 

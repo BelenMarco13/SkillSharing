@@ -77,7 +77,15 @@ public class RequestController {
     public String listReqsUsu(Model model, HttpSession session) throws NullPointerException {
         Student student= (Student) session.getAttribute("student");
         model.addAttribute("requestsUsuario", getValidRequestsInContainers(requestDao.getRequests(student)));
+        model.addAttribute("title", "List of my requests");
 
+        return "request/listusu";
+    }
+
+    @RequestMapping("/manage")
+    public String listReqsManage(Model model, HttpSession session) throws NullPointerException {
+        model.addAttribute("requestsUsuario", getValidRequestsInContainers(requestDao.getRequests()));
+        model.addAttribute("title", "List of requests");
         return "request/listusu";
     }
 
