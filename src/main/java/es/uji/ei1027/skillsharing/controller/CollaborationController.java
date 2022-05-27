@@ -5,6 +5,7 @@ import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Request;
 import es.uji.ei1027.skillsharing.model.Student;
+import es.uji.ei1027.skillsharing.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import es.uji.ei1027.skillsharing.services.CollabService;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Properties;
 
 @Controller
 @RequestMapping("/collaboration")
@@ -26,6 +28,10 @@ class CollaborationController {
     private CollaborationDao collaborationDao;
     @Autowired
     private CollabService collabService;
+
+    @Autowired
+    private EmailService emailService;
+
     @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
         this.collaborationDao = collaborationDao;
@@ -97,10 +103,16 @@ class CollaborationController {
             model.addAttribute("request_name", request.getName());
             model.addAttribute("start_date", request.getStartDate());
             model.addAttribute("end_date", request.getEndDate());
+            session.setAttribute("emailTo", collabService.getStudent(request.getStudent()).getEmail());
+            session.setAttribute("activityName", request.getName());
+            session.setAttribute("activityType", "request");
         } else if (offer != null) {
             model.addAttribute("offer_name", offer.getName());
             model.addAttribute("start_date", offer.getStartDate());
             model.addAttribute("end_date", offer.getEndDate());
+            session.setAttribute("emailTo", collabService.getStudent(offer.getStudent()).getEmail());
+            session.setAttribute("activityName", offer.getName());
+            session.setAttribute("activityType", "offer");
         }
 
         model.addAttribute("collaboration", collaboration);
@@ -110,10 +122,24 @@ class CollaborationController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration,
+                                   HttpSession session,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "collaboration/add";
-        collaborationDao.addCollaboration(collaboration);
+
+        System.out.println(collaboration);
+
+        String receiver = (String)session.getAttribute("emailTo");
+        String sender = ((Student) session.getAttribute("student")).getName();
+        String activityName = (String) session.getAttribute("activityName");
+
+
+        emailService.enviarConGMail(receiver,
+                ""+sender+" has applied to your activity '"+activityName+"'",
+                "If you want to accept the collaboration click in the following link: "+
+                "localhost:8090/collaboration/accept/"+collaboration.getIdRequest()+"/"+
+                collaboration.getIdOffer());
+        //collaborationDao.addCollaboration(collaboration);
         return "redirect:list";
     }
 

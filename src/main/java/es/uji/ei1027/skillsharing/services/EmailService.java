@@ -1,10 +1,12 @@
 package es.uji.ei1027.skillsharing.services;
 
+import org.springframework.stereotype.Service;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-
+@Service
 public class EmailService {
 
     public void enviarConGMail(String destinatario, String asunto, String cuerpo) {

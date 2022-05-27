@@ -9,9 +9,9 @@ import java.time.LocalDate;
 public class Collaboration {
     private int idRequest;
     private int idOffer;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private int score;
     private String comment;

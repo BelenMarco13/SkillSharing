@@ -18,14 +18,12 @@
       <td><label>Request</label></td>
       <td>
         <label th:text="${request_name}"></label>
-        <input type="hidden" th:field="*{idRequest}" />
       </td>
     </tr>
     <tr th:if="${offer_name != null}">
       <td><label>Offer</label></td>
       <td>
         <label th:text="${offer_name}"/>
-        <input type="hidden" th:field="*{idOffer}" />
       </td>
     </tr>
 
@@ -50,7 +48,14 @@
     </tr>
     -->
     <tr>
-      <td colspan="2"><input type="submit" value="Add collaboration" /></td>
+      <td colspan="2">
+        <input type="hidden" th:field="*{idRequest}" />
+        <input type="hidden" th:field="*{idOffer}" />
+        <input type="hidden" min="1" max="5" th:field="*{score}"/>
+        <input type="hidden" th:field="*{comment}" />
+
+        <input type="submit" value="Add collaboration" />
+      </td>
       <td colspan="2"><a href="/collaboration/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a>
     </tr>
   </table>
