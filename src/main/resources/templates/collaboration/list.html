@@ -33,9 +33,8 @@
         <td th:text="${collaboration.startDate}"></td>
         <td th:text="${collaboration.endDate}"></td>
         <td><a th:href="@{/collaboration/info/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}">See more information</a></td>
-        <td><a th:unless="@{${collaboration.endDate} > ${hoy}} " th:href="{@/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}),(idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a>></td>
-        <td><a th:href="@{/collaboration/update/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}),(idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-warning" >Update. </button></a></td>
-        <td><a th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}),(idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger"> Finish. </button></a></td>
+        <td><a th:unless="@{${collaboration.endDate} > ${hoy}} " th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a></td>
+        <td><a th:unless = "@{${collaboration.endDate} <= ${hoy}}" th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger"> Finish. </button></a></td>
 
     </tr>
     </tbody>

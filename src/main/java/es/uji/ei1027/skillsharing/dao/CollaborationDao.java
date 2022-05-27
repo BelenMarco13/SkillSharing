@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +37,16 @@ public class CollaborationDao {
     }
 
     public void updateCollaboration(Collaboration collaboration){
-        jdbcTemplate.update("UPDATE INTO Collaboration SET start_date=?, end_date=?, score=?, comment=?" +
+        jdbcTemplate.update("UPDATE Collaboration SET start_date=?, end_date=?, score=?, comment=?" +
                         "WHERE id_request=? and id_offer=?",
                 collaboration.getStartDate(), collaboration.getEndDate(), collaboration.getScore(),
                 collaboration.getComment(), collaboration.getIdRequest(), collaboration.getIdOffer());
+    }
+    public void finishCollaboration(int id_req, int id_off){
+        jdbcTemplate.update("UPDATE  Collaboration SET end_date= ? " +
+                        "WHERE id_request=? and id_offer=?", LocalDate.now(), id_req, id_off);
+
+
     }
 
     public Collaboration getCollaboration(int idRequest, int idOffer){

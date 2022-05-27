@@ -173,10 +173,24 @@ class CollaborationController {
     }
 
     @RequestMapping("/delete/{idRequest}/{idOffer}")
-    public String processDelete(@PathVariable int id){
-        collaborationDao.deleteCollaborationIdRequest(id);
+    public String processDelete(Model model, @PathVariable int idRequest, @PathVariable int idOffer){
+        collaborationDao.finishCollaboration(idRequest,idOffer);
         return "redirect:list";
     }
+
+    @RequestMapping("/valorar/{idRequest}/{idOffer}")
+    public String processvalorar(Model model, @PathVariable int idRequest, @PathVariable int idOffer){
+        Collaboration colab= collaborationDao.getCollaboration(idRequest,idOffer);
+        model.addAttribute("collaboration",colab);
+        return "collaboration/valorar";
+    }
+
+    @RequestMapping(value = "/valorar",method=RequestMethod.POST)
+    public String processValorar(Model model, @ModelAttribute("collaboration") Collaboration collaboration){
+        collaborationDao.updateCollaboration(collaboration);
+        return "redirect:list";
+    }
+
 
 
 }
