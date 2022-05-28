@@ -50,7 +50,18 @@ public class CollaborationDao {
 
 
     }
+    public void finishCollaboration(Collaboration collaboration){
+        LocalDate start= collaboration.getStartDate();
+        int id_req = collaboration.getIdRequest();
+        int id_off = collaboration.getIdOffer();
+        if(start.compareTo(LocalDate.now()) >=0){
+            start=LocalDate.now().minusDays(1);
+        }
+        jdbcTemplate.update("UPDATE  Collaboration SET end_date= ?, start_date=?" +
+                "WHERE id_request=? and id_offer=?", LocalDate.now(), start, id_req, id_off);
 
+
+    }
     public Collaboration getCollaboration(int idRequest, int idOffer){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM Collaboration WHERE id_request=? AND id_offer=?",

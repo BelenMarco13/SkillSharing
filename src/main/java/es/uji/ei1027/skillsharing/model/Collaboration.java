@@ -23,7 +23,7 @@ public class Collaboration {
         this.idOffer = idOffer;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.comment=null;
+        this.comment="null";
     }
 
     public int getIdRequest() {

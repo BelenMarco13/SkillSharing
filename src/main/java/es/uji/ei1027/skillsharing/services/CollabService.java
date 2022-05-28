@@ -90,21 +90,19 @@ public class CollabService {
             Request request = requestDao.getRequest(req);
             for (Offer offer : offers) {
                 for (Collaboration colab : collabs) {
-                    System.out.println("hay colabs");
 
-                    String dniReq = request.getStudent();
-                    String dniOf = offer.getStudent();
-                    System.out.println(offer);
                     if (offer.getId() != colab.getIdOffer() && offer.getStudent() != request.getStudent()) {
                         optionsColab.add(offer);
-                        System.out.println(optionsColab);
+
 
                     }
                 }
                 if(collabs.isEmpty()){
-                    System.out.println("no hay colabs");
-                    if(offer.getStudent() != request.getStudent()){
+
+
+                    if(! offer.getStudent().equals(request.getStudent())){
                         optionsColab.add(offer);
+
                     }
                 }
 

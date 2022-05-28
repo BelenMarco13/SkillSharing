@@ -48,13 +48,13 @@
     </div>
     <div class = "list_item">
         <h4> Request details</h4>
-        <h5 th:text = "${offer.name}"></h5>
-        <p th:text="${offer.description}"></p>
-        <p th:text="${offer.startDate} + ' // ' + ${offer.endDate}"></p>
+        <h5 th:text = "${request.name}"></h5>
+        <p th:text="${request.description}"></p>
+        <p th:text="${request.startDate} + ' // ' + ${request.endDate}"></p>
     </div>
 </div>
 <div class="menu_container">
-    <div class="list_item" th:unless="${collaboration.comment != null}">
+    <div class="list_item" th:unless="${collaboration.comment == 'null'}">
         <h4> Collabortion details</h4>
         <h5>Score of the Collaboration</h5>
         <p th:text = "${collaboration.score} + ' points'"></p>

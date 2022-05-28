@@ -244,8 +244,9 @@ class CollaborationController {
 
     @RequestMapping("/delete/{idRequest}/{idOffer}")
     public String processDelete(Model model, @PathVariable int idRequest, @PathVariable int idOffer){
-        collaborationDao.finishCollaboration(idRequest,idOffer);
-        return "/collaboration/list";
+        Collaboration colab = collaborationDao.getCollaboration(idRequest,idOffer);
+        collaborationDao.finishCollaboration(colab);
+        return "redirect:/collaboration/list";
     }
 
     @RequestMapping(value= "/valorar/{idRequest}/{idOffer}", method= RequestMethod.GET)
