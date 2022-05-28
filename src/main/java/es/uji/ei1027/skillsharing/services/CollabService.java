@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class CollabService {
@@ -208,5 +206,60 @@ public class CollabService {
     }
 
 
+    public Map<String, List<List<Offer>>> getOffersCollaboratingWithMyRequest(String userDNI) {
+        Map<String, List<List<Offer>>> collaborationsFromMyRequest = new HashMap<>();
+        List<Collaboration> rawCollaborations = collaborationDao.getCollaborations();
+        List<Request> myRequests = requestDao.getRequests(studentDao.getStudent(userDNI));
+        Set<Integer> myRequestsId = myRequests.stream()
+                .filter(request -> !request.getName().equals("null"))
+                .map(Request::getId).collect(Collectors.toSet());
+
+
+        List<Collaboration> collabsIRequested = new ArrayList<>();
+        for (Collaboration collaboration :
+                collaborationDao.getCollaborations()) {
+            if ( myRequestsId.contains(collaboration.getIdRequest())){
+                collabsIRequested.add(collaboration);
+            }
+        }
+
+        for (Collaboration collaboration :
+                collabsIRequested) {
+            String key = String.join(";", Integer.toString(collaboration.getIdRequest()),
+                    requestDao.getRequest(collaboration.getIdRequest()).getName(),
+                    requestDao.getRequest(collaboration.getIdRequest()).getDescription());
+
+            Offer value = offerDao.getOffer(collaboration.getIdOffer());
+
+            if (value.getName().equals("null")){
+                value.setName("");
+                value.setDescription("");
+            }
+
+            value.setStartDate(collaboration.getStartDate());
+            value.setEndDate(collaboration.getEndDate());
+
+            List<List<Offer>> existing = collaborationsFromMyRequest.putIfAbsent(
+                    key, new ArrayList<>(List.of(new ArrayList<>(List.of(value)))));
+
+            if (existing != null){
+                if (existing.get(existing.size()-1).size() < 3){
+                    existing.get(existing.size()-1).add(value);
+                } else {
+                    existing.add(new ArrayList<>(List.of(value)));
+                }
+            }
+        }
+
+/*
+        collaborationsFromMyRequest = collabsIRequested.stream().map(Collaboration::getIdRequest)
+                .collect(Collectors.groupingBy(request ->
+                        String.join(";", Integer.toString(request), requestDao.getRequest(request).getName())
+                        , Collectors.counting()));
+*/
+
+
+        return collaborationsFromMyRequest;
+    }
 }
 

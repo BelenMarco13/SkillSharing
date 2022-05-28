@@ -20,8 +20,8 @@ import es.uji.ei1027.skillsharing.services.CollabService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/collaboration")
@@ -45,6 +45,21 @@ class CollaborationController {
             session.setAttribute("nextUrl", "/collaboration/list");
             return "redirect:/login";
         }
+
+        // Agruparemos requests por request/offer que nuestra que las haya originado
+        Map<String, List<List<Offer>>> offersCollaboratingWithMyRequest;
+        offersCollaboratingWithMyRequest = collabService.getOffersCollaboratingWithMyRequest(
+                ((Student)session.getAttribute("student")).getDni());
+
+        model.addAttribute("userRequestedCollaborations", offersCollaboratingWithMyRequest);
+
+        // Map with user's names from the related offers
+        Map<String, String> names = offersCollaboratingWithMyRequest.values().stream()
+                .flatMap(Collection::stream).flatMap(Collection::stream)
+                .collect(Collectors.toMap(Offer::getStudent, offer -> collabService.getStudent(offer.getStudent()).getName()));
+
+        model.addAttribute("studentNamesMap", names);
+
         //buscar skillname y skill level para info !!
 
         model.addAttribute("hoy", LocalDate.now());
