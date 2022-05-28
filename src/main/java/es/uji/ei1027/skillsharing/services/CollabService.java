@@ -207,7 +207,6 @@ public class CollabService {
 
     public Map<String, List<List<Offer>>> getOffersCollaboratingWithMyRequest(String userDNI) {
         Map<String, List<List<Offer>>> collaborationsFromMyRequest = new HashMap<>();
-        List<Collaboration> rawCollaborations = collaborationDao.getCollaborations();
         List<Request> myRequests = requestDao.getRequests(studentDao.getStudent(userDNI));
         Set<Integer> myRequestsId = myRequests.stream()
                 .filter(request -> !request.getName().equals("null"))
@@ -263,7 +262,6 @@ public class CollabService {
 
     public Map<String, List<List<Request>>> getRequestsCollaboratingWithMyOffers(String userDNI) {
         Map<String, List<List<Request>>> collaborationsFromMyOffers = new HashMap<>();
-        List<Collaboration> rawCollaborations = collaborationDao.getCollaborations();
         List<Offer> myOffers = offerDao.getOffers(studentDao.getStudent(userDNI));
         Set<Integer> myOffersId = myOffers.stream()
                 .filter(offer -> !offer.getName().equals("null"))
@@ -281,8 +279,8 @@ public class CollabService {
         for (Collaboration collaboration :
                 collabsIOffered) {
             String key = String.join(";", Integer.toString(collaboration.getIdOffer()),
-                    requestDao.getRequest(collaboration.getIdOffer()).getName(),
-                    requestDao.getRequest(collaboration.getIdOffer()).getDescription());
+                    offerDao.getOffer(collaboration.getIdOffer()).getName(),
+                    offerDao.getOffer(collaboration.getIdOffer()).getDescription());
 
             Request value = requestDao.getRequest(collaboration.getIdRequest());
 

@@ -46,6 +46,7 @@ class CollaborationController {
             return "redirect:/login";
         }
 
+
         // Agruparemos requests por request/offer nuestra que las haya originado
         Map<String, List<List<Offer>>> offersCollaboratingWithMyRequest;
         offersCollaboratingWithMyRequest = collabService.getOffersCollaboratingWithMyRequest(
@@ -59,6 +60,7 @@ class CollaborationController {
                 .collect(Collectors.toMap(Offer::getStudent, offer -> collabService.getStudent(offer.getStudent()).getName()));
 
         model.addAttribute("studentNamesFromOffersMap", studentsNamesFromOffersMap);
+
 
 
         Map<String, List<List<Request>>> requestsCollaboratingWithMyOffer;
