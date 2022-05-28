@@ -23,6 +23,8 @@ public class CollaborationDao {
     }
 
         public void addCollaboration(Collaboration collaboration){
+            System.out.println(collaboration);
+            System.out.println(collaboration.getComment());
         jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
                 collaboration.getIdRequest(), collaboration.getIdOffer(), collaboration.getStartDate(),
                 collaboration.getEndDate(), collaboration.getScore(), collaboration.getComment());

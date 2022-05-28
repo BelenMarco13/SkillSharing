@@ -54,7 +54,7 @@
     </div>
 </div>
 <div class="menu_container">
-    <div class="list_item" th:unless="${collaboration.comment == ' '}">
+    <div class="list_item" th:unless="${collaboration.comment != null}">
         <h4> Collabortion details</h4>
         <h5>Score of the Collaboration</h5>
         <p th:text = "${collaboration.score} + ' points'"></p>

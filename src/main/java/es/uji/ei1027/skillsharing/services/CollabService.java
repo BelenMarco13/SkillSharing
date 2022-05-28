@@ -67,6 +67,7 @@ public class CollabService {
 
             sendEmail(request,offer);
             Collaboration colab = new Collaboration(idreq,idof,startDate,endDate);
+        System.out.println(colab);
             return colab;
         }
 
