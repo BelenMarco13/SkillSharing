@@ -8,18 +8,38 @@
     <title>Collaboration Management</title>
     <meta charset="UTF-8" />
 </head>
+<body>
+<h1>Skill Sharing</h1>
+<h2>List of my Collaborations</h2>
+<br><br>
+<h3>Collaborations I have requested</h3>
 
-<body th:object="${session}">
-<div class="header">
-    <h1>Skill Sharing</h1>
-    <h2>List of Collaborations </h2>
-    <div>
-        <img src="/profile_picture.png" alt="profile_picture">
-        <h3 th:text="*{student.name}"></h3>
-        <h5 th:text="*{student.balanceHours}"></h5>
+<div th:each="map: ${userRequestedCollaborations}" id="map_container">
+    <h3 th:text="${map.key.split(';')[1]}"></h3>
+    <p th:text="${map.key.split(';')[2]}"></p>
+    <div class="menu_container" th:each="listContainer: ${map.value}">
+        <div class="list_item" th:each="collaboration: ${listContainer}">
+
+            <h4 th:text="${collaboration.name}"></h4>
+            <h4 th:text="'Offered by ' +${studentNamesMap.get(collaboration.student)}"></h4>
+            <h5 th:text="${collaboration.startDate}+ ' → ' +${collaboration.endDate}"></h5>
+            <p th:text="${collaboration.description}"></p>
+            <h5 th:text="${collaboration.skillName}+ ' - ' +${collaboration.skillLevel}"></h5>
+
+            <a th:href="@{/collaboration/info/{idRequest}/{idOffer}(idRequest=${map.key.split(';')[0]},idOffer=${collaboration.id})}"><button type="button" class="btn btn-success" >See more information</button></a>
+            <a th:unless="${collaboration.endDate > hoy} " th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${map.key.split(';')[0]},idOffer=${collaboration.id})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a>
+            <br><br>
+            <a th:unless = "${collaboration.endDate <= hoy}" th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${map.key.split(';')[0]},idOffer=${collaboration.id})}"><button type="button" class="btn btn-danger"> Finish. </button></a>
+        </div>
+
     </div>
 </div>
+
+<h3>Collaborations I have offered</h3>
+
+
 <table class="table table-striped">
+
     <thead>
     <tr>
         <th>Offer from:</th>
@@ -41,7 +61,8 @@
         <td th:text="${collaboration.startDate}"></td>
         <td th:text="${collaboration.endDate}"></td>
         <td><a th:href="@{/collaboration/info/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}">See more information</a></td>
-
+        <td><a th:unless="@{${collaboration.endDate} > ${hoy}} " th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a></td>
+        <td><a th:unless = "@{${collaboration.endDate} <= ${hoy}}" th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger"> Finish. </button></a></td>
 
     </tr>
     </tbody>

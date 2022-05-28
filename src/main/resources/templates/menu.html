@@ -19,7 +19,7 @@
             <h5 th:text="*{student.balanceHours}"></h5>
         </div>
     </div>
-
+    <br><br><br>
     <div class="menu_container">
         <div class="menu_item" onclick="window.location='student/list';">
             <div class="medium_image_container" th:if="*{student != null}">
@@ -45,14 +45,14 @@
     </div>
 
     <div class="menu_container">
-        <div class="menu_item" onclick="window.location='offer/list';">
+        <div class="menu_item" onclick="window.location='offer/manage';">
             <div class="medium_image_container" th:if="*{student != null}">
                 <img src="/offer.png" alt="Offer image">
             </div>
             <p>Offer Management</p>
         </div>
 
-        <div class="menu_item" onclick="window.location='request/list';">
+        <div class="menu_item" onclick="window.location='request/manage';">
             <div class=medium_image_container th:if="*{student != null}">
                 <img src="/request.png" alt="Request image">
             </div>

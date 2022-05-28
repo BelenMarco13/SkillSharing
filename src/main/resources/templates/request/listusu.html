@@ -17,37 +17,26 @@
         <h5 th:text="*{student.balanceHours}"></h5>
     </div>
 </div>
-<h2 >List of my requests</h2>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Skill Name</th>
-        <th>Skill Level</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="request: ${requestsUsuario}">
-        <td th:text="${request.id}"></td>
-        <td th:text="${request.name}"></td>
-        <td th:text="${request.description}"></td>
-        <td th:text="${request.startDate}"></td>
-        <td th:text="${request.endDate}"></td>
-        <td th:text="${request.skillName}"></td>
-        <td th:text="${request.skillLevel}"></td>
-        <td><a th:href="@{/request/update/{id}(id=${request.id})}"><button type="button" class="btn btn-warning" >Update</button></a></td>
-        <td><a th:href="@{/request/end/{id}(id=${request.id})}"><button type="button" class="btn btn-danger">End request</button></a></td>
-        <td><a th:href="@{/offer/listcolab/{skillName}/{skillLevel}/{idreq}(skillName=${request.skillName},skillLevel=${request.skillLevel}, idreq=${request.id})}"><button type="button" class="btn btn-warning" >Offers associated</button></a></td>
+<h2 th:text="${title}"></h2>
 
-    </tr>
-    </tbody>
-</table>
+<div class="menu_container" th:each="listContainer: ${requestsUsuario}">
+
+    <div class="list_item" th:each="request: ${listContainer}">
+
+        <h4 th:text="${request.name}"></h4>
+        <h5 th:text="${request.startDate}+ ' → ' +${request.endDate}"></h5>
+        <p th:text="${request.description}"></p>
+        <h5 th:text="${request.skillName}+ ' - ' +${request.skillLevel}"></h5>
+        <a th:href="@{/request/update/{id}(id=${request.id})}"><button type="button" class="btn btn-warning" >Update</button></a>
+        <a th:href="@{/request/end/{id}(id=${request.id})}"><button type="button" class="btn btn-danger">End request</button></a>
+        <br><br>
+        <a th:href="@{/offer/listcolab/{skillName}/{skillLevel}/{idreq}(skillName=${request.skillName},skillLevel=${request.skillLevel}, idreq=${request.id})}"><button type="button" class="btn btn-warning" >Offers associated</button></a>
+
+    </div>
+
+</div>
+
+
 <a th:href="@{/request/add}"><button type="button" class="btn btn-success">Add request</button></a>
 <a href="../"><button type="button" class="btn btn-secondary">Return</button></a>
 </body>

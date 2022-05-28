@@ -1,21 +1,16 @@
 package es.uji.ei1027.skillsharing.services;
 
 import es.uji.ei1027.skillsharing.Level;
-import es.uji.ei1027.skillsharing.dao.CollaborationDao;
-import es.uji.ei1027.skillsharing.dao.OfferDao;
-import es.uji.ei1027.skillsharing.dao.RequestDao;
-import es.uji.ei1027.skillsharing.dao.StudentDao;
+import es.uji.ei1027.skillsharing.dao.*;
 import es.uji.ei1027.skillsharing.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class CollabService {
@@ -28,6 +23,9 @@ public class CollabService {
 
     @Autowired
     StudentDao studentDao;
+
+    @Autowired
+    SkillTypeDao skillTypeDao;
 
     @Autowired
     RequestDao requestDao;
@@ -180,6 +178,89 @@ public class CollabService {
                 ultimoIndice = collaboration.getIdOffer();
         }
         return ultimoIndice;
+    }
+
+    public void addRequest(int id_request, String dni_solicitante, LocalDate start_date, LocalDate end_date) {
+        Request request = new Request();
+        request.setName("null");
+        request.setDescription("null");
+        request.setId(id_request);
+        request.setStartDate(start_date);
+        request.setEndDate(end_date);
+        request.setSkillTypeLevel(skillTypeDao.getSkills().get(0).getName()+" "+
+                skillTypeDao.getSkills().get(0).getLevel());
+
+        requestDao.addRequest(request, studentDao.getStudent(dni_solicitante));
+    }
+
+    public void addOffer(int id_offer, String dni_solicitante, LocalDate start_date, LocalDate end_date) {
+        Offer offer = new Offer();
+        offer.setName("null");
+        offer.setDescription("null");
+        offer.setId(id_offer);
+        offer.setStartDate(start_date);
+        offer.setEndDate(end_date);
+        offer.setSkillTypeLevel(skillTypeDao.getSkills().get(0).getName()+" "+
+                skillTypeDao.getSkills().get(0).getLevel());
+
+        offerDao.addOffer(offer, studentDao.getStudent(dni_solicitante));
+    }
+
+
+    public Map<String, List<List<Offer>>> getOffersCollaboratingWithMyRequest(String userDNI) {
+        Map<String, List<List<Offer>>> collaborationsFromMyRequest = new HashMap<>();
+        List<Collaboration> rawCollaborations = collaborationDao.getCollaborations();
+        List<Request> myRequests = requestDao.getRequests(studentDao.getStudent(userDNI));
+        Set<Integer> myRequestsId = myRequests.stream()
+                .filter(request -> !request.getName().equals("null"))
+                .map(Request::getId).collect(Collectors.toSet());
+
+
+        List<Collaboration> collabsIRequested = new ArrayList<>();
+        for (Collaboration collaboration :
+                collaborationDao.getCollaborations()) {
+            if ( myRequestsId.contains(collaboration.getIdRequest())){
+                collabsIRequested.add(collaboration);
+            }
+        }
+
+        for (Collaboration collaboration :
+                collabsIRequested) {
+            String key = String.join(";", Integer.toString(collaboration.getIdRequest()),
+                    requestDao.getRequest(collaboration.getIdRequest()).getName(),
+                    requestDao.getRequest(collaboration.getIdRequest()).getDescription());
+
+            Offer value = offerDao.getOffer(collaboration.getIdOffer());
+
+            if (value.getName().equals("null")){
+                value.setName("");
+                value.setDescription("");
+            }
+
+            value.setStartDate(collaboration.getStartDate());
+            value.setEndDate(collaboration.getEndDate());
+
+            List<List<Offer>> existing = collaborationsFromMyRequest.putIfAbsent(
+                    key, new ArrayList<>(List.of(new ArrayList<>(List.of(value)))));
+
+            if (existing != null){
+                if (existing.get(existing.size()-1).size() < 3){
+                    existing.get(existing.size()-1).add(value);
+                } else {
+                    existing.add(new ArrayList<>(List.of(value)));
+                }
+            }
+        }
+
+/*
+        collaborationsFromMyRequest = collabsIRequested.stream().map(Collaboration::getIdRequest)
+                .collect(Collectors.groupingBy(request ->
+                        String.join(";", Integer.toString(request), requestDao.getRequest(request).getName())
+                        , Collectors.counting()));
+*/
+
+
+        return collaborationsFromMyRequest;
     }
 }
 

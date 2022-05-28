@@ -70,7 +70,7 @@ button{
 
 .menu_container{
     display: flex;
-    margin-top: 7%;
+    margin-top: 5%;
     margin-bottom: 2%;
     justify-content: space-evenly;
 }
@@ -130,4 +130,7 @@ button{
     font-weight: bold;
 }
 
+#map_container{
+    text-align: center;
+}
 
