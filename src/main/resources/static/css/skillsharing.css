@@ -130,7 +130,7 @@ button{
     font-weight: bold;
 }
 
-#map_container{
+.map_container{
     text-align: center;
 }
 

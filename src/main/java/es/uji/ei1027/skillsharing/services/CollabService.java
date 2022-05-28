@@ -260,5 +260,53 @@ public class CollabService {
 
         return collaborationsFromMyRequest;
     }
+
+    public Map<String, List<List<Request>>> getRequestsCollaboratingWithMyOffers(String userDNI) {
+        Map<String, List<List<Request>>> collaborationsFromMyOffers = new HashMap<>();
+        List<Collaboration> rawCollaborations = collaborationDao.getCollaborations();
+        List<Offer> myOffers = offerDao.getOffers(studentDao.getStudent(userDNI));
+        Set<Integer> myOffersId = myOffers.stream()
+                .filter(offer -> !offer.getName().equals("null"))
+                .map(Offer::getId).collect(Collectors.toSet());
+
+
+        List<Collaboration> collabsIOffered = new ArrayList<>();
+        for (Collaboration collaboration :
+                collaborationDao.getCollaborations()) {
+            if ( myOffersId.contains(collaboration.getIdOffer())){
+                collabsIOffered.add(collaboration);
+            }
+        }
+
+        for (Collaboration collaboration :
+                collabsIOffered) {
+            String key = String.join(";", Integer.toString(collaboration.getIdOffer()),
+                    requestDao.getRequest(collaboration.getIdOffer()).getName(),
+                    requestDao.getRequest(collaboration.getIdOffer()).getDescription());
+
+            Request value = requestDao.getRequest(collaboration.getIdRequest());
+
+            if (value.getName().equals("null")){
+                value.setName("");
+                value.setDescription("");
+            }
+
+            value.setStartDate(collaboration.getStartDate());
+            value.setEndDate(collaboration.getEndDate());
+
+            List<List<Request>> existing = collaborationsFromMyOffers.putIfAbsent(
+                    key, new ArrayList<>(List.of(new ArrayList<>(List.of(value)))));
+
+            if (existing != null){
+                if (existing.get(existing.size()-1).size() < 3){
+                    existing.get(existing.size()-1).add(value);
+                } else {
+                    existing.add(new ArrayList<>(List.of(value)));
+                }
+            }
+        }
+
+        return collaborationsFromMyOffers;
+    }
 }
 

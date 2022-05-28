@@ -46,7 +46,7 @@ class CollaborationController {
             return "redirect:/login";
         }
 
-        // Agruparemos requests por request/offer que nuestra que las haya originado
+        // Agruparemos requests por request/offer nuestra que las haya originado
         Map<String, List<List<Offer>>> offersCollaboratingWithMyRequest;
         offersCollaboratingWithMyRequest = collabService.getOffersCollaboratingWithMyRequest(
                 ((Student)session.getAttribute("student")).getDni());
@@ -54,15 +54,28 @@ class CollaborationController {
         model.addAttribute("userRequestedCollaborations", offersCollaboratingWithMyRequest);
 
         // Map with user's names from the related offers
-        Map<String, String> names = offersCollaboratingWithMyRequest.values().stream()
+        Map<String, String> studentsNamesFromOffersMap = offersCollaboratingWithMyRequest.values().stream()
                 .flatMap(Collection::stream).flatMap(Collection::stream)
                 .collect(Collectors.toMap(Offer::getStudent, offer -> collabService.getStudent(offer.getStudent()).getName()));
 
-        model.addAttribute("studentNamesMap", names);
+        model.addAttribute("studentNamesFromOffersMap", studentsNamesFromOffersMap);
+
+
+        Map<String, List<List<Request>>> requestsCollaboratingWithMyOffer;
+        requestsCollaboratingWithMyOffer = collabService.getRequestsCollaboratingWithMyOffers(
+                ((Student) session.getAttribute("student")).getDni());
+
+        model.addAttribute("userOfferedCollaborations", requestsCollaboratingWithMyOffer);
+
+        // Map with user's names from the related requests
+        Map<String, String> studentsNamesFromRequestsMap = requestsCollaboratingWithMyOffer.values().stream()
+                .flatMap(Collection::stream).flatMap(Collection::stream)
+                .collect(Collectors.toMap(Request::getStudent, request -> collabService.getStudent(request.getStudent()).getName()));
+
+        model.addAttribute("studentNamesFromRequestsMap", studentsNamesFromRequestsMap);
+
 
         //buscar skillname y skill level para info !!
-
-
         List<Collaboration> colabs = collaborationDao.getCollaborations();
         model.addAttribute("colabInfo", collabService.getCollabsInfo(colabs));
         model.addAttribute("collaborations", colabs);

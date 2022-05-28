@@ -25,14 +25,14 @@
 <br><br>
 <h3>Collaborations I have requested</h3>
 
-<div th:each="map: ${userRequestedCollaborations}" id="map_container">
+<div th:each="map: ${userRequestedCollaborations}" class="map_container">
     <h3 th:text="${map.key.split(';')[1]}"></h3>
     <p th:text="${map.key.split(';')[2]}"></p>
     <div class="menu_container" th:each="listContainer: ${map.value}">
         <div class="list_item" th:each="collaboration: ${listContainer}">
 
             <h4 th:text="${collaboration.name}"></h4>
-            <h4 th:text="'Offered by ' +${studentNamesMap.get(collaboration.student)}"></h4>
+            <h4 th:text="'Offered by ' +${studentNamesFromOffersMap.get(collaboration.student)}"></h4>
             <h5 th:text="${collaboration.startDate}+ ' → ' +${collaboration.endDate}"></h5>
             <p th:text="${collaboration.description}"></p>
             <h5 th:text="${collaboration.skillName}+ ' - ' +${collaboration.skillLevel}"></h5>
@@ -46,35 +46,24 @@
 
 <h3>Collaborations I have offered</h3>
 
+<div th:each="map: ${userOfferedCollaborations}" class="map_container">
+    <h3 th:text="${map.key.split(';')[1]}"></h3>
+    <p th:text="${map.key.split(';')[2]}"></p>
+    <div class="menu_container" th:each="listContainer: ${map.value}">
+        <div class="list_item" th:each="collaboration: ${listContainer}">
 
-<table class="table table-striped">
+            <h4 th:text="${collaboration.name}"></h4>
+            <h4 th:text="'Requested by ' +${studentNamesFromRequestsMap.get(collaboration.student)}"></h4>
+            <h5 th:text="${collaboration.startDate}+ ' → ' +${collaboration.endDate}"></h5>
+            <p th:text="${collaboration.description}"></p>
+            <h5 th:text="${collaboration.skillName}+ ' - ' +${collaboration.skillLevel}"></h5>
 
-    <thead>
-    <tr>
-        <th>Offer from:</th>
-        <th>Request from: </th>
-        <th>Skill Name</th>
-        <th>Skill Level</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="collaboration: ${collaborations}">
-        <td th:text="${colabInfo.get(collaboration).get(0)}"></td>
-        <td th:text="${colabInfo.get(collaboration).get(1)}"></td>
-        <td th:text="${colabInfo.get(collaboration).get(2)}"></td>
-        <td th:text="${colabInfo.get(collaboration).get(3)}"></td>
-        <td th:text="${collaboration.startDate}"></td>
-        <td th:text="${collaboration.endDate}"></td>
-        <td><a th:href="@{/collaboration/info/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}">See more information</a></td>
+            <a th:href="@{/collaboration/info/{idRequest}/{idOffer}(idRequest=${collaboration.id},idOffer=${map.key.split(';')[0]})}"><button type="button" class="btn btn-success" >See more information</button></a>
+            <br><br>
+        </div>
 
-
-    </tr>
-    </tbody>
-</table>
+    </div>
+</div>
 
 <a href=" /"><button type="button" class="btn btn-secondary">Menú.</button></a>
 
