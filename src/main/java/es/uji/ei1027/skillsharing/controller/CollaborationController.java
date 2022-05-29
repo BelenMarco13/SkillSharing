@@ -57,7 +57,9 @@ class CollaborationController {
         // Map with user's names from the related offers
         Map<String, String> studentsNamesFromOffersMap = offersCollaboratingWithMyRequest.values().stream()
                 .flatMap(Collection::stream).flatMap(Collection::stream)
-                .collect(Collectors.toMap(Offer::getStudent, offer -> collabService.getStudent(offer.getStudent()).getName()));
+                .collect(Collectors.toMap(Offer::getStudent,
+                        offer -> collabService.getStudent(offer.getStudent()).getName(),
+                        (student1, student2) -> student1));
 
         model.addAttribute("studentNamesFromOffersMap", studentsNamesFromOffersMap);
 
