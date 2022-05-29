@@ -78,6 +78,25 @@ public class CollabService {
             return false;
         }
     }
+    public float getHorasUsuReq(Collaboration colab){
+        int id_req = colab.getIdRequest();
+        Request request = requestDao.getRequest(id_req);
+        float horas=studentDao.getStudent(request.getStudent()).getBalanceHours();
+        return horas;
+    }
+    public void setHorasColab(Collaboration colab, float horas){
+        Request req = requestDao.getRequest(colab.getIdRequest());
+        Offer offer = offerDao.getOffer(colab.getIdOffer());
+        Student usuOf = studentDao.getStudent(offer.getStudent());
+        float horasActOf = usuOf.getBalanceHours();
+        float horasOf = horasActOf+horas;
+        usuOf.setBalanceHours(horasOf);
+
+        Student usuReq = studentDao.getStudent(req.getStudent());
+        float horasActReq = usuReq.getBalanceHours();
+        float horasReq= horasActReq-horas;
+        usuReq.setBalanceHours(horasReq);
+    }
     public List<Offer> getOptionsColabs(int req, Level skillLevel, String skillName ) {
         List<Offer> offers;
         List<Offer> optionsColab = new ArrayList<>();

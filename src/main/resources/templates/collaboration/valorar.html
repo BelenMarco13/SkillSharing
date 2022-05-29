@@ -32,6 +32,10 @@
             <td><textarea  th:field="*{comment}"></textarea></td>
         </tr>
         <tr>
+            <td><label>Hours spent</label></td>
+            <td><input type="number" step="0.5" th:field="${horas}"> </td>
+        </tr>
+        <tr>
             <td><input type="submit" value="Accept" class="btn btn-outline-secondary"/></td>
             <td><a href="/collaboration/list"> <button type="button" value="return" class="btn btn-outline-secondary">Return</button></a></td>
         </tr>

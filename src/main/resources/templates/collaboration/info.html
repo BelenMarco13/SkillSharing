@@ -64,7 +64,7 @@
     </div>
 </div>
 <table class="table table-striped">
-    <tr><a th:unless="@{${collaboration.endDate} > ${hoy}} " th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a></tr>
+    <tr><a th:unless="@{${collaboration.endDate} > ${hoy} & ${studentReq} == *{student} " th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a></tr>
     <tr><a th:unless = "@{${collaboration.endDate} <= ${hoy}}" th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger"> Finish. </button></a></tr>
     <tr><a th:href="@{/collaboration/update/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-success">Update</button> </a></tr>
     <tr><a href=" /collaboration/list"><button type="button" class="btn btn-secondary">Return.</button></a></tr>
