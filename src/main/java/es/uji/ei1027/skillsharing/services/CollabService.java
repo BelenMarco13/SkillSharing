@@ -65,7 +65,6 @@ public class CollabService {
 
             sendEmail(request,offer);
             Collaboration colab = new Collaboration(idreq,idof,startDate,endDate);
-        System.out.println(colab);
             return colab;
         }
 
@@ -86,7 +85,6 @@ public class CollabService {
             List<Collaboration> collabs = collaborationDao.getCollaborations(req);
             offers = offerDao.getOffers(skillName, skillLevel);
 
-            System.out.println(offers);
             Request request = requestDao.getRequest(req);
             for (Offer offer : offers) {
                 for (Collaboration colab : collabs) {

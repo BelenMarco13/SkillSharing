@@ -23,35 +23,22 @@
 <h2 >Match with: </h2>
 <h4 th:text="${skillName}"></h4>
 <h5 th:text="${skillLevel}"></h5>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th> Student</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="offer: ${offersColab}">
-        <td th:text="${offer.id}"></td>
-        <td th:text="${offer.name}"></td>
-        <td th:text="${offer.description}"></td>
-        <td th:text="${offer.startDate}"></td>
-        <td th:text="${offer.endDate}"></td>
-        <td th:text="${offer.student}"></td>
 
 
-        </td>
-        <td><a th:href="@{/collaboration/addprevio/{idreq}/{idof}(idreq=${idreq}, idof=${offer.id})}"><button type="button" class="btn btn-success">Accept Collaboration</button></a></td>
+<div class="menu_container" th:each="listContainer: ${offersColab}">
 
-    </tr>
-    </tbody>
-</table>
+    <div class="list_item" th:each="offer: ${listContainer}">
+
+        <h4 th:text="${offer.name}"></h4>
+        <h5 th:text="${offer.startDate}+' → '+${offer.endDate}"></h5>
+        <p th:text="${offer.description}"></p>
+        <h5 th:text="${offer.skillName}+' - '+${offer.skillLevel}"></h5>
+        <a th:href="@{/collaboration/addprevio/{idreq}/{idof}(idreq=${idreq}, idof=${offer.id})}"><button type="button" class="btn btn-success">Accept Collaboration</button></a>
+
+    </div>
+
+</div>
+
 <a href="/request/listusu"><button type="button" class="btn btn-secondary">Return</button></a>
 </body>
 </html>

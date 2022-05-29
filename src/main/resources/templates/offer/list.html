@@ -8,9 +8,18 @@
     <title>Offer Management</title>
     <meta charset="UTF-8" />
 </head>
-<body>
-<h1>Skill Sharing</h1>
-<h2>List of offers</h2>
+<body th:object="${session}">
+<div class="header">
+    <h1>Skill Sharing</h1>
+    <div th:if="*{student != null}">
+        <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == true}" src="/SKP_woman.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
+        <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == true}" src="/SKP_man.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
+        <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == false}" src="/woman.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
+        <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == false}" src="/man.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
+        <h3 th:text="*{student.name}"></h3>
+        <h5 th:text="*{student.balanceHours}"></h5>
+    </div>
+</div><h2>List of offers</h2>
 
 
 <div class="menu_container" th:each="listContainer: ${listContainers}">

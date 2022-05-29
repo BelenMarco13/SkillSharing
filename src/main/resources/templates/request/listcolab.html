@@ -12,7 +12,10 @@
 <div class="header">
     <h1>Skill Sharing</h1>
     <div th:if="*{student != null}">
-        <img src="/profile_picture.png" alt="profile_picture">
+        <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == true}" src="/SKP_woman.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
+        <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == true}" src="/SKP_man.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
+        <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == false}" src="/woman.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
+        <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == false}" src="/man.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
         <h3 th:text="*{student.name}"></h3>
         <h5 th:text="*{student.balanceHours}"></h5>
     </div>
@@ -20,30 +23,22 @@
 <h2 >Match with: </h2>
 <h4 th:text="${skillName}"></h4>
 <h5 th:text="${skillLevel}"></h5>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="request: ${requestsColab}">
-        <td th:text="${request.id}"></td>
-        <td th:text="${request.name}"></td>
-        <td th:text="${request.description}"></td>
-        <td th:text="${request.startDate}"></td>
-        <td th:text="${request.endDate}"></td>
-        <td>boton para aceptar colaboracion</td>
 
-    </tr>
-    </tbody>
-</table>
+<div class="menu_container" th:each="listContainer: ${requestsColab}">
+
+    <div class="list_item" th:each="request: ${listContainer}">
+
+        <h4 th:text="${request.name}"></h4>
+        <h5 th:text="${request.startDate}+' → '+${request.endDate}"></h5>
+        <p th:text="${request.description}"></p>
+        <h5 th:text="${request.skillName}+' - '+${request.skillLevel}"></h5>
+        <a th:href="@{/collaboration/addprevio/{idreq}/{idof}(idreq=${request.id}, idof=${idOffer})}"><button type="button" class="btn btn-success">Accept Collaboration</button></a>
+
+
+    </div>
+
+</div>
+
 <a href="/offer/listusu"><button type="button" class="btn btn-secondary">Return</button></a>
 </body>
 </html>

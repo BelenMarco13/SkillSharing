@@ -62,7 +62,7 @@ public class RequestController {
     }
 
     @RequestMapping("/list")
-    public String listOffers(Model model){
+    public String listOffers(Model model, HttpSession session){
 
 
         List<List<Request>> listContainers = getValidRequestsInContainers(requestDao.getRequests());
@@ -89,11 +89,13 @@ public class RequestController {
         return "request/listusu";
     }
 
-    @RequestMapping("/listcolab/{skillName}/{skillLevel}")
-    public String listReqsColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel ) throws NullPointerException {
-        model.addAttribute("requestsColab", requestDao.getRequests(skillName,skillLevel));
+    @RequestMapping("/listcolab/{skillName}/{skillLevel}/{idOffer}")
+    public String listReqsColab(Model model,@PathVariable String skillName, @PathVariable Level skillLevel,
+                                @PathVariable int idOffer) throws NullPointerException {
+        model.addAttribute("requestsColab", getValidRequestsInContainers(requestDao.getRequests(skillName,skillLevel)));
         model.addAttribute("skillName",skillName);
         model.addAttribute("skillLevel", skillLevel);
+        model.addAttribute("idOffer", idOffer);
         return "request/listcolab";
     }
 

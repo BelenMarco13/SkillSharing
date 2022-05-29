@@ -126,7 +126,7 @@ public class OfferController {
             return "offer/listcolabvacio";
         }
         else{
-            model.addAttribute("offersColab", offers);
+            model.addAttribute("offersColab", getValidOfferInContainers(offers));
             return "offer/listcolab";
         }
 
