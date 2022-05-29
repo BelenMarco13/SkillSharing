@@ -275,9 +275,7 @@ class CollaborationController {
             return "redirect:/login";
         }
         Collaboration colab= collaborationDao.getCollaboration(idRequest,idOffer);
-      //  float horas = collabService.getHorasUsuReq(colab);
         model.addAttribute("collaboration",colab);
-       // model.addAttribute("horas", horas);
         System.out.println("primero" + colab);
         return "collaboration/valorar";
     }
