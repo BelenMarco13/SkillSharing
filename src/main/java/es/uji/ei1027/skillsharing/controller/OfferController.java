@@ -104,11 +104,11 @@ public class OfferController {
     public String processAndSubmit(Model model, @ModelAttribute("offer") Offer offer,
                                    BindingResult bindingResult, HttpSession session){
 
+        OfferValidator offerValidator = new OfferValidator();
+        offerValidator.validate(offer, bindingResult);
+
         if (bindingResult.hasErrors()){
             model.addAttribute("values", Level.values());
-            for (ObjectError e: bindingResult.getAllErrors()){
-                System.out.println(e.toString());
-            }
             return "offer/add";
         }
 
@@ -131,8 +131,6 @@ public class OfferController {
         }
 
     }
-
-
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String editOffer(Model model, @PathVariable int id){

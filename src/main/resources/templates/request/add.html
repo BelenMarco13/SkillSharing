@@ -22,22 +22,33 @@
 <form action="#" th:action="@{/request/add}"
       th:object="${request}" method="post">
     <table>
-
         <tr>
             <td><label>Name</label></td>
-            <td><input type="text" th:field="*{name}" /></td>
+            <td>
+                <input type="text" th:field="*{name}" />
+                <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </td>
         </tr>
         <tr>
             <td><label>Description</label></td>
-            <td><textarea th:field="*{description}" /></td>
+            <td>
+                <textarea th:field="*{description}"></textarea>
+                <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+            </td>
         </tr>
         <tr>
             <td><label>Start date</label></td>
-            <td><input type="date" th:field="*{startDate}" /></td>
+            <td>
+                <input type="date" th:field="*{startDate}" />
+                <div class="error" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
+            </td>
         </tr>
         <tr>
             <td><label>End date</label></td>
-            <td><input type="date" th:field="*{endDate}" /></td>
+            <td>
+                <input type="date" th:field="*{endDate}" />
+                <div class="error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
+            </td>
         </tr>
         <tr>
             <td><label>Skill type and level</label></td>

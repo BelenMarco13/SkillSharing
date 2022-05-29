@@ -117,6 +117,9 @@ public class RequestController {
     public String processAddSubmit(Model model, @ModelAttribute("request") Request request,
                                    BindingResult bindingResult, HttpSession session) {
 
+        RequestValidator requestValidator = new RequestValidator();
+        requestValidator.validate(request,bindingResult);
+
         if (bindingResult.hasErrors()){
             model.addAttribute("values", Level.values());
             return "request/add";

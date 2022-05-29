@@ -35,8 +35,7 @@
         <h5 th:text="${request.startDate}+' → '+${request.endDate}"></h5>
         <p th:text="${request.description}"></p>
         <h5 th:text="${request.skillName}+' - '+${request.skillLevel}"></h5>
-        <a th:unless ="*{student ==null}" th:href="@{/collaboration/add/{id_request}/{id_offer}(id_request=${request.id}, id_offer='null')}"><button type="button" class="btn btn-secondary" >Apply To</button></a>
-
+        <a th:href="@{/collaboration/add/{id_request}/{id_offer}(id_request=${request.id}, id_offer='null')}"><button type="button" class="btn btn-secondary" >Apply To</button></a>
 
     </div>
 
