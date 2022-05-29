@@ -2,6 +2,7 @@ package es.uji.ei1027.skillsharing.controller;
 
 import es.uji.ei1027.skillsharing.Gender;
 import es.uji.ei1027.skillsharing.dao.StudentDao;
+import es.uji.ei1027.skillsharing.model.Request;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/student")
@@ -131,5 +134,17 @@ public class StudentController {
         emailService.enviarConGMail(destinatario,asunto,cuerpo);
 
         return "redirect:../list";
+    }
+
+    @RequestMapping(value = "/search/{searchStudent}", method = RequestMethod.GET)
+    public String searchRequest(Model model, @PathVariable String name){
+        model.addAttribute("searchStudent", name);
+        return "student/list";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String processSearch(Model model, @ModelAttribute("searchStudent") String name, BindingResult bindingResult){
+        model.addAttribute("students", studentDao.getStudentName(name));
+        return "student/list";
     }
 }

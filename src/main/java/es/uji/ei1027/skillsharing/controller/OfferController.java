@@ -162,4 +162,31 @@ public class OfferController {
         offerDao.endOffer(id);
         return "redirect:../list";
     }
+
+    @RequestMapping(value = "/search/{searchOffer}", method = RequestMethod.GET)
+    public String searchOffer(Model model, @PathVariable String skill){
+        model.addAttribute("searchOffer", skill);
+        return "offer/list";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String processSearch(Model model, @ModelAttribute("searchOffer") String skill, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "offer/list";
+        }
+
+        List<List<Offer>> listContainers = new ArrayList<>();
+        List<Offer> offers = offerDao.getOffersSkill(skill);
+        for (int i = 0; i < offers.size() / 3; i++) {
+            listContainers.add(List.of(offers.get(i), offers.get(i+1), offers.get(i+2)));
+        }
+        if (offers.size()%3 == 1)
+            listContainers.add(List.of(offers.get(offers.size()-1)));
+        else if (offers.size()%3 == 2)
+            listContainers.add(List.of(offers.get(offers.size()-2),offers.get(offers.size()-1)));
+
+        model.addAttribute("listContainers", listContainers);
+        return "offer/list";
+    }
+
 }

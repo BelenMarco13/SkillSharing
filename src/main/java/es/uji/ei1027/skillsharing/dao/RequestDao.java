@@ -90,4 +90,13 @@ public class RequestDao {
         int id = getRequests().size()+1;
         return id;
     }
+
+    public List<Request> getRequestsSkill(String skill) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM Request WHERE skill_name = ?",
+                    new RequestRowMapper(), skill);
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<Request>();
+        }
+    }
 }

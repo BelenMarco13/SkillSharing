@@ -22,6 +22,11 @@
 </div>
 <h2>List of requests</h2>
 
+<form action="/request/search" method="post">
+    Search request: <input type="search" name="searchRequest" placeholder="Skill name">
+    <input type="submit" value="Search">
+</form>
+
 <div class="menu_container" th:each="listContainer: ${listContainers}">
 
     <div class="list_item" th:each="request: ${listContainer}">

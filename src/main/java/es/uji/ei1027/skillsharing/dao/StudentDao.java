@@ -8,10 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class StudentDao {
@@ -65,10 +62,19 @@ public class StudentDao {
     //Returns the student with the given dni
     public Student getStudent(String dni) {
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM student WHERE dni=?",
+            return jdbcTemplate.queryForObject("SELECT * FROM student WHERE dni = ?",
                     new StudentRowMapper(), dni);
         }catch (EmptyResultDataAccessException e) {
             return null;
+        }
+    }
+
+    public List<Student> getStudentName(String name) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM student WHERE name LIKE ?",
+                    new StudentRowMapper(), "%"+name+"%");
+        }catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Student>();
         }
     }
 

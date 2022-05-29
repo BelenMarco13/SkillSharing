@@ -22,6 +22,11 @@
 </div><h2>List of offers</h2>
 
 
+<form action="/offer/search" method="post">
+        Search offer: <input type="search" name="searchOffer" placeholder="Skill name">
+        <input type="submit" value="Search">
+</form>
+
 <div class="menu_container" th:each="listContainer: ${listContainers}">
 
     <div class="list_item" th:each="offer: ${listContainer}">

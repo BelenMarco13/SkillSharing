@@ -85,6 +85,16 @@ public class OfferDao {
         }
     }
 
+    public List<Offer> getOffersSkill(String skill){
+        try{
+            return jdbcTemplate.query("SELECT * FROM Offer WHERE skill_name = ?",
+                    new OfferRowMapper(), skill);
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<Offer>();
+        }
+    }
+
+
     public int getId(){
         int id = getOffers().size() +1;
         return id;

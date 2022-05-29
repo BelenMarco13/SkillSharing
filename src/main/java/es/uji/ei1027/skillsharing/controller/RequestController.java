@@ -162,5 +162,31 @@ public class RequestController {
         return "redirect:../list";
     }
 
+    @RequestMapping(value = "/search/{searchRequest}", method = RequestMethod.GET)
+    public String searchRequest(Model model, @PathVariable String skill){
+        model.addAttribute("searchRequest", skill);
+        return "request/list";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String processSearch(Model model, @ModelAttribute("searchRequest") String skill, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "request/list";
+        }
+
+        List<List<Request>> listContainers = new ArrayList<>();
+        List<Request> requests = requestDao.getRequestsSkill(skill);
+        for (int i = 0; i < requests.size() / 3; i++) {
+            listContainers.add(List.of(requests.get(i), requests.get(i+1), requests.get(i+2)));
+        }
+        if (requests.size()%3 == 1)
+            listContainers.add(List.of(requests.get(requests.size()-1)));
+        else if (requests.size()%3 == 2)
+            listContainers.add(List.of(requests.get(requests.size()-2),requests.get(requests.size()-1)));
+
+        model.addAttribute("listContainers", listContainers);
+
+        return "request/list";
+    }
 
 }
