@@ -288,6 +288,20 @@ class CollaborationController {
         return "redirect:list";
     }
 
+    @RequestMapping("/manage")
+    public String manageCollaborations(Model model, HttpSession session){
+        if(session.getAttribute("student") == null) {
+            session.setAttribute("nextUrl", "/collaboration/manage");
+            return "redirect:/login";
+        }
+
+        model.addAttribute("hoy", LocalDate.now());
+        List<Collaboration> colabs = collaborationDao.getCollaborations();
+        model.addAttribute("colabInfo", collabService.getCollabsInfo(colabs));
+        model.addAttribute("collaborations", colabs);
+        return "collaboration/manage";
+    }
+
 
 
 }
