@@ -275,18 +275,17 @@ class CollaborationController {
             return "redirect:/login";
         }
         Collaboration colab= collaborationDao.getCollaboration(idRequest,idOffer);
-        float horas = collabService.getHorasUsuReq(colab);
+      //  float horas = collabService.getHorasUsuReq(colab);
         model.addAttribute("collaboration",colab);
-        model.addAttribute("horas", horas);
-        System.out.println(colab);
+       // model.addAttribute("horas", horas);
+        System.out.println("primero" + colab);
         return "collaboration/valorar";
     }
 
     @RequestMapping(value = "/valorar",method=RequestMethod.POST)
-    public String processValorar(Model model, @ModelAttribute("collaboration") Collaboration collaboration, @ModelAttribute("horas") float horas){
+    public String processValorar(Model model, @ModelAttribute("collaboration") Collaboration collaboration){
+        collabService.setHorasColab(collaboration, collaboration.getHoras());
         collaborationDao.updateCollaboration(collaboration);
-        collabService.setHorasColab(collaboration,horas);
-        System.out.println(collaboration);
 
         return "redirect:list";
     }

@@ -15,6 +15,7 @@ public class Collaboration {
     private LocalDate endDate;
     private int score;
     private String comment;
+    private float horas;
 
     public Collaboration() {
     }
@@ -74,6 +75,9 @@ public class Collaboration {
         this.comment = comment;
     }
 
+    public float getHoras() { return horas; }
+
+    public void setHoras(float horas) { this.horas = horas; }
 
     @Override
     public String toString() {

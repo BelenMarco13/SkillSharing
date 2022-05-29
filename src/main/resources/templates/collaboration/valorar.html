@@ -26,11 +26,6 @@
         </tr>
 
         <tr>
-            <td><label> Hours </label></td>
-            <td><input type="number" value="hours"></td>
-        </tr>
-
-        <tr>
             <td><label>Write a short review of the selected collaboration :</label></td>
         </tr>
         <tr>
@@ -38,7 +33,7 @@
         </tr>
         <tr>
             <td><label>Hours spent</label></td>
-            <td><input type="number" step="0.5" th:field="${horas}"> </td>
+            <td><input type="number" step="0.5" th:field="*{horas}"> </td>
         </tr>
         <tr>
             <td><input type="submit" value="Accept" class="btn btn-outline-secondary"/></td>

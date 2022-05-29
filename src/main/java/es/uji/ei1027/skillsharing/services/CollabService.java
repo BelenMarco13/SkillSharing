@@ -89,13 +89,15 @@ public class CollabService {
         Offer offer = offerDao.getOffer(colab.getIdOffer());
         Student usuOf = studentDao.getStudent(offer.getStudent());
         float horasActOf = usuOf.getBalanceHours();
-        float horasOf = horasActOf+horas;
+        float horasOf = horasActOf + horas;
         usuOf.setBalanceHours(horasOf);
+        studentDao.updateStudent(usuOf);
 
         Student usuReq = studentDao.getStudent(req.getStudent());
         float horasActReq = usuReq.getBalanceHours();
-        float horasReq= horasActReq-horas;
+        float horasReq = horasActReq - horas;
         usuReq.setBalanceHours(horasReq);
+        studentDao.updateStudent(usuReq);
     }
     public List<Offer> getOptionsColabs(int req, Level skillLevel, String skillName ) {
         List<Offer> offers;

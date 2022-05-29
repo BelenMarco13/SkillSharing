@@ -20,8 +20,6 @@
     </div>
 </div>
 
-
-
 <div class = "menu_container" >
     <div class = "list_item">
         <h4> Student who made the offer</h4>
@@ -53,6 +51,7 @@
         <p th:text="${request.startDate} + ' // ' + ${request.endDate}"></p>
     </div>
 </div>
+
 <div class="menu_container">
     <div class="list_item" th:unless="${collaboration.comment == 'null'}">
         <h4> Collabortion details</h4>
@@ -63,13 +62,13 @@
 
     </div>
 </div>
+
 <table class="table table-striped">
-    <tr><a th:unless="${collaboration.endDate > hoy && studentReq == session.student}" th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a></tr>
-    <tr><a th:unless = "${collaboration.endDate <= hoy}" th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger"> Finish. </button></a></tr>
+    <tr><a th:if="${collaboration.endDate <= hoy && studentReq.dni == session.student.dni}" th:href="@{/collaboration/valorar/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"> <button type="button" class="btn btn-success" >Valorate Collaboration</button></a></tr>
+    <tr><a th:if = "${collaboration.endDate > hoy}" th:href="@{/collaboration/delete/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-danger"> Finish. </button></a></tr>
     <tr><a th:href="@{/collaboration/update/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest},idOffer=${collaboration.idOffer})}"><button type="button" class="btn btn-success">Update</button> </a></tr>
     <tr><a href=" /collaboration/list"><button type="button" class="btn btn-secondary">Return.</button></a></tr>
 </table>
-
 
 </body>
 </html>
