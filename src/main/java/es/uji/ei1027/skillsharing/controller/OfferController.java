@@ -175,16 +175,7 @@ public class OfferController {
             return "offer/list";
         }
 
-        List<List<Offer>> listContainers = new ArrayList<>();
-        List<Offer> offers = offerDao.getOffersSkill(skill);
-        for (int i = 0; i < offers.size() / 3; i++) {
-            listContainers.add(List.of(offers.get(i), offers.get(i+1), offers.get(i+2)));
-        }
-        if (offers.size()%3 == 1)
-            listContainers.add(List.of(offers.get(offers.size()-1)));
-        else if (offers.size()%3 == 2)
-            listContainers.add(List.of(offers.get(offers.size()-2),offers.get(offers.size()-1)));
-
+        List<List<Offer>> listContainers = getValidOfferInContainers(offerDao.getOffersSkill(skill));
         model.addAttribute("listContainers", listContainers);
         return "offer/list";
     }

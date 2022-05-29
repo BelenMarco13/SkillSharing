@@ -174,16 +174,7 @@ public class RequestController {
             return "request/list";
         }
 
-        List<List<Request>> listContainers = new ArrayList<>();
-        List<Request> requests = requestDao.getRequestsSkill(skill);
-        for (int i = 0; i < requests.size() / 3; i++) {
-            listContainers.add(List.of(requests.get(i), requests.get(i+1), requests.get(i+2)));
-        }
-        if (requests.size()%3 == 1)
-            listContainers.add(List.of(requests.get(requests.size()-1)));
-        else if (requests.size()%3 == 2)
-            listContainers.add(List.of(requests.get(requests.size()-2),requests.get(requests.size()-1)));
-
+        List<List<Request>> listContainers = getValidRequestsInContainers(requestDao.getRequestsSkill(skill));
         model.addAttribute("listContainers", listContainers);
 
         return "request/list";
