@@ -62,15 +62,15 @@ public class CollabService {
         Offer offer = offerDao.getOffer(idof);
         LocalDate startDate = offer.getStartDate();
         LocalDate endDate = request.getEndDate();
+        if(startDate.compareTo(endDate)>=0){
+            startDate=request.getStartDate();
+        }
 
-            sendEmail(request,offer);
+
             Collaboration colab = new Collaboration(idreq,idof,startDate,endDate);
             return colab;
         }
 
-    public void sendEmail(Request req, Offer offer){
-
-    }
     public boolean exists(int idreq, int idof){
         if( collaborationDao.getCollaboration(idreq,idof)!= null){
             return true;
@@ -86,17 +86,24 @@ public class CollabService {
             offers = offerDao.getOffers(skillName, skillLevel);
 
             Request request = requestDao.getRequest(req);
+
             for (Offer offer : offers) {
+                boolean añadir=true;
+
                 for (Collaboration colab : collabs) {
 
                     if (offer.getId() != colab.getIdOffer() && offer.getStudent() != request.getStudent()) {
-                        optionsColab.add(offer);
-
-
+                    }else{
+                        añadir=false;
                     }
-                }
-                if(collabs.isEmpty()){
 
+                }
+                if(añadir){
+                    optionsColab.add(offer);
+                }
+                System.out.println(optionsColab);
+                if(collabs.isEmpty()){
+                    System.out.println("no hay colabs");
 
                     if(! offer.getStudent().equals(request.getStudent())){
                         optionsColab.add(offer);
