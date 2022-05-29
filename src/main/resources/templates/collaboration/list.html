@@ -11,7 +11,6 @@
 <body th:object="${session}">
 <div class="header">
     <h1>Skill Sharing</h1>
-    <h2>List of my Collaborations</h2>
     <div th:if="*{student != null}">
         <img th:if="*{student.gender.name() == 'FEMALE' and student.skp == true}" src="/SKP_woman.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
         <img th:if="*{student.gender.name() != 'FEMALE' and student.skp == true}" src="/SKP_man.png" alt="profile_picture" class="menu_item" onclick="window.location='student/perfil';">
@@ -27,20 +26,15 @@
 
 <div th:each="map: ${userRequestedCollaborations}" class="map_container">
     <h3 th:text="${map.key.split(';')[1]}"></h3>
-    <p th:text="${map.key.split(';')[2]}"></p>
     <div class="menu_container" th:each="listContainer: ${map.value}">
         <div class="list_item" th:each="collaboration: ${listContainer}">
 
-            <h4 th:text="${collaboration.name}"></h4>
-            <h4 th:text="'Offered by ' +${studentNamesFromOffersMap.get(collaboration.student)}"></h4>
+            <h4 th:text="${collaboration.name} + ' Offered by ' +${studentNamesFromOffersMap.get(collaboration.student)}"></h4>
             <h5 th:text="${collaboration.startDate}+ ' → ' +${collaboration.endDate}"></h5>
-            <p th:text="${collaboration.description}"></p>
-            <h5 th:text="${collaboration.skillName}+ ' - ' +${collaboration.skillLevel}"></h5>
 
             <a th:href="@{/collaboration/info/{idRequest}/{idOffer}(idRequest=${map.key.split(';')[0]},idOffer=${collaboration.id})}"><button type="button" class="btn btn-success" >See more information</button></a>
             <br><br>
         </div>
-
     </div>
 </div>
 
@@ -50,20 +44,15 @@
 
 <div th:each="map: ${userOfferedCollaborations}" class="map_container">
     <h3 th:text="${map.key.split(';')[1]}"></h3>
-    <p th:text="${map.key.split(';')[2]}"></p>
     <div class="menu_container" th:each="listContainer: ${map.value}">
         <div class="list_item" th:each="collaboration: ${listContainer}">
 
-            <h4 th:text="${collaboration.name}"></h4>
-            <h4 th:text="'Requested by ' +${studentNamesFromRequestsMap.get(collaboration.student)}"></h4>
+            <h4 th:text="${collaboration.name} + ' Requested by ' +${studentNamesFromRequestsMap.get(collaboration.student)}"></h4>
             <h5 th:text="${collaboration.startDate}+ ' → ' +${collaboration.endDate}"></h5>
-            <p th:text="${collaboration.description}"></p>
-            <h5 th:text="${collaboration.skillName}+ ' - ' +${collaboration.skillLevel}"></h5>
 
             <a th:href="@{/collaboration/info/{idRequest}/{idOffer}(idRequest=${collaboration.id},idOffer=${map.key.split(';')[0]})}"><button type="button" class="btn btn-success" >See more information</button></a>
             <br><br>
         </div>
-
     </div>
 </div>
 
